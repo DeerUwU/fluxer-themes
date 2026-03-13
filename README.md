@@ -9,3 +9,8 @@ copy the contents of theme-system-glass.css, go into fluxer's settings > Look & 
 All customization options are located inside the first body {} and :root {} tags. every option is clearly labeled and comes with descriptions. 
 
 Hopefully as fluxer grows the developers will losen some import restrictions to further improve this theme's customizability through presets.
+
+## Screenshots
+<img src="https://github.com/DeerUwU/fluxer-system-glass-theme/raw/main/screenshots/theme_default.jpg">
+<img src="https://github.com/DeerUwU/fluxer-system-glass-theme/raw/main/screenshots/theme-example.jpg">
+<img src="https://github.com/DeerUwU/fluxer-system-glass-theme/raw/main/screenshots/theme-system24-style.png">
