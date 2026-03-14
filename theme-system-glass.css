@@ -7,11 +7,16 @@ body {
     
     /* decide if you want square or rounded avatars. | Options: off, on */
     --SquareAvatars: on;
+    /* decide if you want bubbles to highlight message groups. | Options: off, on 
+    /* see also: --ThemeMessageBubbleColor */
+    --MessageBubbles: off;
     /* decide if you want panel labels. looks better without a background image | Options: off, on */
     --ThemePanelLabels: off;
     /* overwrites fluxer's panel rounding in most places | Options: off, on
-    see also: --ThemeRoundingMultiplier */
+    /* see also: --ThemeRoundingMultiplier */
     --UseDefaultRounding: off; 
+    /* decide if you want to disable some additional animations added by the theme | Options: off, on */
+    --ExtraAnimations: on;
     /* set a custom app icon in the top left corner | Options: off, on */
     --CustomAppIcon: off;
     /* link to your custom icon. currently it HAS to be hosted on fluxer's servers */
@@ -26,6 +31,8 @@ body {
     --brand-primary: rgb(96, 174, 229);
     --brand-secondary: rgb(78, 121, 167);
 
+    --ThemeMessageBubbleColor: rgba(255, 255, 255, .06);
+    
     --ThemeFlatPrimary: #24242e;
     --ThemeFlatLighter: #383c48;
     --ThemeFlatDarker: #1d1d24;
@@ -90,7 +97,7 @@ body {
     /* ----------------------------------------------------------------------- */
     
     /* gap between panels */
-    --ThemePanelMargins: 8px;
+    --ThemePanelMargin: 8px;
     /* panel bg blur strength */
     --ThemePanelBlur: 8px;
     /* bg blur strength for tooltips, context panels etc*/
@@ -160,6 +167,10 @@ html {
     background: var(--ThemeBackgroundColor);
 }
 
+/* prevent background turning black in mobile view */
+body {
+    background: transparent!important;
+}
 
 /* this holds the background image */
 body::before {
@@ -191,21 +202,8 @@ body::after {
 
 
 /* ---------------------------------------------------------------- */
-/* panel scaling fixes
+/* panel scaling fixes | setup to ensure proper scaling with custom area margins
 /* ---------------------------------------------------------------- */
-/* setup to ensure proper scaling with custom area margins */
-/* app container */
-[class*="GuildsLayout.module__guildsLayoutContainer_"]
-{
-    width: -webkit-fill-available;
-    height: -webkit-fill-available;
-}
-
-/* server list container 
-[class*="GuildsLayout.module__guildListScrollerWrapper_"] {
-    width: -webkit-fill-available;
-    height: calc( 100% - var(--layout-user-area-reserved-height, 0px) - var(--layout-mobile-bottom-nav-reserved-height, 0px) - var(--ThemePanelMargins) - var(--ThemePanelBorderThickness) * 2);
-} */
 
 /* server list container */
 [class*="GuildsLayout.module__guildListScrollerWrapper_"],
@@ -215,12 +213,12 @@ body::after {
 [class*="DMLayout.module__dmListColumn_"]
 {
     width: -webkit-fill-available;
-    height: calc(100% - var(--layout-user-area-reserved-height) - var(--layout-mobile-bottom-nav-reserved-height) - var(--ThemePanelMargins) - var(--ThemePanelBorderThickness) * 2);
+    height: calc(100% - var(--layout-user-area-reserved-height) - var(--layout-mobile-bottom-nav-reserved-height) - var(--ThemePanelMargin) - var(--ThemePanelBorderThickness) * 2);
 }
 /* self status */
 [class*="GuildsLayout.module__userAreaWrapper_"]
 {
-    width: calc(var(--layout-guild-list-width) + var(--layout-sidebar-width) + var(--ThemePanelMargins));
+    width: calc(var(--layout-guild-list-width) + var(--layout-sidebar-width) + var(--ThemePanelMargin));
 }
 
 /* channel header to message list */
@@ -229,13 +227,13 @@ body::after {
     display: flex;
     flex-direction: column;
 }
-/* typing users list */
+/* typing users list 
 [class*="ChannelChatLayout.module__typingArea_"]
 {
     height: fit-content;
-    /* margin-top: calc(- var(--ThemePanelMargins)); */
-    
-} 
+    transition-property: height;
+    transition-duration: 0.3s;
+} */
 
 /* self profile popout */
 [class*="UserAreaPopout.module__container_"]
@@ -243,22 +241,20 @@ body::after {
     width: inherit;
 }
 
-/* mobile self profile */
-[class*="YouPage.module__container_"] {
-    height: calc(100% - var(--layout-user-area-reserved-height) - var(--layout-mobile-bottom-nav-reserved-height) - var(--ThemePanelMargins) - var(--ThemePanelBorderThickness) * 2);
-}
 
 /* ---------------------------------------------------------------- */
 /* panel gaps/margins
 /* ---------------------------------------------------------------- */
-/* whole ui layout container */
-[class*="GuildsLayout.module__guildsLayoutContainer_"]
+
+/* whole ui app layout container */
+[class*="AppLayout.module__appLayout_"]
 {
-    margin: var(--ThemePanelMargins);
-    gap: var(--ThemePanelMargins);
+    padding: var(--ThemePanelMargin);
+    gap: var(--ThemePanelMargin);
 }
 
-/* [class*="ChannelIndexPage.module__contentGrid_"] server message/memberlist */
+/* whole ui layout container */
+[class*="GuildsLayout.module__guildsLayoutContainer_"],
 /* whole ui content container */
 [class*="GuildsLayout.module__contentContainer_"],
 /* dm area container */
@@ -272,14 +268,16 @@ body::after {
 /* friendslist to active panel */
 [class*="DMFriendsView.module__container_"],
 /* friendslist header & friendslist */
-[class*="DMFriendsView.module__mainColumn_"] 
+[class*="DMFriendsView.module__mainColumn_"],
+/* mobile notifications page header to notifs */
+[class*="NotificationsPage.module__container_"] 
 {
-    gap: var(--ThemePanelMargins);
+    gap: var(--ThemePanelMargin);
 }
 
 /*  messages to text input | correcting for the typing members section */
 [class*="ChannelChatLayout.module__container_"] {
-    gap: calc(var(--ThemePanelMargins) / 2);
+    gap: calc(var(--ThemePanelMargin) / 2);
 }
 
 
@@ -289,8 +287,8 @@ body::after {
 /*  message list to search results */
 [class*="ChannelIndexPage.module__searchPanel_"] 
 {
-    margin-left: var(--ThemePanelMargins);
-    width: calc(100% - var(--ThemePanelMargins));
+    margin-left: var(--ThemePanelMargin);
+    width: calc(100% - var(--ThemePanelMargin));
 }
 
 
@@ -351,6 +349,8 @@ body::after {
 [class*="VoiceCallView.module__root_"],
 /* VC panel empty */
 [class*="ChannelIndexPage.module__emptyStateContent_"],
+/* server member page */
+[class*="GuildMembersPage.module__pageContainer_"],
 /* mobile bottom nav */
 [class*="MobileBottomNav.module__container_"],
 /* mobile notifications page header */
@@ -358,7 +358,9 @@ body::after {
 /* mobile notifications page content */
 [class*="NotificationsPage.module__content_"],
 /* mobile own profile page */
-[class*="YouPage.module__container_"]
+[class*="YouPage.module__container_"],
+/* auth page */
+[class*="AuthLayout.module__card_"]
 {
     border: var(--ThemePanelBorder)!important;
     border-radius: var(--ThemePanelBorderRounding)!important;
@@ -399,6 +401,8 @@ body::after {
 [class*="VoiceCallView.module__root_"]:hover,
 /* VC panel empty */
 [class*="ChannelIndexPage.module__emptyStateContent_"]:hover,
+/* server member page */
+[class*="GuildMembersPage.module__pageContainer_"]:hover,
 /* mobile bottom nav */
 [class*="MobileBottomNav.module__container_"]:hover,
 /* mobile notifications page header */
@@ -406,7 +410,9 @@ body::after {
 /* mobile notifications page content */
 [class*="NotificationsPage.module__content_"]:hover,
 /* mobile own profile page */
-[class*="YouPage.module__container_"]:hover
+[class*="YouPage.module__container_"]:hover,
+/* auth page */
+[class*="AuthLayout.module__card_"]:hover
 {
     border: var(--ThemePanelBorderHovered)!important;
     transition: var(--transition-fast);
@@ -470,12 +476,7 @@ body::after {
     background: var(--ThemeDarkenMedium);
 }
 
-/* searchbar filter list */
-[class*="MessageSearchBar.module__popoutContainer_"],
-/* settings profile profile type dropdown */
-.css-206gj2-menu,
-/* emoji autocomplete */
-[class*="Autocomplete.module__container_"],
+
 /* emoji tooltip */
 [class*="EmojiTooltipContent.module__container_"],
 /* tooltip panels */
@@ -486,11 +487,17 @@ body::after {
 
 /* emoji autocomplete */
 [class*="Autocomplete.module__container_"] {
+    border-left: unset!important;
+    border-right: unset!important;
+    border-bottom: unset!important;
+    border-radius: calc(var(--ThemePanelBorderRounding) - var(--ThemePanelBorderThickness))!important;
+    top: calc(0px - var(--ThemePanelMargin) - var(--ThemePanelBorderThickness)*2)!important;
+    
     backdrop-filter: blur(var(--ThemePanelBlurSmall));
     background: var(--ThemeDarkenMedium);
 }
 
-
+/* user mentioned */
 [class*="Message\.module__messageMentioned_"]
 {
     background: linear-gradient(
@@ -498,6 +505,14 @@ body::after {
         color-mix(in srgb, var(--message-mention-bg) 100%, transparent),
         transparent
     )!important;
+}
+
+
+
+/* embed backgrounds */
+[class*="EmbedCard.module__wrapper_"],
+[class*="Embed.module__embedFull_"] {
+    background: var(--ThemeDarkenLight);
 }
 
 
@@ -532,10 +547,7 @@ body::after {
 /* context panels */
 /* right click context menu */
 [class*='module__contextMenu_'],
-/* right click side subpanel */
-[class*='ContextMenu.module__submenuPopover_'], 
-/* popout notifications */
-[class*='Popout.module__popout_'], 
+
 /* vc stats info panel */
 [class*='VoiceStatsOverlay.module__overlay_'], 
 /* media buttons */
@@ -544,6 +556,37 @@ body::after {
     background-color: var(--ThemeDarkenMedium);
 }
 
+
+
+
+
+/* NOTE: backdrop filter doesnt work on these panels. might reconsider re-adding backdropfilter to their parent Popout.module__popout_ */
+/* media picker*/
+[class*='ExpressionPickerPopout.module__container_'], 
+/* channel pins*/
+[class*='ChannelPinsPopout.module__container_'], 
+/* right click side subpanel | its inconsistent whether or not backdrop-filter works on these */
+[class*='ContextMenu.module__submenuPopover_'], 
+/* searchbar filter list */
+[class*="MessageSearchBar.module__popoutContainer_"],
+/* settings profile profile type dropdown */
+.css-206gj2-menu,
+/* notifications inbox */
+[class*='InboxPopout.module__container_'],
+/* profile card */
+[class*='ProfileCardLayout.module__profileCard_'] {
+    
+    background-color: var(--ThemeFlatDarker);
+}
+
+/* vc header gradient */
+[class*='VoiceCallView.module__voiceHeader_']::before {
+    border-radius: var(--ThemePanelBorderRounding) var(--ThemePanelBorderRounding) 0 0;
+}
+/* vc buttons gradient */
+[class*='VoiceCallView\.module__controlBarContainer_']::before {
+    display: none;
+}
 
 /* message hover reaction suggestions. blur effect doesnt seem to work correctly.
 /* MessageActionBar.module__actionBarContainer_ */
@@ -555,8 +598,20 @@ body::after {
 /* user typing status user pills */
 [class*='Message.module__typingPill_'] {
     backdrop-filter: blur(var(--ThemePanelBlurSmall));
-    background-color: var(--ThemeDarkenLight);
+    background-color: var(--ThemePanelBGColor);
     border: var(--ThemePanelBorder);
+    /* transform: none!important; */
+}
+[class*='ChannelChatLayout.module__typingContent_'] {
+    /* these were from a test, it was kinda irritatning to have the messages window shift whenever someone typed.
+    height: fit-content;
+    position: inherit;
+    left: unset;
+    right: unset;
+    bottom: unset;
+    */
+    transition-property: height;
+    transition-duration: 0.3s;
 }
 
 /* "X new messages since Date" panel */
@@ -572,24 +627,16 @@ body::after {
     border-radius: calc(var(--ThemePanelBorderRounding) - 0.5rem)!important;
 }
 
+[class*='UserProfileModal.module__modalContainer_'] {
+    border-width: var(--ThemePanelBorderThickness)!important;
+    border-radius: var(--ThemePanelBorderRounding)!important;
+}
+
+
 
 /* make theme input field resizable */ textarea.FormSurface\.module__surface___XzQ4ZT.Input\.module__input___ZGQ3MT.Scroller\.module__scroller___ZTgyZD {
     resize: vertical !important;
     max-height: 900px !important;
-}
-
-
-
-    /* just a little animation test */
-[class*="ChannelItemSurface\.module__channelItemSurfaceSelected_"] {
-    background-color: var(--background-modifier-selected);
-    animation-name: ChannelSelectAnim;
-    animation-duration: 1s;
-}
-
-@keyframes ChannelSelectAnim {
-    from {background-color: var(--brand-primary);}
-    to {background-color: var(--background-modifier-selected);}
 }
 
 
@@ -615,12 +662,32 @@ body::after {
         height: 30rem;
     }
 }
-
-/* message bubbles test */
-/*.Message\.module__container___XzQ1Zj {
-    padding: 5px;
-    background: #0000006e;
-}*/
+/* credits :3 
+[class*='ChannelHeader.module__headerWrapper_']::after,*/
+[class*='SplashScreen.module__splashContent_']::after {
+    
+    border: var(--ThemePanelBorder)!important;
+    border-radius: var(--ThemePanelBorderRounding)!important;
+    backdrop-filter: blur(var(--ThemePanelBlur))!important;
+    -webkit-backdrop-filter: blur(var(--ThemePanelBlur))!important;
+    background: var(--ThemePanelBGColor);
+    transition: var(--transition-slow);
+    
+    
+    position: absolute;
+    bottom: calc(-30px - var(--ThemePanelMargin));
+    
+    height: 30px;
+    width: fit-content;
+    padding: 0.3rem 0.5rem;
+    line-height: 18px;
+    
+    
+    content: "System-Glass - developed by deer";
+    color: var(--brand-primary);
+    font-weight: bold;
+    z-index: 100;
+}
 
 /* ################################################################################################################################ */
 /* ################################################################################################################################ */
@@ -649,7 +716,8 @@ body::after {
     [class*="OutlineFrame.module__frame_"],
     [class*="OutlineFrame.module__body_"],
     [class*="MemberListContainer.module__memberListContainer_"],
-    [class*='ChannelChatLayout.module__textareaArea_'] {
+    [class*='ChannelChatLayout.module__textareaArea_'],
+    [class*="NotificationsPage.module__content_"] {
         overflow: visible!important;
     }
     
@@ -686,8 +754,12 @@ body::after {
     [class*="VoiceCallView.module__root_"],
     /* vc panel empty */
     [class*="ChannelIndexPage.module__emptyStateContent_"],
+    /* server member page */
+    [class*="GuildMembersPage.module__pageContainer_"],
     /* mobile nav bar */
-    [class*="MobileBottomNav.module__container_"] {
+    [class*="MobileBottomNav.module__container_"],
+    /* mobile notifications page list */
+    [class*="NotificationsPage.module__content_"] {
         &::after {
             display: block;
             position: absolute;
@@ -715,6 +787,8 @@ body::after {
     [class*='ChannelChatLayout.module__textareaArea_']::after {
         content: "input";
     }
+    /* server member page */
+    [class*="GuildMembersPage.module__pageContainer_"]::after,
     /* server member list */
     [class*="MemberListContainer.module__memberListContainer_"]::after {
         content: "members";
@@ -762,7 +836,10 @@ body::after {
         content: "voice";
     }
     
-    
+    /* mobile notifications page list */
+    [class*="NotificationsPage.module__content_"]::after {
+        content: "messages";
+    }
     /* cant get this one to work without clipping.
     [class*="ChannelChatLayout.module__messagesArea_"]::after {
         content: "chat";
@@ -840,7 +917,68 @@ body::after {
     [class*="Markup.module__markup_"] ul {
         list-style-type: square;
     }
+    
+    /* user popout banner pfp mask */
+    [class*="ProfileCardBanner.module__bannerMask_"] > mask > circle,
+    [class*="UserProfileModal.module__bannerMask_"] > mask > circle{
+        display: none;
+    }
 }
+/* ---------------------------------------------------------------- */
+/* Customization: Message Bubbles */
+/* ---------------------------------------------------------------- */
+
+@property --MessageBubbles {
+    syntax: 'off | on';
+    inherits: false;
+    initial-value: on;
+}
+
+@container body style(--MessageBubbles: on) {
+    
+    [aria-label="Message group"] {
+        background: var(--ThemeMessageBubbleColor);
+        border-radius: calc(var(--ThemePanelBorderRounding) - var(--chat-horizontal-padding)/2);
+        border-radius: calc(var(--ThemePanelBorderRounding) * var(--ThemeRoundingMultiplier));
+        padding-left: 0.3rem;
+    }
+}
+
+
+
+/* ---------------------------------------------------------------- */
+/* Customization: Animations */
+/* ---------------------------------------------------------------- */
+
+@property --ExtraAnimations {
+    syntax: 'off | on';
+    inherits: false;
+    initial-value: on;
+}
+
+@container body style(--ExtraAnimations: on) {
+    
+    /* channel select flash */
+    [class*="ChannelItemSurface\.module__channelItemSurfaceSelected_"] {
+        background-color: var(--background-modifier-selected);
+        animation-name: ChannelSelectAnim;
+        animation-duration: 1s;
+    }
+
+    @keyframes ChannelSelectAnim {
+        from {background-color: var(--brand-primary);}
+        to {background-color: var(--background-modifier-selected);}
+    }
+
+    /* server list favorites icon */
+    [class*="GuildsLayout.module__favoritesIcon_"] {
+        transition: transform 0.5s;
+    }
+    [class*="GuildsLayout.module__guildListItem_"]:hover [class*="GuildsLayout.module__favoritesIcon_"] {
+        transform: rotate(216deg);
+    }
+}
+
 
 
 /* ################################################################################################################################ */
@@ -853,11 +991,10 @@ body::after {
 /* ---------------------------------------------------------------- */
 
 @media (max-width: 840px) {
-
     
     /* mobile bottom nav */
     [class*="MobileBottomNav.module__container_"] {
-        margin: var(--ThemePanelMargins);
+        margin: var(--ThemePanelMargin);
         margin-top: 0px;
     }
     
@@ -902,10 +1039,37 @@ body::after {
     [class*="DMList.module__dmItemMobile_"] {
         height: 2.7rem;
     }
+    
+    /* server list container */
+    [class*="GuildsLayout.module__guildListScrollerWrapper_"],
+    /* server channel list */
+    [class*="GuildNavbar.module__guildNavbarContainer_"],
+    /* dm list container */
+    [class*="DMLayout.module__dmListColumn_"]
+    {
+        width: -webkit-fill-available;
+        /* idk why it doesnt need to multiply the themepanelborderthickness on mobile*/
+        height: calc(100% - var(--layout-user-area-reserved-height) - var(--layout-mobile-bottom-nav-reserved-height) - var(--ThemePanelMargin) - var(--ThemePanelBorderThickness));
+    }
+    
+    
+    /* mobile notifications page */
+    [class*="NotificationsPage.module__container_"],
+    /* mobile notifications page */
+    [class*="NotificationsPage.module__content_"],
+    /* mobile self profile */
+    [class*="YouPage.module__container_"] {
+        height: calc(100% - var(--layout-user-area-reserved-height) - var(--layout-mobile-bottom-nav-reserved-height) - var(--ThemePanelMargin) - var(--ThemePanelBorderThickness) * 2);
+        /* NOTE: currently need to hardcode var(--layout-mobile-bottom-nav-reserved-height) here since its wrongly set to 0 on the you page. */
+        height: calc(100% - var(--layout-user-area-reserved-height) - 60px - var(--ThemePanelMargin) - var(--ThemePanelBorderThickness));
+        overflow: hidden auto;
+    }
 }
 
 
-
+/* ################################################################################################################################ */
+/* ################################################################################################################################ */
+/* ################################################################################################################################ */
 
 /* these are base64 encoded fonts to bypass fluxer's import restrictions 
     * credits to https://amio.github.io/embedded-google-fonts/ */
