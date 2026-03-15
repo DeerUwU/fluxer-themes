@@ -39,7 +39,6 @@ body {
 
     --ThemeDarkenLight: #00000044;
     --ThemeDarkenMedium: #00000088;
-    --ThemeDarkenDark: #000c;
     
     
     /* these are overwrites to enable transparency*/
@@ -104,6 +103,10 @@ body {
     --ThemePanelBlurSmall: 5px;
     /* panel */
     --ThemePanelBGColor: #00000088;
+    /* background color for tooltips, context panels etc */
+    --ThemePanelContextBGColor: #00000088;
+    /* background color for media picker, notification inbox, search filters, pins etc */
+    --ThemePanelModalBGColor: var(--ThemeFlatPrimary);
     /* panel border thickness */
     --ThemePanelBorderThickness: 0px;
     /* panel border rounding */

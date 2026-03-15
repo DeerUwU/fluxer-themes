@@ -35,11 +35,10 @@ body {
 
 	--ThemeFlatPrimary: #191919;
 	--ThemeFlatLighter: #303030;
-	--ThemeFlatDarker: #1d1d24;
+	--ThemeFlatDarker: #181819;
 
 	--ThemeDarkenLight: #00000044;
 	--ThemeDarkenMedium: #00000088;
-	--ThemeDarkenDark: #000c;
 	
 	
 	/* these are overwrites to enable transparency*/
@@ -103,7 +102,11 @@ body {
 	/* bg blur strength for tooltips, context panels etc*/
 	--ThemePanelBlurSmall: 0px;
 	/* panel */
-	--ThemePanelBGColor: hsl(240, 0%, 11%);
+	--ThemePanelBGColor: hsl(0, 0%, 11%);
+	/* background color for tooltips, context panels etc */
+	--ThemePanelContextBGColor: hsl(0, 0%, 14%);
+	/* background color for media picker, notification inbox, search filters, pins etc */
+	--ThemePanelModalBGColor: hsl(0, 0%, 14%);
 	/* panel border thickness */
 	--ThemePanelBorderThickness: 3px;
 	/* panel border rounding */

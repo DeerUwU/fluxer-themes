@@ -54,8 +54,6 @@
 
         --ThemeDarkenLight: #00000044;
         --ThemeDarkenMedium: #00000088;
-        --ThemeDarkenDark: #000c;
-        
         
         /* these are overwrites to enable transparency*/
         --background-primary: transparent;
@@ -119,6 +117,10 @@
         --ThemePanelBlurSmall: 5px;
         /* panel */
         --ThemePanelBGColor: #00000088;
+        /* background color for tooltips, context panels etc */
+        --ThemePanelContextBGColor: #00000088;
+        /* background color for media picker, notification inbox, search filters, pins etc */
+        --ThemePanelModalBGColor: var(--ThemeFlatPrimary);
         /* panel border thickness */
         --ThemePanelBorderThickness: 3px;
         /* panel border rounding */
@@ -212,7 +214,7 @@
         mix-blend-mode: overlay;
         background: var(--screen-overlay) repeat;
         opacity: var(--ThemeOverlayOpacity);
-        z-index: 99999;
+        z-index: var(--z-index-contextmenu);
     }
     
 
@@ -512,80 +514,11 @@
         background-color: var(--brand-primary)!important;
     }
     
-
+    
     /* ---------------------------------------------------------------- */
-    /* misc panels
+    /* modals
     /* ---------------------------------------------------------------- */
 
-    /* window titlebar */
-    [class*="NativeTitlebar\.module__titlebar_"] {
-        backdrop-filter: blur(var(--ThemePanelBlur));
-        background: var(--ThemeDarkenMedium);
-    }
-
-    
-    /* emoji tooltip */
-    [class*="EmojiTooltipContent.module__container_"],
-    /* tooltip panels */
-    [class*="Tooltip.module__tooltip_"] {
-        backdrop-filter: blur(var(--ThemePanelBlurSmall));
-        background: var(--ThemeDarkenMedium);
-    }
-
-    /* emoji autocomplete */
-    [class*="Autocomplete.module__container_"] {
-        border-left: unset!important;
-        border-right: unset!important;
-        border-bottom: unset!important;
-        border-radius: calc(var(--ThemePanelBorderRounding) - var(--ThemePanelBorderThickness))!important;
-        top: calc(0px - var(--ThemePanelMargin) - var(--ThemePanelBorderThickness)*2)!important;
-        
-        backdrop-filter: blur(var(--ThemePanelBlurSmall));
-        background: var(--ThemeDarkenMedium);
-    }
-    
-    /* user mentioned */
-    [class*="Message\.module__messageMentioned_"]
-    {
-        background: linear-gradient(
-            90deg, 
-            color-mix(in srgb, var(--message-mention-bg) 100%, transparent),
-            transparent
-        )!important;
-    }
-    
-    
-    
-    /* embed backgrounds */
-    [class*="EmbedCard.module__wrapper_"],
-    [class*="Embed.module__embedFull_"] {
-        background: var(--ThemeDarkenLight);
-    }
-
-    
-    /* message preview (like in bookmarks for example) */
-    [class*="MessagePreview.module__previewCard_"]
-    {
-        overflow: hidden;
-    }
-    
-    
-    /* context panels */
-    /* right click context menu */
-    [class*='module__contextMenu_'],
-    
-    /* vc stats info panel */
-    [class*='VoiceStatsOverlay.module__overlay_'], 
-    /* media buttons */
-    [class*='module__mediaHoverAction_'] > button {
-        backdrop-filter: blur(var(--ThemePanelBlurSmall));
-        background-color: var(--ThemeDarkenMedium);
-    }
-    
-    
-    
-    
-    
     /* NOTE: backdrop filter doesnt work on these panels. might reconsider re-adding backdropfilter to their parent Popout.module__popout_ */
     /* media picker*/
     [class*='ExpressionPickerPopout.module__container_'], 
@@ -602,8 +535,94 @@
     /* profile card */
     [class*='ProfileCardLayout.module__profileCard_'] {
         
-        background-color: var(--ThemeFlatDarker);
+        background-color: var(--ThemePanelModalBGColor);
     }
+    
+    /* small user profile popouts */
+    [class*='ProfileCardLayout.module__profileCard_'],
+    /* big user profile popouts */
+    [class*='UserProfileModal.module__modalContainer_'] {
+        border-width: 0px!important;
+        border-radius: var(--ThemePanelBorderRounding)!important;
+    }
+    
+    /* ---------------------------------------------------------------- */
+    /* context panels
+    /* ---------------------------------------------------------------- */
+
+    /* emoji tooltip */
+    [class*="EmojiTooltipContent.module__container_"],
+    /* tooltip panels */
+    [class*="Tooltip.module__tooltip_"] {
+        backdrop-filter: blur(var(--ThemePanelBlurSmall));
+        background: var(--ThemePanelContextBGColor);
+    }
+
+    /* emoji autocomplete */
+    [class*="Autocomplete.module__container_"] {
+        border-left: unset!important;
+        border-right: unset!important;
+        border-bottom: unset!important;
+        border-radius: calc(var(--ThemePanelBorderRounding) - var(--ThemePanelBorderThickness))!important;
+        top: calc(0px - var(--ThemePanelMargin) - var(--ThemePanelBorderThickness)*2)!important;
+        
+        backdrop-filter: blur(var(--ThemePanelBlurSmall));
+        background: var(--ThemePanelContextBGColor);
+    }
+    
+
+    /* right click context menu */
+    [class*='module__contextMenu_'],
+    /* vc stats info panel */
+    [class*='VoiceStatsOverlay.module__overlay_'], 
+    /* media buttons */
+    [class*='module__mediaHoverAction_'] > button {
+        backdrop-filter: blur(var(--ThemePanelBlurSmall));
+        background-color: var(--ThemePanelContextBGColor);
+    }
+    
+    /* message hover reaction suggestions. blur effect doesnt seem to work correctly. */
+    [class*='MessageActionBar.module__actionBar_'] {
+        background-color: var(--ThemePanelContextBGColor);
+    }
+    
+    /* ---------------------------------------------------------------- */
+    /* misc panels
+    /* ---------------------------------------------------------------- */
+
+    /* window titlebar */
+    [class*="NativeTitlebar\.module__titlebar_"] {
+        backdrop-filter: blur(var(--ThemePanelBlur));
+        background: var(--ThemeDarkenMedium);
+    }
+
+    
+    
+    /* user mentioned */
+    [class*="Message\.module__messageMentioned_"]
+    {
+        background: linear-gradient(
+            90deg, 
+            color-mix(in srgb, var(--message-mention-bg) 100%, transparent),
+            transparent
+        )!important;
+    }
+
+    
+    /* embed backgrounds */
+    [class*="EmbedCard.module__wrapper_"],
+    [class*="Embed.module__embedFull_"] {
+        background: var(--ThemeDarkenLight);
+    }
+
+    
+    /* message preview (like in bookmarks for example) */
+    [class*="MessagePreview.module__previewCard_"]
+    {
+        overflow: hidden;
+    }
+    
+
     
     /* vc header gradient */
     [class*='VoiceCallView.module__voiceHeader_']::before {
@@ -614,12 +633,7 @@
         display: none;
     }
     
-    /* message hover reaction suggestions. blur effect doesnt seem to work correctly.
-    /* MessageActionBar.module__actionBarContainer_ */
-    [class*='MessageActionBar.module__actionBar_'] {
-        backdrop-filter: blur(var(--ThemePanelBlurSmall));
-        background-color: var(--ThemeDarkenLight);
-    }
+    
     
     /* user typing status user pills */
     [class*='Message.module__typingPill_'] {
@@ -640,6 +654,7 @@
         transition-duration: 0.3s;
     }
     
+    
     /* "X new messages since Date" panel */
     [class*='Messages.module__newMessagesBar_'] {
         padding-top: 0px;
@@ -653,10 +668,8 @@
         border-radius: calc(var(--ThemePanelBorderRounding) - 0.5rem)!important;
     }
     
-    [class*='UserProfileModal.module__modalContainer_'] {
-        border-width: var(--ThemePanelBorderThickness)!important;
-        border-radius: var(--ThemePanelBorderRounding)!important;
-    }
+    
+    
     
     /* "discovery explore page top banner */
     [class*="DiscoveryPage.module__hero_"]
@@ -671,8 +684,23 @@
         background-color: var(--ThemeDarkenMedium);
     }
     
+    
+    /* "toasts */
+    [class*="Toast.module__toast_"]
+    {
+        border-radius: var(--radius-full)!important;
+        background-color: var(--ThemeFlatPrimary)!important;
+    }
+    
+    [class*="ProfileCardUserInfo.module__pronouns_"]
+    {
+        display: inline-block;
+    }
+    
+    
 
-    /* make theme input field resizable */ textarea.FormSurface\.module__surface___XzQ4ZT.Input\.module__input___ZGQ3MT.Scroller\.module__scroller___ZTgyZD {
+    /* make theme input field resizable */ 
+    textarea.FormSurface\.module__surface___XzQ4ZT.Input\.module__input___ZGQ3MT.Scroller\.module__scroller___ZTgyZD {
         resize: vertical !important;
         max-height: 900px !important;
     }
