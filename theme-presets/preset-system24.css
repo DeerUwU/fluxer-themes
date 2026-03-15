@@ -1,0 +1,154 @@
+body {
+	container-name: body;
+	
+	/* ----------------------------------------------------------------------- */
+	/* Toggles
+	/* ----------------------------------------------------------------------- */
+	
+	/* decide if you want square or rounded avatars. | Options: off, on */
+	--SquareAvatars: on;
+	/* decide if you want bubbles to highlight message groups. | Options: off, on 
+	/* see also: --ThemeMessageBubbleColor */
+	--MessageBubbles: off;
+	/* decide if you want panel labels. looks better without a background image | Options: off, on */
+	--ThemePanelLabels: on;
+	/* overwrites fluxer's panel rounding in most places | Options: off, on
+	/* see also: --ThemeRoundingMultiplier */
+	--UseDefaultRounding: off; 
+	/* decide if you want to disable some additional animations added by the theme | Options: off, on */
+	--ExtraAnimations: on;
+	/* set a custom app icon in the top left corner | Options: off, on */
+	--CustomAppIcon: off;
+	/* link to your custom icon. currently it HAS to be hosted on fluxer's servers */
+	--ThemeCustomIconUrl: url('');
+}
+
+:root {
+	/* ----------------------------------------------------------------------- */
+	/* Colors & default theme overrides
+	/* ----------------------------------------------------------------------- */
+	
+	--brand-primary: rgb(230, 143, 254);
+	--brand-secondary: rgb(154, 78, 167);
+	
+	--ThemeMessageBubbleColor: rgba(255, 255, 255, .06);
+
+	--ThemeFlatPrimary: #191919;
+	--ThemeFlatLighter: #303030;
+	--ThemeFlatDarker: #1d1d24;
+
+	--ThemeDarkenLight: #00000044;
+	--ThemeDarkenMedium: #00000088;
+	--ThemeDarkenDark: #000c;
+	
+	
+	/* these are overwrites to enable transparency*/
+	--background-primary: transparent;
+	--background-secondary: transparent;
+	--background-secondary-alt: var(--ThemeFlatPrimary); /* mainly used in for mobile view*/
+	--background-secondary-lighter: transparent;
+	--background-tertiary: transparent;
+	--panel-control-bg: transparent;
+	--background-textarea: #0003!important;
+	
+	/* ----------------------------------------------------------------------- */
+	/* Fonts & Text
+	/* ----------------------------------------------------------------------- */
+
+	/* change to '' for fluxer's default font */
+	--font-sans: 'DM Mono', sans-serif;
+	/* change to '' for fluxer's default font */
+	--font-mono: 'DM Mono';
+	/* 300 is light, 400 is normal. DOES NOT AFFECT BOLD TEXT */
+	font-weight: 300;
+	/* decreases letter spacing for better readability. recommended on monospace fonts.*/
+	letter-spacing: -0.03ch;
+	
+	/* ----------------------------------------------------------------------- */
+	/* Background
+	/* ----------------------------------------------------------------------- */
+	
+	/* Background Image | fluxer currently only allows using images hosted on their own servers.
+	/* theres a list of presets further below, named --bg-1 to --bg-5. of course, you can also use your own images. */
+	--background-image: var(--bg-2);
+	/* fallback color behind the background image. can be used to give your bg image a tint */
+	--ThemeBackgroundColor: hsl(240, 0%, 11%);
+	/* Image position | center, left, right, bottom, top */
+	--backgroundPosition: top;
+	/* To cover the entire app, set to "cover". You can also set it to "100% 100%" but the image will be stretched. Set to "contain" to see the entire image */
+	--backgroundSize: cover;
+	/* if you want the image to repeat */
+	--backgroundRepeat: no-repeat;
+	/* Set to 0 to remove blur. i recommend leaving this off and tweaking --ThemePanelBlur instead */
+	--backgroundBlur: 0px;
+	/* 0 is fully transparent, 1 is fully opaque */
+	--backgroundOpacity: 0;
+	
+	/* ----------------------------------------------------------------------- */
+	/* screen overlay effect */
+	/* ----------------------------------------------------------------------- */
+	
+	/* screen overlay texture opacity. by default its a film grain effect */
+	--ThemeOverlayOpacity: 0.2;
+	--screen-overlay: url('https://fluxerusercontent.com/attachments/1474610319297830991/1481397623233222422/Noise_Texture.png');
+
+	/* ----------------------------------------------------------------------- */
+	/* panels
+	/* ----------------------------------------------------------------------- */
+	
+	/* gap between panels */
+	--ThemePanelMargin: 12px;
+	/* panel bg blur strength */
+	--ThemePanelBlur: 0px;
+	/* bg blur strength for tooltips, context panels etc*/
+	--ThemePanelBlurSmall: 0px;
+	/* panel */
+	--ThemePanelBGColor: hsl(240, 0%, 11%);
+	/* panel border thickness */
+	--ThemePanelBorderThickness: 3px;
+	/* panel border rounding */
+	--ThemePanelBorderRounding: 0px;
+	/* panel border color (not hovered) */
+	--ThemePanelBorderColor: var(--ThemeFlatLighter);
+	/* panel border color (hovered) */
+	--ThemePanelBorderColorHovered: var(--brand-primary);
+	
+	/* you can ignore these */
+	--ThemePanelBorder: var(--ThemePanelBorderThickness) solid var(--ThemePanelBorderColor);
+	--ThemePanelBorderHovered: var(--ThemePanelBorderThickness) solid var(--ThemePanelBorderColorHovered);
+	
+	/* ----------------------------------------------------------------------- */
+	/* rounding
+	/* ----------------------------------------------------------------------- */
+
+	/* change this value to control the ui's overall rounding strength 
+	* 1 is the default, 0 removes most rounding. */
+	--ThemeRoundingMultiplier: 0;
+	
+	/* leave these alone unless you know what youre doing */
+	--radius-sm: calc(0.25rem * var(--ThemeRoundingMultiplier));
+	--radius-md: calc(0.375rem * var(--ThemeRoundingMultiplier));
+	--radius-lg: calc(0.5rem * var(--ThemeRoundingMultiplier));
+	--radius-xl: calc(0.75rem * var(--ThemeRoundingMultiplier));
+	--radius-2xl: calc(1rem * var(--ThemeRoundingMultiplier));
+	--radius-full: calc(9999px * var(--ThemeRoundingMultiplier));
+	--media-border-radius: calc(4px * var(--ThemeRoundingMultiplier));
+	--message-reply-spine-radius: calc(6px * var(--ThemeRoundingMultiplier));
+
+	/* ----------------------------------------------------------------------- */
+	/* bg presets */
+	/* ----------------------------------------------------------------------- */
+	/* Background Image Presets 
+	* credits:
+	* bg-1: ThaSilentArtist https://www.pixilart.com/thasilentartist
+	* bg-2: ThaSilentArtist 
+	* bg-3: ThaSilentArtist 
+	* bg-4: haraguroi?
+	* bg-5: RoofTerrible1413 https://www.reddit.com/r/yumenikki/comments/1kukxkf/one_of_my_favourite_locations_in_the_game/
+	*/
+	--bg-1: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481279988511911959/41511cd77e70.png");
+	--bg-2: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481670714326512122/a8082672504ec71.gif");
+	--bg-3: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481671197485134759/rocket_thasilentartist.png");
+	--bg-4: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481279988625158169/Konachan.com_-_199470_bicycle_clouds_dress_haraguroi_you_night_original_scenic_sky_stars_water.jpg");
+	--bg-5: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481282614376882391/brvzd6evgs2f1.png");
+}

@@ -2,8 +2,10 @@
 a highly customizable frosted glass theme for fluxer, based on refact0r's tui style discord theme [system24](https://github.com/refact0r/system24/). this is NOT a port.
 
 ## Installation
-simply click this theme link: https://web.fluxer.app/theme/12a9180593ee6b93
-fluxer should automatically open and prompt you to apply the theme. 
+simply click one of the theme preset links. fluxer should automatically open and prompt you to apply the theme. 
+- System-Glass (default): 	https://web.fluxer.app/theme/d7d21e965ae4396a
+- system24: 				https://web.fluxer.app/theme/a6bcc363da4efc7f
+- midnight-background: 		https://web.fluxer.app/theme/b5b5f9801b390e7f
 alternatively you can copy the contents of theme-system-glass.css, go to fluxer's settings > Look & Feel > Custom Theme Tokens and paste everything into the CSS Overrides field.
 
 ## Customization
@@ -24,8 +26,5 @@ bg-5: [RoofTerrible1413](https://www.reddit.com/user/RoofTerrible1413/)
 
 ## Screenshots
 <img src="https://github.com/DeerUwU/fluxer-system-glass-theme/raw/main/screenshots/theme-default.jpg">
-<img src="https://github.com/DeerUwU/fluxer-system-glass-theme/raw/main/screenshots/theme-example.jpg">
 <img src="https://github.com/DeerUwU/fluxer-system-glass-theme/raw/main/screenshots/theme-system24-style.png">
 <img src="https://github.com/DeerUwU/fluxer-system-glass-theme/raw/main/screenshots/theme-midnight-style.jpg">
-
-https://web.fluxer.app/theme/26251e3b75635b45
