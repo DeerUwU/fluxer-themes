@@ -3,9 +3,9 @@ a highly customizable frosted glass theme for fluxer, based on refact0r's tui st
 
 ## Installation
 simply click one of the theme preset links. fluxer should automatically open and prompt you to apply the theme. 
-- System-Glass (default): 	https://web.fluxer.app/theme/b61dc083b10abb11
-- system24: 				https://web.fluxer.app/theme/11775933630da5a3
-- midnight-background: 		https://web.fluxer.app/theme/276b3fb129a4868b
+- System-Glass (default): 	https://web.fluxer.app/theme/79dfb5742bcdd4b0
+- system24: 				https://web.fluxer.app/theme/90367f25da89f2a9
+- midnight-background: 		https://web.fluxer.app/theme/6e17fc111d5aa3ab
 alternatively you can copy the contents of theme-system-glass.css, go to fluxer's settings > Look & Feel > Custom Theme Tokens and paste everything into the CSS Overrides field.
 
 ## Customization

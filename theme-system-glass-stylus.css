@@ -533,19 +533,13 @@
     /* notifications inbox */
     [class*='InboxPopout.module__container_'],
     /* profile card */
-    [class*='ProfileCardLayout.module__profileCard_'] {
+    [class*='ProfileCardLayout.module__profileCard_'],
+    /* server options context panel */
+    [class*='GuildHeaderPopout.module__container_'] {
         
         background-color: var(--ThemePanelModalBGColor);
     }
-    
-    /* small user profile popouts */
-    [class*='ProfileCardLayout.module__profileCard_'],
-    /* big user profile popouts */
-    [class*='UserProfileModal.module__modalContainer_'] {
-        border-width: 0px!important;
-        border-radius: var(--ThemePanelBorderRounding)!important;
-    }
-    
+
     /* ---------------------------------------------------------------- */
     /* context panels
     /* ---------------------------------------------------------------- */
@@ -587,9 +581,120 @@
     }
     
     /* ---------------------------------------------------------------- */
-    /* misc panels
+    /* user profile poputs
     /* ---------------------------------------------------------------- */
 
+    /* small user profile popouts */
+    [class*='ProfileCardLayout.module__profileCard_'],
+    /* big user profile popouts */
+    [class*='UserProfileModal.module__modalContainer_'] {
+        border-width: var(--ThemePanelBorderWidth)!important;
+        border-radius: var(--ThemePanelBorderRounding)!important;
+    }
+    
+    /* pfp button */
+    [class*="ProfileCardBanner.module__avatarButton_"],
+    [class*="UserProfileModal.module__avatarContainer_"]
+    {
+        anchor-name: --anchor-userstatus;
+    }
+    
+    /* "display name, username, pronouns */
+    [class*="ProfileCardUserInfo.module__userInfoContainer_"],
+    [class*="UserProfileModal.module__userInfoContent_"]
+    {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    /* display name */
+    [class*="ProfileCardUserInfo.module__nameRow_"],
+    [class*="UserProfileModal.module__nameRow_"]
+    {
+        width: 100%;
+    }
+    /* username */
+    [class*="ProfileCardUserInfo.module__usernameRow_"],
+    [class*="UserProfileModal.module__usernameRow_"]
+    {
+        gap: unset;
+        color: var(--text-secondary);
+    }
+    /* username pronouns separator */
+    [class*="ProfileCardUserInfo.module__pronouns_"]::before,
+    [class*="UserProfileModal.module__pronouns_"]::before
+    {
+        content: "";
+        width: 4px!important;
+        height: 4px!important;
+        margin: 0rem 0.5rem;
+        background-color: var(--text-tertiary);
+        border-radius: var(--radius-full);
+    }
+    
+    /* pronouns */
+    [class*="ProfileCardUserInfo.module__pronouns_"],
+    [class*="UserProfileModal.module__pronouns_"]
+    {
+        font-size: 14px;
+        margin-top: unset;
+        color: var(--text-secondary);
+        display: inline-flex;
+        align-items: center;
+    }
+    
+    /* custom profile status */
+    [class*="UserProfilePopout.module__profileCustomStatus_"],
+    /* custom profile status (user area) */
+    [class*="UserAreaPopout.module__customStatusRow_"],
+    [class*="UserProfileModal.module__customStatusRow_"],
+    /* profile preview custom status */
+    [class*="ProfilePreview.module__profileCustomStatus_"]
+    {
+        align-items: flex-start;
+        
+        position: absolute;
+        position-anchor: --anchor-userstatus;
+        position-area: right span-all;
+        position-visibility: always;
+        
+        
+        margin-left: 0.75rem;
+        
+        width: max-content;
+        max-width: 175px;
+        max-height: 3.5rem;
+        
+        overflow: hidden;
+        
+        background: var(--ThemeFlatLighter);
+        /* border: 1px solid var(--background-header-secondary); */
+        border-radius: calc(4px * var(--ThemeRoundingMultiplier));
+        
+        transition: var(--transition-normal);
+    }
+    
+    /* custom profile status */
+    [class*="UserProfilePopout.module__profileCustomStatus_"]:hover,
+    /* custom profile status (user area) */
+    [class*="UserAreaPopout.module__customStatusRow_"]:hover,
+    [class*="UserProfileModal.module__customStatusRow_"]:hover,
+    /* profile preview custom status */
+    [class*="ProfilePreview.module__profileCustomStatus_"]:hover {
+        max-height: 10rem;
+    }
+    /* custom profile status inner */
+    [class*="CustomStatusDisplay.module__content_"]:not([class*="UserArea"] > [class*="CustomStatusDisplay.module__content_"]) {
+        margin: 0.25rem 0.5rem;
+    }
+
+    
+    
+    /* ---------------------------------------------------------------- */
+    /* misc panels
+    /* ---------------------------------------------------------------- */
+    
+    
     /* window titlebar */
     [class*="NativeTitlebar\.module__titlebar_"] {
         backdrop-filter: blur(var(--ThemePanelBlur));
@@ -692,11 +797,6 @@
         background-color: var(--ThemeFlatPrimary)!important;
     }
     
-    [class*="ProfileCardUserInfo.module__pronouns_"]
-    {
-        display: inline-block;
-    }
-    
     
 
     /* make theme input field resizable */ 
@@ -787,9 +887,6 @@
             overflow: visible!important;
         }
         
-        
-        /* loading splashscreen */
-        [class*='SplashScreen.module__splashContent_'],
         /* server sidebar */
         [class*="GuildsLayout.module__guildListScroller"],
         /* dm list */
@@ -864,10 +961,6 @@
         /* server channel list */
         [class*="ChannelHeader.module__headerWrapper_"]::after {
             content: "channel";
-        }
-        /* loading splashscreen */
-        [class*='SplashScreen.module__splashContent_']::after {
-            content: "load";
         }
         /* dm list */
         [class*="DMLayout.module__dmListColumn_"]::after {
