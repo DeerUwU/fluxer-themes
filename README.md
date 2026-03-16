@@ -3,9 +3,9 @@ a highly customizable frosted glass theme for fluxer, based on refact0r's tui st
 
 ## Installation
 simply click one of the theme preset links. fluxer should automatically open and prompt you to apply the theme. 
-- System-Glass (default): 	https://web.fluxer.app/theme/79dfb5742bcdd4b0
-- system24: 				https://web.fluxer.app/theme/90367f25da89f2a9
-- midnight-background: 		https://web.fluxer.app/theme/6e17fc111d5aa3ab
+- System-Glass (default): 	https://web.fluxer.app/theme/e4aa6b194f984a6d
+- system24: 				https://web.fluxer.app/theme/9c7919940895e885
+- midnight-background: 		https://web.fluxer.app/theme/a9826a810e77da34
 alternatively you can copy the contents of theme-system-glass.css, go to fluxer's settings > Look & Feel > Custom Theme Tokens and paste everything into the CSS Overrides field.
 
 ## Customization
@@ -14,15 +14,7 @@ All customization options are located inside the first body {} and :root {} tags
 Hopefully as fluxer grows the developers will losen some import restrictions to further improve this theme's customizability through presets.
 
 ## Credits
-bg-1: [ThaSilentArtist](https://www.pixilart.com/thasilentartist)
-
-bg-2: [ThaSilentArtist](https://www.pixilart.com/thasilentartist) 
-
-bg-3: [ThaSilentArtist](https://www.pixilart.com/thasilentartist) 
-
-bg-4: [白糸](https://www.pixiv.net/en/artworks/49983419) 
-
-bg-5: [RoofTerrible1413](https://www.reddit.com/user/RoofTerrible1413/) 
+backgrounds: [ThaSilentArtist](https://www.pixilart.com/thasilentartist)
 
 ## Screenshots
 <img src="https://github.com/DeerUwU/fluxer-system-glass-theme/raw/main/screenshots/theme-default.jpg">

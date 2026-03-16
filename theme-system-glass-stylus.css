@@ -22,6 +22,8 @@
        
         /* decide if you want square or rounded avatars. | Options: off, on */
         --SquareAvatars: on;
+        /* set the user online status appearance. outlines look better with square avatars | Options: off, on */
+        --OutlineOnlineStatus: on;
         /* decide if you want bubbles to highlight message groups. | Options: off, on 
         /* see also: --ThemeMessageBubbleColor */
         --MessageBubbles: off;
@@ -48,21 +50,20 @@
 
         --ThemeMessageBubbleColor: rgba(255, 255, 255, .06);
         
-        --ThemeFlatPrimary: #24242e;
-        --ThemeFlatLighter: #383c48;
-        --ThemeFlatDarker: #1d1d24;
+        --ThemeFlatPrimary: #26262c;
+        --ThemeFlatLighter: #2e3138;
+        --ThemeFlatDarker: #1e1e24;
 
         --ThemeDarkenLight: #00000044;
         --ThemeDarkenMedium: #00000088;
         
-        /* these are overwrites to enable transparency*/
-        --background-primary: transparent;
-        --background-secondary: transparent;
-        --background-secondary-alt: var(--ThemeFlatPrimary); /* mainly used in for mobile view*/
-        --background-secondary-lighter: transparent;
-        --background-tertiary: transparent;
-        --panel-control-bg: transparent;
-        --background-textarea: #0003!important;
+        
+        /* color overrides */
+        --background-primary: var(--ThemeFlatDarker);
+        --background-secondary: var(--ThemeFlatPrimary);
+        --background-secondary-alt: var(--ThemeFlatLighter); /* mainly used in for mobile view*/
+        --background-tertiary: var(--ThemeFlatLighter); /* mainly used in for mobile view*/
+        --background-textarea: var(--ThemeDarkenLight); /* used in search bars */
         
         /* ----------------------------------------------------------------------- */
         /* Fonts & Text
@@ -161,20 +162,16 @@
         * bg-1: ThaSilentArtist https://www.pixilart.com/thasilentartist
         * bg-2: ThaSilentArtist 
         * bg-3: ThaSilentArtist 
-        * bg-4: haraguroi?
-        * bg-5: RoofTerrible1413 https://www.reddit.com/r/yumenikki/comments/1kukxkf/one_of_my_favourite_locations_in_the_game/
         */
         --bg-1: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481279988511911959/41511cd77e70.png");
         --bg-2: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481670714326512122/a8082672504ec71.gif");
         --bg-3: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481671197485134759/rocket_thasilentartist.png");
-        --bg-4: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481279988625158169/Konachan.com_-_199470_bicycle_clouds_dress_haraguroi_you_night_original_scenic_sky_stars_water.jpg");
-        --bg-5: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481282614376882391/brvzd6evgs2f1.png");
     }
     
     
-    /* ################################################################################################################################ */
-    /* ################################################################################################################################ */
-    /* ################################################################################################################################ */
+    /* ################################################################################################# */
+    /* ################################################################################################# */
+    /* ################################################################################################# */
     
     /* ---------------------------------------------------------------- */
     /* basic setup */
@@ -217,6 +214,55 @@
         z-index: var(--z-index-contextmenu);
     }
     
+    
+    /* remove backgrounds. this is safer than overwriting the color variables directly */
+    html:not(.auth-page) [class*="App.module__appContainer_"],
+    [class*="App.module__appContainer_"],
+    [class*="GuildsLayout.module__guildsLayoutContainer_"],
+    [class*="GuildsLayout.module__guildListScrollContainer_"],
+    [class*="GuildsLayout.module__contentContainer_"],
+    [class*="UserArea.module__userAreaInnerWrapper_"],
+    [class*="OutlineFrame.module__frame_"],
+    [class*="GuildsLayout.module__contentInner_"],
+    [class*="GuildLayout.module__guildLayoutContainer_"],
+    [class*="ChannelListContent.module__channelListScroller_"],
+    [class*="GuildLayout.module__guildMainContent_"],
+    [class*="ChannelLayout.module__channelLayoutContainer_"],
+    [class*="ChannelIndexPage.module__channelGrid_"],
+    [class*="ChannelHeader.module__headerContainer_"],
+    [class*="ChannelChatLayout.module__container_"],
+    [class*="InputWrapper.module__box_"],
+    [class*="GuildHeader.module__headerContainer_"],
+    [class*="DMLayout.module__dmLayoutContainer_"],
+    [class*="DMList.module__dmListContainer_"],
+    [class*="DMList.module__dmListHeader_"],
+    [class*="DMList.module__desktopScroller_"],
+    [class*="DMList.module__dmChannelList_"],
+    [class*="DMLayout.module__contentColumn_"],
+    [class*="DMLayout.module__contentInner_"],
+    [class*="DMFriendsView.module__container_"],
+    [class*="UserProfileModal.module__modalContainer_"],
+    [class*="Divider.module__text_"],
+    [class*="SplashScreen.module__splashOverlay_"],
+    [class*="MobileTextareaLayout.module__mobilePlusButton_"],
+    [class*="MobileTextareaLayout.module__mobileInputContainer_"],
+    [class*="MobileTextareaLayout.module__mobileVoiceButton_"],
+    [class*="ChannelHeader.module__iconButtonMobile_"],
+    [class*="NotificationsPage.module__container_"],
+    [class*="SelectBottomSheet.module__trigger_"],
+    [class*="NotificationsPage.module__bookmarkButton_"],
+    [class*="YouPage.module__profile_"],
+    [class*="YouPage.module__noteIconWrapper_"],
+    [class*="DMList.module__mobileContainer_"],
+    [class*="DMList.module__mobileScroller_"],
+    [class*="DMList.module__mobileHeaderButton_"],
+    [class*="DMList.module__mobileAddFriendButton_"],
+    [class*="MemberListContainer.module__memberListScroller_"],
+    [class*="App.module__appContainer_"],
+    [class*="App.module__appContainer_"]
+    {
+        background: transparent;
+    }
 
     /* ---------------------------------------------------------------- */
     /* panel scaling fixes | setup to ensure proper scaling with custom area margins
@@ -306,6 +352,11 @@
     {
         margin-left: var(--ThemePanelMargin);
         width: calc(100% - var(--ThemePanelMargin));
+    }
+    
+    /* server list */
+    [class*="GuildsLayout.module__guildListScrollContainer_"] {
+        padding-top: var(--spacing-2);
     }
     
     
@@ -474,7 +525,6 @@
     /* dm list users hover*/
     [class*='DMList.module__dmItem_']:hover {
         background: color-mix(in srgb, var(--brand-primary) 80%, transparent)!important;;
-        border-radius: 100px;
         transition-duration: 0.0s;
     }
 
@@ -584,6 +634,11 @@
     /* user profile poputs
     /* ---------------------------------------------------------------- */
 
+    /* full user profile */
+    [class*='UserProfileModal.module__modalRoot_'] {
+        height: unset;
+    }
+    
     /* small user profile popouts */
     [class*='ProfileCardLayout.module__profileCard_'],
     /* big user profile popouts */
@@ -597,6 +652,8 @@
     [class*="UserProfileModal.module__avatarContainer_"]
     {
         anchor-name: --anchor-userstatus;
+        background-color: var(--ThemePanelPrimary);
+        border-color:  var(--ThemeFlatPrimary);
     }
     
     /* "display name, username, pronouns */
@@ -684,10 +741,53 @@
         max-height: 10rem;
     }
     /* custom profile status inner */
-    [class*="CustomStatusDisplay.module__content_"]:not([class*="UserArea"] > [class*="CustomStatusDisplay.module__content_"]) {
+    [class*="CustomStatusDisplay"] > [class*="CustomStatusDisplay.module__content_"],
+    [class*="UserProfilePopout"] > [class*="CustomStatusDisplay.module__content_"],
+    [class*="UserProfileModal"] > [class*="CustomStatusDisplay.module__content_"],
+    [class*="ProfilePreview"] > [class*="CustomStatusDisplay.module__content_"] {
         margin: 0.25rem 0.5rem;
     }
 
+    [class*="UserProfileModal.module__profileContentWrapper_"] {
+       background: var(--ThemeFlatDarker);
+    }
+    /* mobile view personal page bio section */
+    [class*="YouPage.module__section_"],
+    /* mobile view personal page note section */
+    [class*="YouPage.module__noteButton_"],
+    /* mobile view personal page settings button */
+        [class*="YouPage.module__settingsButton_"] {
+       background: var(--ThemeDarkenLight);
+    }
+    
+    
+    /* bio join date notes etc container */
+    [class*="UserProfileModal.module__profileContent_"] {
+        padding-top: 16px!important;
+    }
+    
+    
+    /* ---------------------------------------------------------------- */
+    /* misc panels
+    /* ---------------------------------------------------------------- */
+    
+    /* sever member list tab */
+    [class*="GuildMembersPage.module__tableWrapper_"],
+    /* sever member list tab */
+    [class*="Button.module__secondary_"],
+    /* sever member list tab rows per page dropdown */
+    .css-185nao-control {
+        background-color: var(--ThemeDarkenLight)!important;
+    }
+    .css-185nao-control:focus {
+        background-color: var(--ThemeDarkenLight)!important;
+    }
+    
+    /* sever member list tab */
+    [class*="GuildMembersPage.module__table_"]
+    {
+        margin-top: 0;
+    }
     
     
     /* ---------------------------------------------------------------- */
@@ -716,7 +816,8 @@
     
     /* embed backgrounds */
     [class*="EmbedCard.module__wrapper_"],
-    [class*="Embed.module__embedFull_"] {
+    [class*="Embed.module__embedFull_"],
+    [class*="AttachmentFile.module__attachmentContainer_"] {
         background: var(--ThemeDarkenLight);
     }
 
@@ -725,6 +826,7 @@
     [class*="MessagePreview.module__previewCard_"]
     {
         overflow: hidden;
+        background: var(--ThemeDarkenLight);
     }
     
 
@@ -774,28 +876,46 @@
     }
     
     
+    /* emoji reactions */
+    [class*='MessageReactions.module__reactionButton_'] {
+        background: var(--ThemeDarkenLight);
+        border: 1px solid var(--background-modifier-accent);
+    }
+    
+    /* profile roles */
+    [class*='RoleManagement.module__roleBadge_'] {
+        background: var(--ThemeDarkenLight);
+    }
     
     
-    /* "discovery explore page top banner */
+    /* discovery explore page top banner */
     [class*="DiscoveryPage.module__hero_"]
     {
         border-radius: calc(var(--ThemePanelBorderRounding) - var(--spacing-5) / 2);
         margin: var(--spacing-5);
         margin-bottom: unset;
     }
-    /* "discovery explore page search bar */
+    
+    
+    /* discovery explore page search bar */
     [class*="DiscoveryPage.module__searchInput_"]
     {
         background-color: var(--ThemeDarkenMedium);
     }
+    /* search/input bars */
+    [class*="Input.module__input_"] {
+        background-color: var(--ThemeDarkenLight);
+    }
     
     
-    /* "toasts */
+    /* toasts */
     [class*="Toast.module__toast_"]
     {
         border-radius: var(--radius-full)!important;
         background-color: var(--ThemeFlatPrimary)!important;
     }
+    
+    
     
     
 
@@ -811,7 +931,7 @@
     /* ---------------------------------------------------------------- */
     [class*='SplashScreen.module__splashContent_'] {
         padding: 10px;
-        background: var(--ThemeDarkenMedium);
+        background: var(--ThemePanelBGColor);
         aspect-ratio: 1 / 1;
         justify-content: center;
     }
@@ -829,14 +949,15 @@
         }
     }
     /* credits :3 
-    [class*='ChannelHeader.module__headerWrapper_']::after,*/
+    [class*='ChannelHeader.module__headerWrapper_']::after,
+    [class*='SplashScreen.module__connectionStatus_']::after */
     [class*='SplashScreen.module__splashContent_']::after {
         
         border: var(--ThemePanelBorder)!important;
         border-radius: var(--ThemePanelBorderRounding)!important;
         backdrop-filter: blur(var(--ThemePanelBlur))!important;
         -webkit-backdrop-filter: blur(var(--ThemePanelBlur))!important;
-        background: var(--ThemePanelBGColor);
+        
         transition: var(--transition-slow);
         
         
@@ -850,14 +971,29 @@
         
         
         content: "System-Glass - developed by deer";
+        background: var(--ThemePanelBGColor);
         color: var(--brand-primary);
         font-weight: bold;
         z-index: 100;
     }
     
-    /* ################################################################################################################################ */
-    /* ################################################################################################################################ */
-    /* ################################################################################################################################ */
+    
+    /* ---------------------------------------------------------------- */
+    /* fluxer ui fixes | things that should be fixed on fluxer's end
+    /* ---------------------------------------------------------------- */
+    
+    [class*='ScreenShareSettingsModal.module__audioToggleRow_'] {
+        padding: 12px;
+    }
+    
+    /* unread messages "NEW" divider */
+    [class*='Divider.module__unreadBadge_'] {
+        height: unset;
+    }
+    
+    /* ################################################################################################# */
+    /* ################################################################################################# */
+    /* ################################################################################################# */
     
     /* ---------------------------------------------------------------- */
     /* Customization: Panel labels */
@@ -928,15 +1064,15 @@
             &::after {
                 display: block;
                 position: absolute;
-                top: -8px;
+                top: -11px;
                 left: 8px;
                 line-height: 14px;
-                padding: 0px 4px;
+                padding: 2px 4px;
                 z-index: 100;
                 font-size: 16px;
                 font-weight: bold;
                 background: var(--ThemePanelBGColor);
-                color: var(--ThemeFlatLighter);
+                color: var(--ThemePanelBorderColor);
                 
                 transition: var(--transition-slow);
             }
@@ -1036,6 +1172,55 @@
 
         [class*="BaseAvatar"] > image {
             mask: none;
+        }
+    }
+    
+    
+    /* ---------------------------------------------------------------- */
+    /* Customization: border online status */
+    /* ---------------------------------------------------------------- */
+    
+    @property --OutlineOnlineStatus {
+        syntax: 'off | on';
+        inherits: false;
+        initial-value: on;
+    }
+
+
+    @container body style(--OutlineOnlineStatus: on) {
+        /* hide original status indicator */
+        [class*="BaseAvatar.module__statusContainer_"] {
+            display: none!important;
+        }
+        
+        [class*="BaseAvatar"] > image {
+            mask: none;
+            border-radius: var(--radius-full)!important;
+        }
+        
+        [class*="BaseAvatar.module__container_"] {
+            border-radius: var(--radius-full)!important;
+            overflow: hidden;
+        }
+        
+        [class*="BaseAvatar.module__container_"][aria-label*="Offline"] {
+            border: 2px solid var(--status-offline);
+        }
+        [class*="BaseAvatar.module__container_"][aria-label*="Do Not Disturb"] {
+            border: 2px solid var(--status-dnd);
+        }
+        [class*="BaseAvatar.module__container_"][aria-label*="Idle"] {
+            border: 2px solid var(--status-idle);
+        }
+        [class*="BaseAvatar.module__container_"][aria-label*="Online"] {
+            border: 2px solid var(--status-online);
+        }
+        
+        /* pfp view outline medium */
+        [class*="UserProfileModal"] [class*="BaseAvatar.module__container_"],
+        [class*="ProfileCardBanner"] [class*="BaseAvatar.module__container_"],
+        [class*="YouPage"] [class*="BaseAvatar.module__container_"]{
+            border-width: 4px;
         }
     }
     
@@ -1157,9 +1342,9 @@
     
     
     
-    /* ################################################################################################################################ */
-    /* ################################################################################################################################ */
-    /* ################################################################################################################################ */
+    /* ################################################################################################# */
+    /* ################################################################################################# */
+    /* ################################################################################################# */
 
     
     /* ---------------------------------------------------------------- */
@@ -1181,6 +1366,11 @@
         [class*="UserProfileMobileSheet.module__profileContent_"]*/
         {
             background: var(--ThemeFlatDarker);
+        }
+        /* mobile sheets */
+        [class*="Sheet.module__container_"]
+        {
+            border-radius: unset!important;
         }
         
         
@@ -1216,6 +1406,12 @@
             height: 2.7rem;
         }
         
+        /* notifications page X button */
+        [class*="InboxMessageHeader\.module__headerIconButton_"] {
+            background: var(--ThemeDarkenLight);
+            background: transparent;
+        }
+        
         /* server list container */
         [class*="GuildsLayout.module__guildListScrollerWrapper_"],
         /* server channel list */
@@ -1240,12 +1436,17 @@
             height: calc(100% - var(--layout-user-area-reserved-height) - 60px - var(--ThemePanelMargin) - var(--ThemePanelBorderThickness));
             overflow: hidden auto;
         }
+        
+        /* mobile user profile banner */
+        [class*="UserProfileMobileSheet.module__bannerContainer_"] {
+            border-radius: unset;
+        }
     }
     
     
-    /* ################################################################################################################################ */
-    /* ################################################################################################################################ */
-    /* ################################################################################################################################ */
+    /* ################################################################################################# */
+    /* ################################################################################################# */
+    /* ################################################################################################# */
     
     /* these are base64 encoded fonts to bypass fluxer's import restrictions 
      * credits to https://amio.github.io/embedded-google-fonts/ */

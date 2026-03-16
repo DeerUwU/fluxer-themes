@@ -7,6 +7,8 @@ body {
 	
 	/* decide if you want square or rounded avatars. | Options: off, on */
 	--SquareAvatars: on;
+	/* set the user online status appearance. outlines look better with square avatars | Options: off, on */
+	--OutlineOnlineStatus: on;
 	/* decide if you want bubbles to highlight message groups. | Options: off, on 
 	/* see also: --ThemeMessageBubbleColor */
 	--MessageBubbles: off;
@@ -34,21 +36,19 @@ body {
 	--ThemeMessageBubbleColor: rgba(255, 255, 255, .06);
 
 	--ThemeFlatPrimary: #191919;
-	--ThemeFlatLighter: #303030;
-	--ThemeFlatDarker: #181819;
+	--ThemeFlatLighter: hsl(0, 0%, 15%);
+	--ThemeFlatDarker: #141414;
 
 	--ThemeDarkenLight: #00000044;
 	--ThemeDarkenMedium: #00000088;
 	
 	
-	/* these are overwrites to enable transparency*/
-	--background-primary: transparent;
-	--background-secondary: transparent;
-	--background-secondary-alt: var(--ThemeFlatPrimary); /* mainly used in for mobile view*/
-	--background-secondary-lighter: transparent;
-	--background-tertiary: transparent;
-	--panel-control-bg: transparent;
-	--background-textarea: #0003!important;
+	/* color overrides */
+	--background-primary: var(--ThemeFlatDarker);
+	--background-secondary: var(--ThemeFlatPrimary);
+	--background-secondary-alt: var(--ThemeFlatLighter); /* mainly used in for mobile view*/
+	--background-tertiary: var(--ThemeFlatLighter); /* mainly used in for mobile view*/
+	--background-textarea: var(--ThemeDarkenLight); /* used in search bars */
 	
 	/* ----------------------------------------------------------------------- */
 	/* Fonts & Text
@@ -112,7 +112,7 @@ body {
 	/* panel border rounding */
 	--ThemePanelBorderRounding: 0px;
 	/* panel border color (not hovered) */
-	--ThemePanelBorderColor: var(--ThemeFlatLighter);
+	--ThemePanelBorderColor: hsl(0, 0%, 19%);
 	/* panel border color (hovered) */
 	--ThemePanelBorderColorHovered: var(--brand-primary);
 	
@@ -146,12 +146,8 @@ body {
 	* bg-1: ThaSilentArtist https://www.pixilart.com/thasilentartist
 	* bg-2: ThaSilentArtist 
 	* bg-3: ThaSilentArtist 
-	* bg-4: haraguroi?
-	* bg-5: RoofTerrible1413 https://www.reddit.com/r/yumenikki/comments/1kukxkf/one_of_my_favourite_locations_in_the_game/
 	*/
 	--bg-1: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481279988511911959/41511cd77e70.png");
 	--bg-2: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481670714326512122/a8082672504ec71.gif");
 	--bg-3: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481671197485134759/rocket_thasilentartist.png");
-	--bg-4: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481279988625158169/Konachan.com_-_199470_bicycle_clouds_dress_haraguroi_you_night_original_scenic_sky_stars_water.jpg");
-	--bg-5: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481282614376882391/brvzd6evgs2f1.png");
 }
