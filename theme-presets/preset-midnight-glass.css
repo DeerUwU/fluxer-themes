@@ -1,3 +1,7 @@
+/* ----------------------------------------------------------------------- */
+/* System-Glass Theme by Deer ♡ - based on System24 by refact0r
+/* ----------------------------------------------------------------------- */
+
 body {
     container-name: body;
     
@@ -23,6 +27,10 @@ body {
     --CustomAppIcon: off;
     /* link to your custom icon. currently it HAS to be hosted on fluxer's servers */
     --ThemeCustomIconUrl: url('');
+    /* [Experimental] Controls the server list position. Options: off | on */
+    --Horizontal-Serverlist: off;
+    /* Controls the server list alignment. only works with horizontal serverlist enabled. Options: left | center | right */
+    --Serverlist-Alignment: left;
 }
 
 :root {
@@ -41,6 +49,8 @@ body {
 
     --ThemeDarkenLight: #00000044;
     --ThemeDarkenMedium: #00000088;
+    --ThemeBrightenLight: rgba(255, 255, 255, .06);
+    --ThemeBrightenMedium: rgba(255, 255, 255, .15);
     
     /* color overrides */
     --background-primary: var(--ThemeFlatDarker);
@@ -48,6 +58,7 @@ body {
     --background-secondary-alt: var(--ThemeFlatLighter); /* mainly used in for mobile view*/
     --background-tertiary: var(--ThemeFlatLighter); /* mainly used in for mobile view*/
     --background-textarea: var(--ThemeDarkenLight); /* used in search bars */
+    --status-danger: #f24562; /* notification badges */
     
     /* ----------------------------------------------------------------------- */
     /* Fonts & Text
@@ -138,15 +149,9 @@ body {
     --message-reply-spine-radius: calc(6px * var(--ThemeRoundingMultiplier));
 
     /* ----------------------------------------------------------------------- */
-    /* bg presets */
-    /* ----------------------------------------------------------------------- */
-    /* Background Image Presets 
-    * credits:
-    * bg-1: ThaSilentArtist https://www.pixilart.com/thasilentartist
-    * bg-2: ThaSilentArtist 
-    * bg-3: ThaSilentArtist 
-    */
-    --bg-1: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481279988511911959/41511cd77e70.png");
-    --bg-2: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481670714326512122/a8082672504ec71.gif");
-    --bg-3: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481671197485134759/rocket_thasilentartist.png");
+	/* background presets (credits to ThaSilentArtist)
+	/* ----------------------------------------------------------------------- */
+	--bg-1: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481279988511911959/41511cd77e70.png");
+	--bg-2: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481670714326512122/a8082672504ec71.gif");
+	--bg-3: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481671197485134759/rocket_thasilentartist.png");
 }

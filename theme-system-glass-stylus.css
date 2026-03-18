@@ -38,6 +38,10 @@
         --CustomAppIcon: off;
         /* link to your custom icon. currently it HAS to be hosted on fluxer's servers */
         --ThemeCustomIconUrl: url('');
+        /* [Experimental] Controls the server list position. Options: off | on */
+        --Horizontal-Serverlist: off;
+        /* Controls the server list alignment. only works with horizontal serverlist enabled. Options: left | center | right */
+        --Serverlist-Alignment: left;
     }
     
     :root {
@@ -47,16 +51,16 @@
         
         --brand-primary: rgb(96, 174, 229);
         --brand-secondary: rgb(78, 121, 167);
-
-        --ThemeMessageBubbleColor: rgba(255, 255, 255, .06);
         
+        --ThemeMessageBubbleColor: rgba(255, 255, 255, .06);
         --ThemeFlatPrimary: #26262c;
         --ThemeFlatLighter: #2e3138;
         --ThemeFlatDarker: #1e1e24;
 
-        --ThemeDarkenLight: #00000044;
-        --ThemeDarkenMedium: #00000088;
-        
+        --ThemeDarkenLight: rgba(0, 0, 0, .267);
+        --ThemeDarkenMedium: rgba(0, 0, 0, .533);
+        --ThemeBrightenLight: rgba(255, 255, 255, .06);
+        --ThemeBrightenMedium: rgba(255, 255, 255, .15);
         
         /* color overrides */
         --background-primary: var(--ThemeFlatDarker);
@@ -64,6 +68,7 @@
         --background-secondary-alt: var(--ThemeFlatLighter); /* mainly used in for mobile view*/
         --background-tertiary: var(--ThemeFlatLighter); /* mainly used in for mobile view*/
         --background-textarea: var(--ThemeDarkenLight); /* used in search bars */
+        --status-danger: #f24562; /* notification badges, unread divider line etc */
         
         /* ----------------------------------------------------------------------- */
         /* Fonts & Text
@@ -113,9 +118,9 @@
         /* gap between panels */
         --ThemePanelMargin: 8px;
         /* panel bg blur strength */
-        --ThemePanelBlur: 8px;
+        --ThemePanelBlur: 6px;
         /* bg blur strength for tooltips, context panels etc*/
-        --ThemePanelBlurSmall: 5px;
+        --ThemePanelBlurSmall: 4px;
         /* panel */
         --ThemePanelBGColor: #00000088;
         /* background color for tooltips, context panels etc */
@@ -155,14 +160,8 @@
         --spoiler-border-radius: calc(6px * var(--ThemeRoundingMultiplier));
         
         /* ----------------------------------------------------------------------- */
-        /* bg presets */
+        /* background presets (credits to ThaSilentArtist)
         /* ----------------------------------------------------------------------- */
-        /* Background Image Presets 
-        * credits:
-        * bg-1: ThaSilentArtist https://www.pixilart.com/thasilentartist
-        * bg-2: ThaSilentArtist 
-        * bg-3: ThaSilentArtist 
-        */
         --bg-1: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481279988511911959/41511cd77e70.png");
         --bg-2: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481670714326512122/a8082672504ec71.gif");
         --bg-3: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481671197485134759/rocket_thasilentartist.png");
@@ -243,6 +242,7 @@
     [class*="DMFriendsView.module__container_"],
     [class*="UserProfileModal.module__modalContainer_"],
     [class*="Divider.module__text_"],
+    [class*="Divider.module__dateWithUnreadText_"],
     [class*="SplashScreen.module__splashOverlay_"],
     [class*="MobileTextareaLayout.module__mobilePlusButton_"],
     [class*="MobileTextareaLayout.module__mobileInputContainer_"],
@@ -258,7 +258,7 @@
     [class*="DMList.module__mobileHeaderButton_"],
     [class*="DMList.module__mobileAddFriendButton_"],
     [class*="MemberListContainer.module__memberListScroller_"],
-    [class*="App.module__appContainer_"],
+    [class*="ChannelSearchResults.module__container_"],
     [class*="App.module__appContainer_"]
     {
         background: transparent;
@@ -720,13 +720,14 @@
         
         width: max-content;
         max-width: 175px;
-        max-height: 3.5rem;
+        max-height: 3.7rem;
         
         overflow: hidden;
         
         background: var(--ThemeFlatLighter);
         /* border: 1px solid var(--background-header-secondary); */
         border-radius: calc(4px * var(--ThemeRoundingMultiplier));
+        box-shadow: var(--shadow-md);
         
         transition: var(--transition-normal);
     }
@@ -740,6 +741,7 @@
     [class*="ProfilePreview.module__profileCustomStatus_"]:hover {
         max-height: 10rem;
     }
+    
     /* custom profile status inner */
     [class*="CustomStatusDisplay"] > [class*="CustomStatusDisplay.module__content_"],
     [class*="UserProfilePopout"] > [class*="CustomStatusDisplay.module__content_"],
@@ -760,7 +762,6 @@
        background: var(--ThemeDarkenLight);
     }
     
-    
     /* bio join date notes etc container */
     [class*="UserProfileModal.module__profileContent_"] {
         padding-top: 16px!important;
@@ -768,13 +769,11 @@
     
     
     /* ---------------------------------------------------------------- */
-    /* misc panels
+    /* server member list panel
     /* ---------------------------------------------------------------- */
     
-    /* sever member list tab */
+    /* sever member list tab table */
     [class*="GuildMembersPage.module__tableWrapper_"],
-    /* sever member list tab */
-    [class*="Button.module__secondary_"],
     /* sever member list tab rows per page dropdown */
     .css-185nao-control {
         background-color: var(--ThemeDarkenLight)!important;
@@ -789,6 +788,40 @@
         margin-top: 0;
     }
     
+    /* ---------------------------------------------------------------- */
+    /* forwarded messages
+    /* ---------------------------------------------------------------- */
+    
+    /* forwarded message link button */
+    [class*="MessageAttachments.module__forwardedSourceButton_"]
+    {
+        background-color: color-mix(in srgb, var(--markup-mention-fill) 70%, transparent);
+        border-color: color-mix(in srgb, var(--markup-mention-border) 65%, transparent);
+        color: var(--markup-mention-text);
+    }
+    /* forwarded message link button hover */
+    [class*="MessageAttachments.module__forwardedSourceButton_"]:hover
+    {
+        background-color: var(--markup-mention-fill);
+        border-color: var(--markup-mention-border);
+    }
+    /* "forwarded from" label */
+    [class*="MessageAttachments.module__forwardedSourceLabel_"]
+    {
+        color: var(--markup-mention-text);
+    }
+    
+    /* forwarded message link source & destination label*/
+    [class*="MessageAttachments.module__forwardedSourceName_"]
+    {
+        color: var(--markup-mention-text);
+    }
+    /* forwarded message link channel symbol */
+    [class*="MessageAttachments.module__forwardedSourceButton_"] svg
+    {
+        fill: var(--markup-mention-text);
+    }
+    
     
     /* ---------------------------------------------------------------- */
     /* misc panels
@@ -796,12 +829,24 @@
     
     
     /* window titlebar */
-    [class*="NativeTitlebar\.module__titlebar_"] {
+    [class*="NativeTitlebar.module__titlebar_"] {
         backdrop-filter: blur(var(--ThemePanelBlur));
         background: var(--ThemeDarkenMedium);
     }
-
     
+    /*  member list */
+    [class*="MemberListContainer.module__memberListContainer_"]{
+        min-width: 10rem;
+        max-width: 20rem;
+    }
+    
+    /* generic button secondary */
+    [class*="Button.module__secondary_"] {
+        background: var(--ThemeDarkenLight)!important;
+    }
+    [class*="Button.module__secondary_"]:hover {
+        background: var(--ThemeBrightenLight)!important;
+    }
     
     /* user mentioned */
     [class*="Message\.module__messageMentioned_"]
@@ -812,15 +857,24 @@
             transparent
         )!important;
     }
-
     
     /* embed backgrounds */
     [class*="EmbedCard.module__wrapper_"],
     [class*="Embed.module__embedFull_"],
-    [class*="AttachmentFile.module__attachmentContainer_"] {
+    [class*="AttachmentFile.module__attachmentContainer_"],
+    [class*="InlineAudioPlayer.module__container_"] {
         background: var(--ThemeDarkenLight);
     }
 
+    /* attachment uploads */
+    [class*="ChannelAttachmentArea.module__upload_"] {
+        background: var(--ThemeDarkenLight);
+    }
+    
+    /* video controls */
+    [class*="VideoPlayer.module__controlsRow_"] {
+        background: var(--ThemeDarkenLight);
+    }
     
     /* message preview (like in bookmarks for example) */
     [class*="MessagePreview.module__previewCard_"]
@@ -828,8 +882,6 @@
         overflow: hidden;
         background: var(--ThemeDarkenLight);
     }
-    
-
     
     /* vc header gradient */
     [class*='VoiceCallView.module__voiceHeader_']::before {
@@ -841,16 +893,9 @@
     }
     
     
-    
-    /* user typing status user pills */
-    [class*='Message.module__typingPill_'] {
-        backdrop-filter: blur(var(--ThemePanelBlurSmall));
-        background-color: var(--ThemePanelBGColor);
-        border: var(--ThemePanelBorder);
-        /* transform: none!important; */
-    }
+    /* user typing status user container thingy */
     [class*='ChannelChatLayout.module__typingContent_'] {
-        /* these were from a test, it was kinda irritatning to have the messages window shift whenever someone typed.
+        /* these were from a test, it was kinda irritating to have the messages window shift whenever someone typed.
         height: fit-content;
         position: inherit;
         left: unset;
@@ -860,6 +905,17 @@
         transition-property: height;
         transition-duration: 0.3s;
     }
+    
+    /* user typing status user pills */
+    [class*='Message.module__typingPill_'] {
+        backdrop-filter: blur(var(--ThemePanelBlurSmall));
+        -webkit-backdrop-filter: blur(var(--ThemePanelBlurSmall))!important;
+        background-color: var(--ThemePanelBGColor);
+        border: var(--ThemePanelBorder);
+        /* transform: none!important; */
+    }
+    
+    
     
     
     /* "X new messages since Date" panel */
@@ -882,11 +938,11 @@
         border: 1px solid var(--background-modifier-accent);
     }
     
-    /* profile roles */
+    /* profile role badge */
     [class*='RoleManagement.module__roleBadge_'] {
         background: var(--ThemeDarkenLight);
     }
-    
+
     
     /* discovery explore page top banner */
     [class*="DiscoveryPage.module__hero_"]
@@ -907,6 +963,17 @@
         background-color: var(--ThemeDarkenLight);
     }
     
+    /* search results container inner */
+    [class*="ChannelSearchResults.module__container_"] {
+        border: unset;
+        border-radius: var(--ThemePanelBorderRounding);
+        overflow: hidden;
+    }
+    /* search results */
+    [class*="ChannelSearchResults.module__messageItem_"] {
+        border-radius: calc(var(--ThemePanelBorderRounding) - 0.5rem);
+        background-color: var(--ThemeDarkenLight);
+    }
     
     /* toasts */
     [class*="Toast.module__toast_"]
@@ -915,9 +982,20 @@
         background-color: var(--ThemeFlatPrimary)!important;
     }
     
+    /* unread divider with date */
+    [class*="Divider.module__dateWithUnreadText_"] {
+        position: static;
+        transform: none;
+    }
     
-    
-    
+    /* server folder expanded */
+    [class*="GuildFolderItem.module__expandedFolderBackground_"] {
+        border-radius: calc(var(--guild-icon-size)/100*30 + var(--guild-list-item-inset)); /* focused server icon border-radius (30%) + padding */
+    }
+    /* server folder items container */
+    [class*="GuildFolderItem.module__expandedGuilds_"] {
+        padding-bottom: unset;
+    }
 
     /* make theme input field resizable */ 
     textarea.FormSurface\.module__surface___XzQ4ZT.Input\.module__input___ZGQ3MT.Scroller\.module__scroller___ZTgyZD {
@@ -989,6 +1067,11 @@
     /* unread messages "NEW" divider */
     [class*='Divider.module__unreadBadge_'] {
         height: unset;
+    }
+    
+    /* profile role badge name */
+    [class*='RoleManagement.module__roleName_'] {
+        line-height: inherit;
     }
     
     /* ################################################################################################# */
@@ -1203,17 +1286,26 @@
             overflow: hidden;
         }
         
+        
+        [class*="BaseAvatar.module__container_"][aria-label*="Offline"],
+        [class*="BaseAvatar.module__container_"][aria-label*="Do Not Disturb"],
+        [class*="BaseAvatar.module__container_"][aria-label*="Idle"],
+        [class*="BaseAvatar.module__container_"][aria-label*="Online"] {
+            border-width: 0.15rem;
+            border-style: solid;
+        }
+        
         [class*="BaseAvatar.module__container_"][aria-label*="Offline"] {
-            border: 2px solid var(--status-offline);
+            border-color: var(--status-offline);
         }
         [class*="BaseAvatar.module__container_"][aria-label*="Do Not Disturb"] {
-            border: 2px solid var(--status-dnd);
+            border-color: var(--status-dnd);
         }
         [class*="BaseAvatar.module__container_"][aria-label*="Idle"] {
-            border: 2px solid var(--status-idle);
+            border-color: var(--status-idle);
         }
         [class*="BaseAvatar.module__container_"][aria-label*="Online"] {
-            border: 2px solid var(--status-online);
+            border-color: var(--status-online);
         }
         
         /* pfp view outline medium */
@@ -1333,10 +1425,141 @@
 
         /* server list favorites icon */
         [class*="GuildsLayout.module__favoritesIcon_"] {
-          transition: transform 0.5s;
+            transition: transform 0.5s;
         }
         [class*="GuildsLayout.module__guildListItem_"]:hover [class*="GuildsLayout.module__favoritesIcon_"] {
-          transform: rotate(216deg);
+            transform: rotate(216deg);
+        }
+        
+        [class*="ChannelSearchResults.module__messageItem_"] {
+            transition: var(--transition-fast);
+        }
+        
+        [class*="ChannelSearchResults.module__messageItem_"]:hover {
+            border-color: var(--ThemePanelBorderColorHovered);
+            background-color: var(--background-modifier-hover);
+        }
+    }
+    
+    
+    /* ---------------------------------------------------------------- */
+    /* Customization: horizontal server list */
+    /* ---------------------------------------------------------------- */
+    
+    /* setting property setup */
+    @property --Horizontal-Serverlist {
+        syntax: 'off | on';
+        inherits: false;
+        initial-value: left;
+    }
+    
+    @property --Serverlist-Alignment {
+        syntax: 'left | center | right';
+        inherits: false;
+        initial-value: left;
+    }
+    
+    
+    @container body style(--Horizontal-Serverlist: on) {
+        
+        /* doesnt have any effect placed here. need to find a workaround. */
+        :root {
+            --layout-guild-list-width: 4.4rem; /* more compact */
+            --layout-sidebar-width: calc(16.875rem + var(--layout-guild-list-width))!important; /* make sidebar wider to compensate for extra space */
+        }
+        
+        /* only show on desktop */
+        @media (min-width: 650px) {
+            
+
+            /* container for server list & rest */
+            [class*="GuildsLayout.module__guildsLayoutContainer_"] {
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* make channel list etc wider to match user area */
+            [class*="GuildsLayout.module__userAreaWrapper_"] {
+                width: var(--layout-sidebar-width);
+            }
+
+            /* scroller wrapper */
+            [class*="GuildsLayout.module__guildListScrollerWrapper_"] {
+                height: var(--layout-guild-list-width);
+                width: 100%;
+            }
+            /* scroller wrap | changed to fix hover region while allowing panel labels */
+            [class*="GuildsLayout.module__guildListScrollerWrapper_"] [class*="Scroller.module__scrollerWrap_"] {
+                overflow: hidden;
+            }
+
+            /* rotate scroller */
+            [class*="GuildsLayout.module__guildListScrollContainer_"] {
+                padding: var(--spacing-2) 0px;
+                width: var(--layout-guild-list-width);
+                height: calc(100vw - var(--ThemePanelMargin)*2 - var(--ThemePanelBorderThickness) * 2);
+
+                transform: rotateZ(-90deg);
+            }
+
+            /* scroller child container*/
+            [class*="GuildsLayout.module__guildListScrollContainer_"] [class*="Scroller.module__scrollerChildren_"] {
+                align-items: flex-end;
+            }
+
+            /* serverlist section container */
+            [class*="GuildsLayout.module__guildListContent_"] {
+                align-items: flex-end;
+                width: var(--layout-guild-list-width);
+            }
+
+            /* serverlist top & lower section */
+            [class*="GuildsLayout.module__guildListTopSection_"],
+            [class*="GuildsLayout.module__guildListGuildsSection_"] {
+                width: unset;
+            }
+
+            /* unrotate server button & misc buttons */
+            [class*="GuildsLayout.module__guildListItem_"],
+            [class*="GuildFolderItem.module__folderHeader_"] {
+                width: 3.7rem; 
+                transform: rotateZ(-180deg);
+            }
+            /* unrotate server image & extra buttons */
+            [class*="GuildListDMItem.module__relative_"],
+            [class*="GuildsLayout.module__relative_"],
+            [class*="GuildFolderItem.module__relative_"],
+            [class*="GuildsLayout.module__addGuildButtonIcon_"]
+            {
+                transform: rotateZ(-90deg);
+            } 
+            
+            
+            @container body style(--Serverlist-Alignment: left) {
+                [class*="GuildsLayout.module__guildListScrollContainer_"] [class*="Scroller.module__scrollerChildren_"] {
+                    justify-content: start;
+                }
+            }
+
+            @container body style(--Serverlist-Alignment: center) {
+                [class*="GuildsLayout.module__guildListScrollContainer_"] [class*="Scroller.module__scrollerChildren_"] {
+                    justify-content: center;
+                }
+            }
+
+            @container body style(--Serverlist-Alignment: right) {
+
+                /* reverse server list */
+                [class*="GuildsLayout.module__guildListContent_"],
+                [class*="GuildsLayout.module__guildListTopSection_"], 
+                [class*="GuildsLayout.module__guildListGuildsSection_"] {
+                    flex-direction: column-reverse;
+                }
+
+                [class*="GuildsLayout.module__guildListScrollContainer_"] [class*="Scroller.module__scrollerChildren_"] {
+                    justify-content: end;
+                }
+            }
         }
     }
     
