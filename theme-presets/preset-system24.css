@@ -112,7 +112,9 @@ body {
 	/* bg blur strength for tooltips, context panels etc*/
 	--ThemePanelBlurSmall: 0px;
 	/* panel */
-	--ThemePanelBGColor: hsl(0, 0%, 11%);
+	--ThemePanelBGColor: hsl(0, 0%, 10%);
+	/* panel hovered */
+	--ThemePanelBGColorHovered: hsl(0, 0%, 10%);
 	/* background color for tooltips, context panels etc */
 	--ThemePanelContextBGColor: hsl(0, 0%, 14%);
 	/* background color for media picker, notification inbox, search filters, pins etc */

@@ -113,6 +113,8 @@ body {
     --ThemePanelBlurSmall: 5px;
     /* panel */
     --ThemePanelBGColor: #00000088;
+    /* panel hovered */
+    --ThemePanelBGColorHovered: hsla(0, 0%, 2.5%, .533);
     /* background color for tooltips, context panels etc */
     --ThemePanelContextBGColor: #00000088;
     /* background color for media picker, notification inbox, search filters, pins etc */
@@ -149,9 +151,9 @@ body {
     --message-reply-spine-radius: calc(6px * var(--ThemeRoundingMultiplier));
 
     /* ----------------------------------------------------------------------- */
-	/* background presets (credits to ThaSilentArtist)
-	/* ----------------------------------------------------------------------- */
-	--bg-1: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481279988511911959/41511cd77e70.png");
-	--bg-2: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481670714326512122/a8082672504ec71.gif");
-	--bg-3: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481671197485134759/rocket_thasilentartist.png");
+    /* background presets (credits to ThaSilentArtist)
+    /* ----------------------------------------------------------------------- */
+    --bg-1: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481279988511911959/41511cd77e70.png");
+    --bg-2: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481670714326512122/a8082672504ec71.gif");
+    --bg-3: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481671197485134759/rocket_thasilentartist.png");
 }
