@@ -6,6 +6,7 @@ simply click one of the theme preset links. fluxer should automatically open and
 - System-Glass (default): 	https://web.fluxer.app/theme/bce13f14318699ac
 - system24: 				https://web.fluxer.app/theme/8d2334b391a1a277
 - midnight-glass: 			https://web.fluxer.app/theme/cf41ad8cd90bd28a
+
 alternatively you can copy the contents of theme-system-glass.css, go to fluxer's settings > Look & Feel > Custom Theme Tokens and paste everything into the CSS Overrides field.
 
 ## Customization
@@ -14,8 +15,8 @@ All customization options are located inside the first body {} and :root {} tags
 Hopefully as fluxer grows the developers will losen some import restrictions to further improve this theme's customizability through presets.
 
 ## Credits
-backgrounds: [ThaSilentArtist](https://www.pixilart.com/thasilentartist)
-small CSS snippets: [refact0r](https://github.com/refact0r/)
+- backgrounds: [ThaSilentArtist](https://www.pixilart.com/thasilentartist)
+- small CSS snippets: [refact0r](https://github.com/refact0r/)
 
 ## Screenshots
 <img src="https://github.com/DeerUwU/fluxer-system-glass-theme/raw/main/screenshots/theme-default.jpg">
