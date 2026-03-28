@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------- */
-/* System-Glass Theme by Deer ♡ - based on System24 by refact0r
+/* System-Glass (system24) Theme by Deer ♡ - based on System24 by refact0r
 /* ----------------------------------------------------------------------- */
 
 body {
@@ -98,7 +98,7 @@ body {
 	/* ----------------------------------------------------------------------- */
 	
 	/* screen overlay texture opacity. by default its a film grain effect */
-	--ThemeOverlayOpacity: 0.2;
+	--ThemeOverlayOpacity: 0.12;
 	--screen-overlay: url('https://fluxerusercontent.com/attachments/1474610319297830991/1481397623233222422/Noise_Texture.png');
 
 	/* ----------------------------------------------------------------------- */

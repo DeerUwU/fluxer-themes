@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           System Glass
 @namespace      github.com/DeerUwU/fluxer-system-glass-theme
-@version        1.0.9
+@version        1.0.11
 @description    a highly customizable frosted glass theme for fluxer, based on refact0r's tui style discord theme system24. this is NOT a port
 @author         deer
 ==/UserStyle== */
@@ -108,7 +108,7 @@
         /* ----------------------------------------------------------------------- */
         
         /* screen overlay texture opacity. by default its a film grain effect */
-        --ThemeOverlayOpacity: 0.2;
+        --ThemeOverlayOpacity: 0.12;
         --screen-overlay: url('https://fluxerusercontent.com/attachments/1474610319297830991/1481397623233222422/Noise_Texture.png');
 
         /* ----------------------------------------------------------------------- */
@@ -420,10 +420,14 @@
     [class*="ChannelIndexPage.module__searchPanel_"],
     /* settings panel */
     [class*="Modal.module__root_"],
-    /* VC panel */
+    /* VC Server panel */
     [class*="VoiceCallView.module__root_"],
-    /* VC panel empty */
+    /* VC Server panel empty */
     [class*="ChannelIndexPage.module__emptyStateContent_"],
+    /* VC DMs panel */
+    [class*="DMChannelView.module__callBanner_"],
+    /* VC DMs panel active */
+    [class*="DMChannelView.module__compactVoiceCallView_"],
     /* server member page */
     [class*="GuildMembersPage.module__pageContainer_"],
     /* mobile bottom nav */
@@ -478,10 +482,14 @@
     [class*="ChannelIndexPage.module__searchPanel_"]:hover,
     /* settings panel */
     [class*="Modal.module__root_"]:hover,
-    /* VC panel */
+    /* VC Server panel */
     [class*="VoiceCallView.module__root_"]:hover,
-    /* VC panel empty */
+    /* VC Server panel empty */
     [class*="ChannelIndexPage.module__emptyStateContent_"]:hover,
+    /* VC DMs panel */
+    [class*="DMChannelView.module__callBanner_"]:hover,
+    /* VC DMs panel active */
+    [class*="DMChannelView\.module__compactVoiceCallView_"]:hover,
     /* server member page */
     [class*="GuildMembersPage.module__pageContainer_"]:hover,
     /* mobile bottom nav */
@@ -524,6 +532,13 @@
         background-color: var(--ThemeDarkenMedium);
         background-color: var(--ThemeFlatPrimary)!important;
     }
+    
+    /* settings menu screenreader container */
+    [class*="Modal.module__focusLock_"],
+    /* settings menu container */
+    [class*="Modal.module__surface_"] {
+        overflow: visible!important;
+    }
 
 
 
@@ -551,6 +566,12 @@
     [class*='DMList.module__dmItemSelected_']:hover {
         filter: brightness(1.2);
     }
+    
+    /*  dm list width fix */
+    [class*="DMList.module__dmListContainer_"]{
+        width: inherit;
+    }
+    
 
     
     /* ---------------------------------------------------------------- */
@@ -782,7 +803,7 @@
     
     
     /* ---------------------------------------------------------------- */
-    /* server member list panel
+    /* server member list PAGE
     /* ---------------------------------------------------------------- */
     
     /* sever member list tab table */
@@ -837,6 +858,74 @@
     
     
     /* ---------------------------------------------------------------- */
+    /* vc 
+    /* ---------------------------------------------------------------- */
+    
+    /* dm vc chat area */
+    [class*="ChannelIndexPage.module__voiceActiveHeaderWrapper_"], 
+    [class*="DMChannelView.module__compactCallWrapper_"], 
+    [class*="ChannelIndexPage.module__contentGrid_"],
+    [class*="DMChannelView.module__callParticipantsRow_"] {
+        background: transparent!important;
+    }
+    
+    /* dm vc channel header gradient */
+    [class*="ChannelHeader.module__headerContainerCallActive_"]::before {
+        display: none;
+    }
+    
+    [class*="ChannelIndexPage.module__voiceActiveHeaderWrapper_"] {
+        display: grid;
+        gap: 10px;
+    }
+    
+    /* vc header gradient */
+    [class*='VoiceCallView.module__voiceHeader_']::before {
+        border-radius: var(--ThemePanelBorderRounding) var(--ThemePanelBorderRounding) 0 0;
+    }
+    /* vc buttons gradient */
+    [class*='VoiceCallView\.module__controlBarContainer_']::before {
+        display: none;
+    }
+    
+    /* ---------------------------------------------------------------- */
+    /* user typing status
+    /* ---------------------------------------------------------------- */
+    
+    /* user typing status user container thingy */
+    [class*='ChannelChatLayout.module__typingContent_'] {
+        /* these were from a test, it was kinda irritating to have the messages window shift whenever someone typed.
+        height: fit-content;
+        position: inherit;
+        left: unset;
+        right: unset;
+        bottom: unset;
+        */
+        bottom: calc(var(--typing-floating-offset) + 6px);
+        transition-property: height;
+        transition-duration: 0.3s;
+    }
+    
+    /* overwrite the spacing change while replying to someone */
+    [class*='ChannelChatLayout.module__typingAreaWithTopBar_'] [class*='ChannelChatLayout.module__typingContent_'] {
+        /* bottom: calc(var(--typing-floating-offset) + 12px); */
+        bottom: calc(var(--typing-floating-offset) + 6px);
+    }
+    
+    /* user typing status user pills */
+    [class*='Message.module__typingPill_'] {
+        backdrop-filter: blur(var(--ThemePanelBlurSmall));
+        -webkit-backdrop-filter: blur(var(--ThemePanelBlurSmall))!important;
+        background-color: var(--ThemePanelBGColor);
+        border: var(--ThemePanelBorder);
+        transform: none!important;
+    }
+    /*  typing pill avatar container */
+    [class*="AvatarStack.module__container___YWY1Yz"]{
+        padding-bottom: unset;
+    }
+    
+    /* ---------------------------------------------------------------- */
     /* misc panels
     /* ---------------------------------------------------------------- */
     
@@ -849,10 +938,11 @@
     
     /*  member list */
     [class*="MemberListContainer.module__memberListContainer_"]{
-        min-width: 10rem;
-        max-width: 20rem;
+        min-width: 17rem;
+        max-width: 17rem;
     }
     
+
     /* generic button secondary */
     [class*="Button.module__secondary_"] {
         background: var(--ThemeDarkenLight)!important;
@@ -896,40 +986,6 @@
         background: var(--ThemeDarkenLight);
     }
     
-    /* vc header gradient */
-    [class*='VoiceCallView.module__voiceHeader_']::before {
-        border-radius: var(--ThemePanelBorderRounding) var(--ThemePanelBorderRounding) 0 0;
-    }
-    /* vc buttons gradient */
-    [class*='VoiceCallView\.module__controlBarContainer_']::before {
-        display: none;
-    }
-    
-    
-    /* user typing status user container thingy */
-    [class*='ChannelChatLayout.module__typingContent_'] {
-        /* these were from a test, it was kinda irritating to have the messages window shift whenever someone typed.
-        height: fit-content;
-        position: inherit;
-        left: unset;
-        right: unset;
-        bottom: unset;
-        */
-        transition-property: height;
-        transition-duration: 0.3s;
-    }
-    
-    /* user typing status user pills */
-    [class*='Message.module__typingPill_'] {
-        backdrop-filter: blur(var(--ThemePanelBlurSmall));
-        -webkit-backdrop-filter: blur(var(--ThemePanelBlurSmall))!important;
-        background-color: var(--ThemePanelBGColor);
-        border: var(--ThemePanelBorder);
-        /* transform: none!important; */
-    }
-    
-    
-    
     
     /* "X new messages since Date" panel */
     [class*='Messages.module__newMessagesBar_'] {
@@ -938,10 +994,19 @@
         border-radius: calc(var(--ThemePanelBorderRounding) - 0.5rem)!important;
     }
     /* "youre viewing older messages" panel */
-    [aria-busy="false"][class*='Messages.module__newMessagesBar_'] {
+    [aria-busy="false"][class*='Messages.module__newMessagesBar_'],
+    [aria-busy="true"][class*='Messages.module__newMessagesBar_'] {
         padding-top: 0px;
         bottom: 0.5rem!important;
         border-radius: calc(var(--ThemePanelBorderRounding) - 0.5rem)!important;
+    }
+    
+    /* blocked/spammer message panel */
+    [class*='BlockedMessageGroups.module__container_'] {
+        width: fit-content;
+        background: var(--ThemeDarkenLight);
+        /* fluxer ui issue */
+        padding-left: 10px;
     }
     
     
@@ -1010,6 +1075,12 @@
         padding-bottom: 0px;
         overflow: visible!important;
     }
+    
+    /* unread divider with date */
+    [class*="LiveBadge.module__liveBadge_"] {
+        background-color: var(--status-danger);
+    }
+   
 
     /* make theme input field resizable */ 
     textarea.FormSurface\.module__surface___XzQ4ZT.Input\.module__input___ZGQ3MT.Scroller\.module__scroller___ZTgyZD {
@@ -1040,30 +1111,46 @@
             height: 30rem;
         }
     }
+    
+    /* logo pulse effect */
+    [class*='SplashScreen.module__iconPulse_'] {
+        border-radius: clamp(0%, calc(50% * var(--ThemeRoundingMultiplier)), 50%);
+    }
+    /* logo shape */
+    [class*='SplashScreen.module__iconWrapper_'] > svg > rect {
+        rx: calc(256 * var(--ThemeRoundingMultiplier))!important;
+    }
+    
+    
+    
+    [class*='SplashScreen.module__connectionStatus_'] {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
     /* credits :3 
     [class*='ChannelHeader.module__headerWrapper_']::after,
-    [class*='SplashScreen.module__connectionStatus_']::after */
-    [class*='SplashScreen.module__splashContent_']::after {
+    [class*='SplashScreen.module__connectionStatus_']::after 
+    [class*='SplashScreen.module__splashContent_']::after,*/
+    [class*='SplashScreen.module__connectionStatus_']::after {
         
+        /* 
         border: var(--ThemePanelBorder)!important;
         border-radius: var(--ThemePanelBorderRounding)!important;
-        backdrop-filter: blur(var(--ThemePanelBlur))!important;
-        -webkit-backdrop-filter: blur(var(--ThemePanelBlur))!important;
-        
         transition: var(--transition-slow);
-        
-        
         position: absolute;
         bottom: calc(-30px - var(--ThemePanelMargin));
+        background: var(--ThemePanelBGColor);
+        */
+        content: "System-Glass Theme by Deer ♡";
         
         height: 30px;
         width: fit-content;
         padding: 0.3rem 0.5rem;
+        margin-top: 5px;
         line-height: 18px;
         
-        
-        content: "System-Glass - developed by deer";
-        background: var(--ThemePanelBGColor);
         color: var(--brand-primary);
         font-weight: bold;
         z-index: 100;
@@ -1118,7 +1205,9 @@
         [class*="MemberListContainer.module__memberListContainer_"],
         [class*='ChannelChatLayout.module__textareaArea_'],
         [class*="NotificationsPage.module__content_"],
-        [class*="GuildNavbarSkeleton.module__skeletonContainer_"] {
+        [class*="GuildNavbarSkeleton.module__skeletonContainer_"],
+        /* vc dms active panel */
+        [class*="DMChannelView.module__compactVoiceCallView_"] {
             overflow: visible!important;
         }
         
@@ -1152,10 +1241,12 @@
         [class*="ChannelHeader.module__headerWrapper_"],
         [class*="MemberListContainer.module__memberListContainer_"],
         [class*='ChannelChatLayout.module__textareaArea_'],
-        /* vc panel */
+        /* vc server panel */
         [class*="VoiceCallView.module__root_"],
-        /* vc panel empty */
+        /* vc server panel empty */
         [class*="ChannelIndexPage.module__emptyStateContent_"],
+        /* vc dms active panel */
+        [class*="DMChannelView.module__compactVoiceCallView_"],
         /* server member page */
         [class*="GuildMembersPage.module__pageContainer_"],
         /* mobile nav bar */
@@ -1238,7 +1329,9 @@
         }
         /* vc panel */
         [class*="VoiceCallView.module__root_"]::after,
-        [class*="ChannelIndexPage.module__emptyStateContent_"]::after {
+        [class*="ChannelIndexPage.module__emptyStateContent_"]::after,
+        /* vc dms active panel */
+        [class*="DMChannelView.module__compactVoiceCallView_"]::after {
             content: "voice";
         }
         
@@ -1274,9 +1367,7 @@
     }
 
     @container body style(--SquareAvatars: off) {
-        [class*="BaseAvatar"] {
-            border-radius: 0px!important;
-        }
+
     }
 
     @container body style(--SquareAvatars: on) {
