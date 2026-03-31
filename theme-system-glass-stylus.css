@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           System Glass
 @namespace      github.com/DeerUwU/fluxer-system-glass-theme
-@version        1.0.11
+@version        1.0.12
 @description    a highly customizable frosted glass theme for fluxer, based on refact0r's tui style discord theme system24. this is NOT a port
 @author         deer
 ==/UserStyle== */
@@ -578,16 +578,6 @@
     /* markup 
     /* ---------------------------------------------------------------- */
 
-    /*block quote & markup alert panels */
-    [class*="Markup.module__blockquoteContainer_"],
-    [class*="Markup.module__alert_"]
-    {
-        background: linear-gradient(
-            90deg, 
-            color-mix(in srgb, var(--brand-secondary) 50%, transparent),
-            transparent
-        )!important;
-    }
     /* alert divider line */
     [class*="Markup.module__alert_"]::before
     {
@@ -597,6 +587,38 @@
     [class*="Markup.module__blockquoteDivider_"] {
         background-color: var(--brand-primary)!important;
     }
+    
+    /*block quote & markup alert panels */
+    [class*="Markup.module__blockquoteContainer_"],
+    [class*="Markup.module__alert_"]
+    {
+        background: linear-gradient(90deg, color-mix(in srgb, var(--brand-secondary) 40%, transparent),  transparent )!important;
+    }
+    /* markup Note */
+    [class*="Markup.module__alertNote_"] {
+        background: linear-gradient(90deg, color-mix(in srgb, var(--alert-note-color) 40%, transparent),  transparent )!important;
+    }
+    
+    /* markup Tip */
+    [class*="Markup.module__alertTip_"] {
+        background: linear-gradient(90deg, color-mix(in srgb, var(--alert-tip-color) 40%, transparent),  transparent )!important;
+    }
+    
+    /* markup Caution */
+    [class*="Markup.module__alertCaution_"] {
+        background: linear-gradient(90deg, color-mix(in srgb, var(--alert-caution-color) 40%, transparent),  transparent )!important;
+    }
+    
+    /* markup Important */
+    [class*="Markup.module__alertImportant_"] {
+        background: linear-gradient(90deg, color-mix(in srgb, var(--alert-important-color) 40%, transparent),  transparent )!important;
+    }
+    
+    /* markup Warning */
+    [class*="Markup.module__alertWarning_"] {
+        background: linear-gradient(90deg, color-mix(in srgb, var(--alert-warning-color) 40%, transparent),  transparent )!important;
+    }
+    
     
     
     /* ---------------------------------------------------------------- */
@@ -709,7 +731,7 @@
     [class*="UserProfileModal.module__usernameRow_"]
     {
         gap: unset;
-        color: var(--text-secondary);
+        color: var(--text-tertiary);
     }
     /* username pronouns separator */
     [class*="ProfileCardUserInfo.module__pronouns_"]::before,
@@ -729,7 +751,7 @@
     {
         font-size: 14px;
         margin-top: unset;
-        color: var(--text-secondary);
+        color: var(--text-tertiary);
         display: inline-flex;
         align-items: center;
     }
@@ -756,10 +778,10 @@
         max-width: 175px;
         max-height: 3.7rem;
         
+        z-index: 11;
         overflow: hidden;
         
         background: var(--ThemeFlatLighter);
-        /* border: 1px solid var(--background-header-secondary); */
         border-radius: calc(4px * var(--ThemeRoundingMultiplier));
         box-shadow: var(--shadow-md);
         
@@ -794,6 +816,15 @@
     /* mobile view personal page settings button */
         [class*="YouPage.module__settingsButton_"] {
        background: var(--ThemeDarkenLight);
+    }
+    
+    /* profile popout bio background */
+    [class*="UserProfileShared.module__bioContainer_"] {
+        background: var(--ThemeBrightenLight);
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        border: 1px solid var(--background-modifier-hover);
+        
     }
     
     /* bio join date notes etc container */
@@ -1450,15 +1481,21 @@
     }
     
     @container body style(--CustomAppIcon: on) {
+        
+        /* hide original svg path */
+        [class*="GuildsLayout.module__fluxerSymbolIcon_"] > path {
+            display: none;
+        }
+
+        [class*="GuildsLayout.module__fluxerButtonIcon_"] {
+            overflow: hidden;
+        }
+
         /* replace appicon with custom image */
         [class*="GuildsLayout.module__fluxerSymbolIcon_"]
         {
             background: var(--ThemeCustomIconUrl) no-repeat;
             background-size: contain;
-        }
-        /* hide original svg path */
-        [class*="GuildsLayout.module__fluxerSymbolIcon_"] > path {
-            display: none;
         }
     }
     

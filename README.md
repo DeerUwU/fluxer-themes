@@ -3,9 +3,9 @@ a highly customizable frosted glass theme for fluxer, based on refact0r's tui st
 
 ## Installation
 simply click one of the theme preset links. fluxer should automatically open and prompt you to apply the theme. 
-- System-Glass (default): 	https://web.fluxer.app/theme/b09ea8a08e949f21
-- system24: 				https://web.fluxer.app/theme/8d2334b391a1a277
-- midnight-glass: 			https://web.fluxer.app/theme/6f8e8d82c074fec9
+- System-Glass (default): 	https://web.fluxer.app/theme/3ead29b1b9d1138b
+- system24: 				https://web.fluxer.app/theme/24895a7477b9fd98
+- midnight-glass: 			https://web.fluxer.app/theme/78b37cbc9c512b49
 
 alternatively you can copy the contents of theme-system-glass.css, go to fluxer's settings > Look & Feel > Custom Theme Tokens and paste everything into the CSS Overrides field.
 
@@ -19,6 +19,6 @@ Hopefully as fluxer grows the developers will losen some import restrictions to 
 - small CSS snippets: [refact0r](https://github.com/refact0r/)
 
 ## Screenshots
-<img src="https://github.com/DeerUwU/fluxer-system-glass-theme/raw/main/screenshots/theme-default.jpg">
-<img src="https://github.com/DeerUwU/fluxer-system-glass-theme/raw/main/screenshots/theme-system24-style.png">
-<img src="https://github.com/DeerUwU/fluxer-system-glass-theme/raw/main/screenshots/theme-midnight-style.jpg">
+<img src="https://github.com/DeerUwU/fluxer-system-glass-theme/raw/main/screenshots/preview-default.jpg">
+<img src="https://github.com/DeerUwU/fluxer-system-glass-theme/raw/main/screenshots/preview-system24.png">
+<img src="https://github.com/DeerUwU/fluxer-system-glass-theme/raw/main/screenshots/preview-midnight.jpg">
