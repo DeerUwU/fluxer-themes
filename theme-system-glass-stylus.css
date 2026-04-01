@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           System Glass
 @namespace      github.com/DeerUwU/fluxer-system-glass-theme
-@version        1.0.12
+@version        1.0.13
 @description    a highly customizable frosted glass theme for fluxer, based on refact0r's tui style discord theme system24. this is NOT a port
 @author         deer
 ==/UserStyle== */
@@ -89,19 +89,19 @@
         
         /* Background Image | fluxer currently only allows using images hosted on their own servers.
         /* theres a list of presets further below, named --bg-1 to --bg-5. of course, you can also use your own images. */
-        --background-image: var(--bg-1);
+        --ThemeBackgroundImage: var(--bg-1);
         /* fallback color behind the background image. can be used to give your bg image a tint */
         --ThemeBackgroundColor: #222;
         /* Image position | center, left, right, bottom, top */
-        --backgroundPosition: top;
+        --ThemeBackgroundPosition: top;
         /* To cover the entire app, set to "cover". You can also set it to "100% 100%" but the image will be stretched. Set to "contain" to see the entire image */
-        --backgroundSize: cover;
+        --ThemeBackgroundSize: cover;
         /* if you want the image to repeat */
-        --backgroundRepeat: no-repeat;
+        --ThemeBackgroundRepeat: no-repeat;
         /* Set to 0 to remove blur. i recommend leaving this off and tweaking --ThemePanelBlur instead */
-        --backgroundBlur: 0px;
+        --ThemeBackgroundBlur: 0px;
         /* 0 is fully transparent, 1 is fully opaque */
-        --backgroundOpacity: 1;
+        --ThemeBackgroundOpacity: 1;
         
         /* ----------------------------------------------------------------------- */
         /* screen overlay effect */
@@ -109,7 +109,7 @@
         
         /* screen overlay texture opacity. by default its a film grain effect */
         --ThemeOverlayOpacity: 0.12;
-        --screen-overlay: url('https://fluxerusercontent.com/attachments/1474610319297830991/1481397623233222422/Noise_Texture.png');
+        --ThemeScreenOverlay: url('https://fluxerusercontent.com/attachments/1474610319297830991/1481397623233222422/Noise_Texture.png');
 
         /* ----------------------------------------------------------------------- */
         /* panels
@@ -169,6 +169,40 @@
         --bg-3: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481671197485134759/rocket_thasilentartist.png");
     }
     
+    /* light-theme specific tweaks */
+    .theme-light {
+        
+        /* ----------------------------------------------------------------------- */
+        /* Colors & default theme overrides
+        /* ----------------------------------------------------------------------- */
+        
+        --brand-primary: rgb(77, 176, 246);
+        --brand-secondary: rgb(63, 112, 165);
+        
+        --ThemeMessageBubbleColor: rgba(255, 255, 255, .06);
+        --ThemeFlatPrimary: #c8c8d1;
+        --ThemeFlatLighter: #cccfd6;
+        --ThemeFlatDarker: #c4c4cb;
+        
+        /* ----------------------------------------------------------------------- */
+        /* Panels
+        /* ----------------------------------------------------------------------- */
+        
+        /* panel */
+        --ThemePanelBGColor: hsla(0, 0%, 100%, .500);
+        /* panel hovered */
+        --ThemePanelBGColorHovered: hsla(0, 0%, 100%, .6);
+        
+        /* background color for tooltips, context panels etc */
+        --ThemePanelContextBGColor: #fff8;
+        /* background color for media picker, notification inbox, search filters, pins etc */
+        --ThemePanelModalBGColor: var(--ThemeFlatPrimary);
+        
+        /* panel border color (not hovered) */
+        --ThemePanelBorderColor: #6b758e;
+        /* panel border color (hovered) */
+        --ThemePanelBorderColorHovered: var(--brand-primary);
+    }
     
     /* ################################################################################################# */
     /* ################################################################################################# */
@@ -192,12 +226,12 @@
         content: "";
         position: fixed;
         inset: 0;
-        background: var(--background-image);
-        background-size: var(--backgroundSize);
-        background-position: var(--backgroundPosition);
-        background-repeat: var(--backgroundRepeat);
-        filter: blur(var(--backgroundBlur));
-        opacity: var(--backgroundOpacity);
+        background: var(--ThemeBackgroundImage);
+        background-size: var(--ThemeBackgroundSize);
+        background-position: var(--ThemeBackgroundPosition);
+        background-repeat: var(--ThemeBackgroundRepeat);
+        filter: blur(var(--ThemeBackgroundBlur));
+        opacity: var(--ThemeBackgroundOpacity);
         z-index: -1;
     }
 
@@ -210,7 +244,7 @@
         top: 0%;
         pointer-events: none;
         mix-blend-mode: overlay;
-        background: var(--screen-overlay) repeat;
+        background: var(--ThemeScreenOverlay) repeat;
         opacity: var(--ThemeOverlayOpacity);
         z-index: var(--z-index-contextmenu);
     }
@@ -388,7 +422,8 @@
     }
     /* remove default panel borders */
     [class*="ActiveNowSidebar.module__sidebar_"],
-    [class*="OutlineFrame.module__frame_"] {
+    [class*="OutlineFrame.module__frame_"],
+    [class*="ChannelHeader.module__headerContainer_"] {
         border: none;
     }
     
