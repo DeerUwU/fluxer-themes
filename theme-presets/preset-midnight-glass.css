@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
 /* ----------------------------------------------------------------------- */
 /* System-Glass (midnight-glass) Theme by Deer ♡ - based on System24 by refact0r
 /* ----------------------------------------------------------------------- */
@@ -60,6 +61,9 @@ body {
     --background-textarea: var(--ThemeDarkenLight); /* used in search bars */
     --status-danger: #f24562; /* notification badges */
     --message-mention-bg: color-mix(in srgb, var(--message-mention-color) 30%, transparent)!important;
+    
+    --text-chat: #EBEDF0;
+    --text-chat-muted: #C0C5CF;
     
     /* ----------------------------------------------------------------------- */
     /* Fonts & Text
