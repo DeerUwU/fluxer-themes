@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 /* ----------------------------------------------------------------------- */
-/* System-Glass (default) Theme by Deer ♡ - based on System24 by refact0r
+/* System-Glass Theme by Deer ♡ - based on System24 by refact0r
 /* ----------------------------------------------------------------------- */
 
 body {
@@ -103,7 +103,7 @@ body {
 	
 	/* screen overlay texture opacity. by default its a film grain effect */
 	--ThemeOverlayOpacity: 0.12;
-	--ThemeScreenOverlay: url('https://fluxerusercontent.com/attachments/1474610319297830991/1481397623233222422/Noise_Texture.png');
+	--ThemeScreenOverlay: url('https://fluxerusercontent.com/attachments/1474610319297830991/1493962211233411092/Noise_Texture.png');
 
 	/* ----------------------------------------------------------------------- */
 	/* panels
@@ -158,9 +158,9 @@ body {
 	/* ----------------------------------------------------------------------- */
 	/* background presets (credits to ThaSilentArtist)
 	/* ----------------------------------------------------------------------- */
-	--bg-1: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481279988511911959/41511cd77e70.png");
-	--bg-2: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481670714326512122/a8082672504ec71.gif");
-	--bg-3: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481671197485134759/rocket_thasilentartist.png");
+	--bg-1: url("https://fluxerusercontent.com/attachments/1474610319297830991/1493962211325685781/bg-1.png");
+	--bg-2: url("https://fluxerusercontent.com/attachments/1474610319297830991/1493962211334074390/bg-2.png");
+	--bg-3: url("https://fluxerusercontent.com/attachments/1474610319297830991/1493962211338268695/bg-3.gif");
 }
 
 /* light-theme specific tweaks */
@@ -356,6 +356,7 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 [class*="DMLayout.module__dmLayoutContainer_"],
 /* nagbar to channel header */
 [class*="OutlineFrame.module__frame_"][class*="OutlineFrame.module__frameShowTop_"],
+[class*="GuildLayout.module__guildLayoutContainerWithNagbar_"],
 /* channel header to message list */
 [class*="ChannelIndexPage.module__channelGrid_"],
 /* messages to text input */
@@ -1145,7 +1146,8 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 	background-color: var(--status-danger);
 }
 
-/* unread divider with date */
+/* nagbar */
+[class*="GuildLayout.module__guildLayoutContainerWithNagbar_"],
 [class*="GuildsLayout.module__nagbarStack_"] {
 	border-radius: var(--ThemePanelBorderRounding);
 	overflow: hidden;
@@ -1535,6 +1537,7 @@ textarea.FormSurface\.module__surface___XzQ4ZT.Input\.module__input___ZGQ3MT.Scr
 	{
 		background: var(--ThemeCustomIconUrl) no-repeat;
 		background-size: contain;
+		background-position: center;
 	}
 }
 

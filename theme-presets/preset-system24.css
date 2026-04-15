@@ -104,7 +104,7 @@ body {
 	
 	/* screen overlay texture opacity. by default its a film grain effect */
 	--ThemeOverlayOpacity: 0.12;
-	--ThemeScreenOverlay: url('https://fluxerusercontent.com/attachments/1474610319297830991/1481397623233222422/Noise_Texture.png');
+	--ThemeScreenOverlay: url('https://fluxerusercontent.com/attachments/1474610319297830991/1493962211233411092/Noise_Texture.png');
 
 	/* ----------------------------------------------------------------------- */
 	/* panels
@@ -158,9 +158,9 @@ body {
 	/* ----------------------------------------------------------------------- */
 	/* background presets (credits to ThaSilentArtist)
 	/* ----------------------------------------------------------------------- */
-	--bg-1: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481279988511911959/41511cd77e70.png");
-	--bg-2: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481670714326512122/a8082672504ec71.gif");
-	--bg-3: url("https://fluxerusercontent.com/attachments/1474610319297830991/1481671197485134759/rocket_thasilentartist.png");
+	--bg-1: url("https://fluxerusercontent.com/attachments/1474610319297830991/1493962211325685781/bg-1.png");
+	--bg-2: url("https://fluxerusercontent.com/attachments/1474610319297830991/1493962211334074390/bg-2.png");
+	--bg-3: url("https://fluxerusercontent.com/attachments/1474610319297830991/1493962211338268695/bg-3.gif");
 }
 
 
@@ -190,7 +190,6 @@ body {
 	/* ----------------------------------------------------------------------- */
 	/* Panels
 	/* ----------------------------------------------------------------------- */
-	
 	
 	/* panel */
 	--ThemePanelBGColor: hsl(0, 0%, 95%);
