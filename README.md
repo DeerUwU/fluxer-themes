@@ -1,6 +1,8 @@
 
 ## Installation
 simply click one of the theme preset links. fluxer should automatically open and prompt you to apply the theme. 
+> [!NOTE]  
+> If you're using the canary client, please switch to the [canary branch](https://github.com/DeerUwU/fluxer-themes/tree/canary) first.
 
 # System-Glass Theme
 a highly customizable frosted glass theme for fluxer, based on refact0r's tui style discord theme [system24](https://github.com/refact0r/system24/). this is NOT a port. 
