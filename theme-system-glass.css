@@ -2,7 +2,7 @@
  * @name System Glass base
  * @description based on system24 by refact0r, using background art by ThaSilentArtist
  * @author deer#1234
- * @version 2.0
+ * @version 2.0.1
  * @tags frosted glass, modern, customizable
  */
 
@@ -23,7 +23,7 @@ body {
 	/* see also: --ThemeMessageBubbleColor */
 	--MessageBubbles: off;
 	/* decide if you want panel labels. looks better without a background image | Options: off, on */
-	--ThemePanelLabels: on;
+	--ThemePanelLabels: off;
 	/* overwrites fluxer's panel rounding in most places | Options: off, on
 	/* see also: --ThemeRoundingMultiplier */
 	--UseDefaultRounding: off; 
@@ -983,7 +983,7 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 
 /* user typing status user container thingy */
 [data-flx="channel.lexical-channel-textarea-content.flx-channel-textarea-status-rail"] {
-	height: calc(2.125rem + var(--ThemePanelMargin))!important;
+	height: calc(3.5rem + var(--ThemePanelMargin))!important;
 }
 
 /* overwrite the spacing change while replying to someone 
@@ -992,8 +992,10 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 }*/
 
 /* user typing bottom gradient */
-[data-flx="channel.lexical-channel-textarea-content.textarea-outer"]::before {
+
+[data-flx="channel.messages.bottom-fade"] {
 	background: transparent!important;
+    display: none!important;
 }
 
 /* user typing status user pills */

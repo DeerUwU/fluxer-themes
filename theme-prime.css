@@ -2,7 +2,7 @@
  * @name PRIME Theme
  * @description Theme based on PRIMELOCK / Neon Prime
  * @author deer#1234
- * @version 2.1
+ * @version 2.1.1
  * @tags canary, modern, neon, customizable
  */
 
@@ -1044,6 +1044,11 @@ div:has(>[class*="ChannelItem.module__channelItemIcon_"]) {
 /* ---------------------------------------------------------------- */
 
 /* user typing status user container thingy */
+[data-flx="channel.lexical-channel-textarea-content.flx-channel-textarea-status-rail"] {
+	height: calc(2.5rem + var(--ThemePanelMargin))!important;
+}
+
+/* user typing status user container thingy */
 [class*='ChannelChatLayout.module__typingContent_'] {
     bottom: calc(var(--typing-floating-offset) + -3px);
 }
@@ -1060,8 +1065,8 @@ div:has(>[class*="ChannelItem.module__channelItemIcon_"]) {
 }
 
 /* user typing bottom gradient */
-[data-flx="channel.lexical-channel-textarea-content.textarea-outer"]::before {
-	background: transparent!important;
+[data-flx="channel.messages.bottom-fade"] {
+    display: none!important;
 }
 
 /* user typing status user pills */
@@ -1184,9 +1189,6 @@ div:has(>[class*="ChannelItem.module__channelItemIcon_"]) {
 }
 
 
-/* "X new messages since Date" panel */
-
-
 [data-flx="channel.messages.jump-to-present-bar"] {
     padding-top: 0px;
     padding-bottom: 0px!important;
@@ -1212,10 +1214,6 @@ div:has(>[class*="ChannelItem.module__channelItemIcon_"]) {
   background-color: var(--themecolor-tech)!important;
   transition: var(--transition-fast);
 }
-/*"youre viewing older messages" panel 
-[aria-busy="false"][class*='Messages.module__newMessagesBar_'],
-[aria-busy="true"][class*='Messages.module__newMessagesBar_']
-*/
 
 /* blocked/spammer message panel */
 [class*='BlockedMessageGroups.module__container_'] {
@@ -1500,6 +1498,10 @@ pre {
     [data-flx="ui.base-avatar.image-frame"] {
       mask: unset;
     }
+
+    [data-flx="ui.base-avatar.hover-overlay"] {
+      display: none;
+    }
     
     /* banner masks */
     [class*="UserProfileModal.module__bannerMask_"] mask > circle,
@@ -1728,6 +1730,7 @@ pre {
 
     [data-flx="app.sidebar-nav.fluxer-button.message-bubble-icon"] {
         width: 100%;
+        height: 100%;
         background-repeat: no-repeat;
         background-position: center;
         transition: var(--transition-normal);
@@ -1736,6 +1739,8 @@ pre {
     [data-flx="app.sidebar-nav.fluxer-button.fluxer-button-icon"] [data-flx="app.sidebar-nav.fluxer-button.message-bubble-icon"] {
         background: fluxer-theme-asset("icon_courage_tech.svg"); 
         background: var(--icon-prime-tech);
+        width: 100%;
+        height: 100%;
         background-repeat: no-repeat;
         background-position: center;
     }
@@ -1753,7 +1758,7 @@ pre {
     [class*="GuildsLayout.module__fluxerButtonIconSelected_"]> [data-flx="app.sidebar-nav.fluxer-button.message-bubble-icon"] {
         background: fluxer-theme-asset("icon_courage_offblack.svg");
         background: var(--icon-prime-offblack);
-      background-repeat: no-repeat;
+        background-repeat: no-repeat;
         background-position: center;
     }
 
