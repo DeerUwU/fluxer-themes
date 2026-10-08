@@ -2,7 +2,7 @@
  * @name Transparent theme template
  * @description customizable template for transparent themes. can also just be a used as a theme on its own.
  * @author deer
- * @version 1.1.1
+ * @version 1.2.1
  * @tags canary, template, transparent
  */
 
@@ -18,7 +18,7 @@
     /* BG image blurring. Set to 0 to remove blur */
 	--theme-background-blur: 10px;
 	/* fallback color behind the background image. can be used to give your bg image a tint */
-	--theme-background-color: #02172c;
+	--theme-background-color: #010c17;
 	/* Image position | center, left, right, bottom, top */
 	--theme-background-position: top;
 	/* To cover the entire app, set to "cover". You can also set it to "100% 100%" but the image will be stretched. Set to "contain" to see the entire image */
@@ -39,17 +39,14 @@
 /* BUILT IN THEME STYLES
 /* ----------------------------------------------------------------------- */
 
-/* dark-theme specific tweaks. this one can generally be ignored, but ive decided to add it as an example.
+/* theme-specific theme changes go here
 /* you can find these theme-specific colors through dev tools in the fluxer client here:
 /* sources -> fluxer_app/src/styles/generated/color-system.css */
 .theme-dark {
-
 }
-
 /* light-theme specific tweaks */
 .theme-light {
 	--theme-background-color: #c0defc;
-
 }
 /* coal-theme specific tweaks go here */
 .theme-coal {
@@ -111,6 +108,7 @@ body::before {
 [class*="ChannelChatLayout.module__messagesArea_"], /* channel message container */
 [class*='ChannelChatLayout.module__textareaArea_'], /* chat input area */
 [data-flx="channel.messages.bottom-fade"], /* chat messages bottom gradient */
+[data-flx="channel.editing-message-input.textarea-container"], /* editing message bg thing */
 [class*="ActiveNowSidebar.module__sidebar_"], /* friendslist active now panel */
 [class*="ChannelIndexPage.module__searchPanel_"], /* search results */
 [class*="DiscoveryPage.module__container_"], /* server discovery explore page */
@@ -186,22 +184,26 @@ body::before {
 /* adding some color/blur to panels to look a little nicer
 /* ---------------------------------------------------------------- */
 
-[data-flx="user.user-settings-modal.modal-root"] /* settings page */ {
-    background: var(--theme-shade-light)!important;
-    backdrop-filter: blur(var(--theme-blur-strength));
-}
-
+/* blur dark */
 [data-flx="messaging.inbox-popout.container"], /* notifications */
 [data-flx="channel.channel-pins-popout.container"], /* channel pins */
 [data-flx="expressions.expression-picker-popout.container"], /* emoji/media/gif picker */
 [data-flx="threads.thread-browser.container"], /* threads */
-[data-flx="channel.message-search-bar.message-search-bar.popout-container"] /* chat search filters */
+[data-flx="channel.message-search-bar.message-search-bar.popout-container"], /* chat search filters */
+[data-flx="ui.action-menu.context-menu.popup"], /* right click context menu */
+[data-flx="ui.action-menu.context-menu.sub-menu.popup"]
 {
     background: var(--theme-shade-dark)!important;
     backdrop-filter: blur(var(--theme-blur-strength));
 }
 
+/* blur light */
+[data-flx="user.user-settings-modal.modal-root"] /* settings page */ {
+    background: var(--theme-shade-light)!important;
+    backdrop-filter: blur(var(--theme-blur-strength));
+}
 
+/* shade dark */
 [data-flx="app.native-titlebar.titlebar"], /* window titlebar */
 [data-flx="forum.forum-post-card.card.open"], /* forum post card*/
 [data-flx="forum.forum-post-card.card-media"],
@@ -210,11 +212,13 @@ body::before {
 {
     background: var(--theme-shade-dark)!important;
 }
-
+/* shade light */
 [class*="Button.module__secondary_"], /* secondary buttons */
 [class^="SegmentedTabs.module__tabList_"],
+[data-flx="ui.segmented-tabs.segmented-tabs.tab-background"],
 [data-flx="app.user-area.user-area-inner.section"], /* self user status */
 [data-flx="channel.message-search-bar.message-search-bar.input-container"], /* chat searchbar */
+[data-flx="channel.message-search-bar.filter-option.search-filter"], /* chat search filters */
 [class^="FormSurface.module__surface_"][data-protonpass-ignore="true"], /* hopefully search bars and nothing else */
 [data-flx="app.settings-modal-layout.settings-modal-desktop-sidebar.desktop-sidebar"], /* settings page sidebar */
 [data-flx="forum.forum-toolbar.entry-card"],
@@ -226,8 +230,8 @@ body::before {
 [data-flx="voice.voice-call-corner-controls.channel-header-icon.toggle-fullscreen"], /* vc button */
 [data-flx="voice.compact-voice-call-view.compact-call-height-toggle-button.height-toggle-pill"], /* vc button */
 [data-flx="channel.message-reactions.message-reaction-item.reaction-button.click"], /* react button */
-[data-flx="channel.message-action-bar.message-action-bar-core.action-bar"], /* reaction bar */
 [data-flx="messaging.markdown.renderers.common.code-elements.rich-code-block-renderer.div--8"], /* code block */
+[data-flx="channel.editing-message-input.main-wrapper-editing"], /* editing message */
 [class*="Markup.module__inline_"], /* inline code block */
 [data-flx="messaging.embeds.embed-card.embed-card.wrapper"], /* embed card */
 [data-flx="channel.embeds.embed.rich-embed.embed"], /* embeds */
@@ -239,8 +243,7 @@ body::before {
 [data-flx="forum.forum-post-card.card.open"][aria-current="true"], /* forum card active */
 [data-flx="forum.forum-toolbar.button.sort-menu"], /* forum filter dropdown */
 [data-flx="forum.forum-post-composer.composer"],
-[data-flx="channel.channel-search-results.render-content.message-item"],
-[data-flx="channel.message-search-bar.filter-option.search-filter"] /* chat search filters */
+[data-flx="channel.channel-search-results.render-content.message-item"]
 {
     background: var(--theme-shade-light)!important;
 }
