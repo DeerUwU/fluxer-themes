@@ -1,12 +1,13 @@
 /**
- * @name Preset midnight glass
+ * @name System Glass - Crystal
  * @description based on system24 by refact0r, using background art by ThaSilentArtist
  * @author deer#1234
- * @version 2.0
- * @tags frosted glass, modern, customizable
+ * @version 3.0.0
+ * @tags canary, frosted glass, modern, customizable
  */
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
 
 body {
     container-name: body;
@@ -18,10 +19,7 @@ body {
     /* decide if you want square or rounded avatars. | Options: off, on */
     --SquareAvatars: off;
     /* set the user online status appearance. outlines look better with square avatars | Options: off, on */
-    --OutlineOnlineStatus: on;
-    /* decide if you want bubbles to highlight message groups. | Options: off, on 
-    /* see also: --ThemeMessageBubbleColor */
-    --MessageBubbles: off;
+    --OutlineOnlineStatus: off;
     /* decide if you want panel labels. looks better without a background image | Options: off, on */
     --ThemePanelLabels: off;
     /* overwrites fluxer's panel rounding in most places | Options: off, on
@@ -29,10 +27,6 @@ body {
     --UseDefaultRounding: on; 
     /* decide if you want to disable some additional animations added by the theme | Options: off, on */
     --ExtraAnimations: on;
-    /* set a custom app icon in the top left corner | Options: off, on */
-    --CustomAppIcon: off;
-    /* link to your custom icon. currently it HAS to be hosted on fluxer's servers */
-    --ThemeCustomIconUrl: url('');
     /* Controls the server list position. Options: off | on */
 	--Horizontal-Serverlist: off;
 	/* Controls the server list alignment. center only works with the horizontal serverlist. 
@@ -42,13 +36,24 @@ body {
 
 :root {
     /* ----------------------------------------------------------------------- */
+    /* Fonts & Text
+    /* ----------------------------------------------------------------------- */
+
+    /* change to '' for fluxer's default font */
+    --font-sans: 'DM Sans', sans-serif;
+    /* change to '' for fluxer's default font */
+    --font-mono: 'DM Mono';
+    /* 300 is light, 400 is normal. DOES NOT AFFECT BOLD TEXT */
+    font-weight: 300;
+    /* decreases letter spacing for better readability. recommended on monospace fonts.*/
+    letter-spacing: 0.00ch;
+    
+    /* ----------------------------------------------------------------------- */
     /* Colors & default theme overrides
     /* ----------------------------------------------------------------------- */
     
     --brand-primary: rgb(211, 133, 240);
     --brand-secondary: rgb(154, 78, 167);
-    
-    --ThemeMessageBubbleColor: rgba(255, 255, 255, .06);
 
     --ThemeFlatPrimary: #26262c;
     --ThemeFlatLighter: #32363e;
@@ -70,27 +75,16 @@ body {
     
     --text-chat: #EBEDF0;
     --text-chat-muted: #C0C5CF;
-    
-    /* ----------------------------------------------------------------------- */
-    /* Fonts & Text
-    /* ----------------------------------------------------------------------- */
-
-    /* change to '' for fluxer's default font */
-    --font-sans: 'DM Sans', sans-serif;
-    /* change to '' for fluxer's default font */
-    --font-mono: 'DM Mono';
-    /* 300 is light, 400 is normal. DOES NOT AFFECT BOLD TEXT */
-    font-weight: 300;
-    /* decreases letter spacing for better readability. recommended on monospace fonts.*/
-    letter-spacing: -0.00ch;
+    --bg-code: var(--ThemeBrightenLight);
+    --bg-code-block: var(--ThemeBrightenLight);
+    --keybind-hint-background: var(--ThemeBrightenLight);
     
     /* ----------------------------------------------------------------------- */
     /* Background
     /* ----------------------------------------------------------------------- */
     
-    /* Background Image | fluxer currently only allows using images hosted on their own servers.
-    /* theres a list of presets further below, named --bg-1 to --bg-5. of course, you can also use your own images. */
-    --ThemeBackgroundImage: var(--bg-3);
+    /* Background Image | fluxer currently only allows using images hosted on their own servers. */
+    --ThemeBackgroundImage: url("https://fluxerusercontent.com/attachments/1474610319297830991/1493962211338268695/bg-3.gif");
     /* fallback color behind the background image. can be used to give your bg image a tint */
     --ThemeBackgroundColor: #222;
     /* Image position | center, left, right, bottom, top */
@@ -99,16 +93,15 @@ body {
     --ThemeBackgroundSize: cover;
     /* if you want the image to repeat */
     --ThemeBackgroundRepeat: no-repeat;
-    /* Set to 0 to remove blur. i recommend leaving this off and tweaking --ThemePanelBlur instead */
-    --ThemeBackgroundBlur: 0px;
-    /* 0 is fully transparent, 1 is fully opaque */
+    /* Set to 0 to remove blur. alternatively you can use --ThemePanelBlur to add blur */
+    --ThemeBackgroundBlur: 8px;
+    /* 0 is fully transparent, 1 is fully visible */
     --ThemeBackgroundOpacity: 1;
     
     /* ----------------------------------------------------------------------- */
-    /* screen overlay effect */
+    /* film grain overlay */
     /* ----------------------------------------------------------------------- */
     
-    /* screen overlay texture opacity. by default its a film grain effect */
     --ThemeOverlayOpacity: 0.12;
     --ThemeScreenOverlay: url('https://fluxerusercontent.com/attachments/1474610319297830991/1493962211233411092/Noise_Texture.png');
 
@@ -117,11 +110,11 @@ body {
     /* ----------------------------------------------------------------------- */
     
     /* gap between panels */
-    --ThemePanelMargin: 12px;
+    --ThemePanelMargin: 10px;
     /* panel bg blur strength */
-    --ThemePanelBlur: 8px;
+    --ThemePanelBlur: 0px;
     /* bg blur strength for tooltips, context panels etc*/
-    --ThemePanelBlurSmall: 5px;
+    --ThemeModalPanelBlur: 8px;
     /* panel */
     --ThemePanelBGColor: #00000088;
     /* panel hovered */
@@ -129,7 +122,7 @@ body {
     /* background color for tooltips, context panels etc */
     --ThemePanelContextBGColor: #00000088;
     /* background color for media picker, notification inbox, search filters, pins etc */
-    --ThemePanelModalBGColor: var(--ThemeFlatPrimary);
+    --ThemePanelModalBGColor: #0d0d1ebd;
     /* panel border thickness */
     --ThemePanelBorderThickness: 1px;
     /* panel border rounding */
@@ -138,11 +131,7 @@ body {
     --ThemePanelBorderColor: var(--background-modifier-accent);
     /* panel border color (hovered) */
     --ThemePanelBorderColorHovered: var(--brand-primary);
-    
-    /* you can ignore these */
-    --ThemePanelBorder: var(--ThemePanelBorderThickness) solid var(--ThemePanelBorderColor);
-    --ThemePanelBorderHovered: var(--ThemePanelBorderThickness) solid var(--ThemePanelBorderColorHovered);
-    
+
     /* ----------------------------------------------------------------------- */
     /* rounding
     /* ----------------------------------------------------------------------- */
@@ -160,51 +149,4 @@ body {
     --radius-full: calc(9999px * var(--ThemeRoundingMultiplier));
     --media-border-radius: calc(4px * var(--ThemeRoundingMultiplier));
     --message-reply-spine-radius: calc(6px * var(--ThemeRoundingMultiplier));
-
-    /* ----------------------------------------------------------------------- */
-    /* background presets (credits to ThaSilentArtist)
-    /* ----------------------------------------------------------------------- */
-    --bg-1: url("https://fluxerusercontent.com/attachments/1474610319297830991/1493962211325685781/bg-1.png");
-    --bg-2: url("https://fluxerusercontent.com/attachments/1474610319297830991/1493962211334074390/bg-2.png");
-    --bg-3: url("https://fluxerusercontent.com/attachments/1474610319297830991/1493962211338268695/bg-3.gif");
-}
-
-/* light-theme specific tweaks */
-.theme-light {
-    
-    /* ----------------------------------------------------------------------- */
-    /* Colors & default theme overrides
-    /* ----------------------------------------------------------------------- */
-    
-    --ThemeMessageBubbleColor: rgba(0, 0, 0, .06);
-    --ThemeFlatDarker:  hsl(249, 22%, 85%);
-    --ThemeFlatPrimary: hsl(251, 22%, 90%);
-    --ThemeFlatLighter: #e3e1eb;
-    
-    --ThemeDarkenLight: #564f5814;
-    --ThemeDarkenMedium: #00000088;
-    --ThemeBrightenLight: rgba(255, 255, 255, .06);
-    --ThemeBrightenMedium: rgba(255, 255, 255, .15);
-
-    --text-chat: #222;
-    --text-chat-muted: #444;
-    
-    /* ----------------------------------------------------------------------- */
-    /* Panels
-    /* ----------------------------------------------------------------------- */
-    
-    /* panel */
-    --ThemePanelBGColor: hsla(0, 0%, 100%, .5);
-    /* panel hovered */
-    --ThemePanelBGColorHovered: hsla(0, 0%, 100%, .6);
-    
-    /* background color for tooltips, context panels etc */
-    --ThemePanelContextBGColor: #fff8;
-    /* background color for media picker, notification inbox, search filters, pins etc */
-    --ThemePanelModalBGColor: var(--ThemeFlatPrimary);
-    
-    /* panel border color (not hovered) */
-    --ThemePanelBorderColor: #9ba9cb;
-    /* panel border color (hovered) */
-    --ThemePanelBorderColorHovered: var(--brand-primary);
 }

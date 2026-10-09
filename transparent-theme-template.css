@@ -101,7 +101,6 @@ body::before {
 [data-flx="channel.pickers.gif.gif-picker-view.virtual-list"],
 [data-flx="app.settings-modal-layout.settings-modal-desktop-content-component.desktop-content"], /* settings menu */
 [data-flx="app.native-drag-region.native-drag-region-inner.native-drag-region"], /* settings menu */
-[class*='SplashScreen.module__splashContent_'], /* loading splashscreen */
 [class*="GuildsLayout.module__guildListScroller"], /* server sidebar */
 [class*="ChannelHeader.module__headerWrapper_"], /* channel header */
 [class*="MemberListContainer.module__memberListContainer_"], /* channel member list */
