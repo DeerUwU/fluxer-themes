@@ -29,16 +29,16 @@ Hopefully as fluxer grows the developers will losen some import restrictions to 
 ---
 ---
 
-# PRIME Theme
-a customizable theme based on Neon Prime. Includes options for horizontal server list, hiding blocked user messages, outline online status & more
+# rat.drome Theme
+created for a commission. inspired by soviet brutalist architecture & russian constructivism. NOTE: this theme requires you to allow content from githubusercontent.com
 
 ### Presets
-- PRIME: https://web.canary.fluxer.app/theme/a73803d4532de20f
+- theme: https://canary.fluxer.com/theme/e3f00a8de0c3f380
 
 
-## PRIME Screenshots
-<img src="./screenshots/preview-PRIME-1.jpg" alt="screenshot of PRIME">
-<img src="./screenshots/preview-PRIME-2.png" alt="screenshot of PRIME settings page">
+## rat.drome Screenshots
+<img src="./screenshots/preview_rat.drome_1.jpg" alt="screenshot of PRIME">
+<img src="./screenshots/preview_rat.drome_2.png" alt="screenshot of PRIME settings page">
 
 
 # Transparent Theme Template
