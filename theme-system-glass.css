@@ -1386,7 +1386,8 @@ body::after {
 	}
 
     /* profile mask */
-    [data-flx="ui.base-avatar.image-frame"] {
+    [data-flx="ui.base-avatar.image-frame"],
+	[data-flx="ui.base-avatar.hover-overlay"] {
       mask: unset;
     }
 }
