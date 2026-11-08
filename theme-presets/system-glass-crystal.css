@@ -2,7 +2,7 @@
  * @name System Glass - Crystal
  * @description based on system24 by refact0r, using background art by ThaSilentArtist
  * @author deer#1234
- * @version 3.0.0
+ * @version 3.1.1
  * @tags canary, frosted glass, modern, customizable
  */
 
@@ -32,6 +32,10 @@ body {
 	/* Controls the server list alignment. center only works with the horizontal serverlist. 
     Options: left | center | right */
     --Serverlist-Alignment: left;
+    /* hide the word mark in the titlebar. Options: off | on */
+	--ShowFluxerWordmark: on;
+    /* Experimental. Options: off | on */
+	--CompactDmList: off;
 }
 
 :root {
