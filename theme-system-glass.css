@@ -1,27 +1,25 @@
 /**
- * @name System Glass base
+ * @name System Glass Base
  * @description based on system24 by refact0r, using background art by ThaSilentArtist
  * @author deer#1234
- * @version 2.0.1
- * @tags frosted glass, modern, customizable
+ * @version 3.1.1
+ * @tags canary, frosted glass, modern, customizable
  */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
 
 body {
 	container-name: body;
 	
 	/* ----------------------------------------------------------------------- */
-	/* Toggles
+	/* TOGGLES
 	/* ----------------------------------------------------------------------- */
 	
 	/* decide if you want square or rounded avatars. | Options: off, on */
 	--SquareAvatars: on;
 	/* set the user online status appearance. outlines look better with square avatars | Options: off, on */
 	--OutlineOnlineStatus: on;
-	/* decide if you want bubbles to highlight message groups. | Options: off, on 
-	/* see also: --ThemeMessageBubbleColor */
-	--MessageBubbles: off;
 	/* decide if you want panel labels. looks better without a background image | Options: off, on */
 	--ThemePanelLabels: off;
 	/* overwrites fluxer's panel rounding in most places | Options: off, on
@@ -29,14 +27,32 @@ body {
 	--UseDefaultRounding: off; 
 	/* decide if you want to disable some additional animations added by the theme | Options: off, on */
 	--ExtraAnimations: on;
-	/* [Experimental] Controls the server list position. Options: off | on */
+	/* Controls the server list position. Options: off | on */
 	--Horizontal-Serverlist: off;
 	/* Controls the server list alignment. center only works with the horizontal serverlist. 
     Options: left | center | right */
 	--Serverlist-Alignment: left;
+	/* hide the word mark in the titlebar. Options: off | on */
+	--ShowFluxerWordmark: on;
+	/* Experimental. Options: off | on */
+	--CompactDmList: off;
 }
 
 :root {
+	
+    /* ----------------------------------------------------------------------- */
+	/* Fonts & Text
+	/* ----------------------------------------------------------------------- */
+	
+    /* change to '' for fluxer's default font */
+	--font-sans: 'DM Sans', sans-serif;
+	/* change to '' for fluxer's default font */
+	--font-mono: 'DM Mono';
+	/* 300 is light, 400 is normal. DOES NOT AFFECT BOLD TEXT */
+	font-weight: 300;
+	/* decreases letter spacing for better readability. recommended on monospace fonts.*/
+	letter-spacing: 0.0ch;
+  
 	/* ----------------------------------------------------------------------- */
 	/* Colors & default theme overrides
 	/* ----------------------------------------------------------------------- */
@@ -45,7 +61,7 @@ body {
 	--brand-secondary: rgb(78, 121, 167);
 	
 	--ThemeMessageBubbleColor: rgba(255, 255, 255, .06);
-	--ThemeFlatPrimary: #26262c;
+	--ThemeFlatPrimary: #16161c;
 	--ThemeFlatLighter: #2e3138;
 	--ThemeFlatDarker: #1e1e24;
 
@@ -65,27 +81,19 @@ body {
 	
 	--text-chat: #EBEDF0; /*default #EBEDF0 */
 	--text-chat-muted: #C0C5CF; /*default #C0C5CF */
-	
-	/* ----------------------------------------------------------------------- */
-	/* Fonts & Text
-	/* ----------------------------------------------------------------------- */
+    --bg-code: var(--ThemeBrightenLight);
+    --bg-code-block: var(--ThemeBrightenLight);
+	--keybind-hint-background: var(--ThemeBrightenLight);
 
-	/* change to '' for fluxer's default font */
-	--font-sans: 'DM Mono', sans-serif;
-	/* change to '' for fluxer's default font */
-	--font-mono: 'DM Mono';
-	/* 300 is light, 400 is normal. DOES NOT AFFECT BOLD TEXT */
-	font-weight: 300;
-	/* decreases letter spacing for better readability. recommended on monospace fonts.*/
-	letter-spacing: -0.03ch;
+	--voice-header-gradient: transparent!important;
+	--voice-footer-gradient: transparent!important;
 	
 	/* ----------------------------------------------------------------------- */
-	/* Background
+	/* BACKGROUND
 	/* ----------------------------------------------------------------------- */
 	
-	/* Background Image | fluxer currently only allows using images hosted on their own servers.
-	/* theres a list of presets further below, named --bg-1 to --bg-5. of course, you can also use your own images. */
-	--ThemeBackgroundImage: var(--bg-1);
+	/* Background Image | fluxer currently only allows using images hosted on their own servers. */
+	--ThemeBackgroundImage: url("https://fluxerusercontent.com/attachments/1474610319297830991/1493962211325685781/bg-1.png");
 	/* fallback color behind the background image. can be used to give your bg image a tint */
 	--ThemeBackgroundColor: #222;
 	/* Image position | center, left, right, bottom, top */
@@ -94,49 +102,46 @@ body {
 	--ThemeBackgroundSize: cover;
 	/* if you want the image to repeat */
 	--ThemeBackgroundRepeat: no-repeat;
-	/* Set to 0 to remove blur. i recommend leaving this off and tweaking --ThemePanelBlur instead */
-	--ThemeBackgroundBlur: 0px;
-	/* 0 is fully transparent, 1 is fully opaque */
+	/* Set to 0 to remove blur. alternatively you can use --ThemePanelBlur to add blur */
+	--ThemeBackgroundBlur: 10px;
+	/* 0 is fully transparent, 1 is fully visible */
 	--ThemeBackgroundOpacity: 1;
 	
 	/* ----------------------------------------------------------------------- */
 	/* screen overlay effect */
 	/* ----------------------------------------------------------------------- */
 	
-	/* screen overlay texture opacity. by default its a film grain effect */
 	--ThemeOverlayOpacity: 0.12;
 	--ThemeScreenOverlay: url('https://fluxerusercontent.com/attachments/1474610319297830991/1493962211233411092/Noise_Texture.png');
 
 	/* ----------------------------------------------------------------------- */
-	/* panels
+	/* PANELS
 	/* ----------------------------------------------------------------------- */
 	
 	/* gap between panels */
 	--ThemePanelMargin: 8px;
-	/* panel bg blur strength */
-	--ThemePanelBlur: 8px;
-	/* bg blur strength for tooltips, context panels etc*/
-	--ThemePanelBlurSmall: 4px;
+	/* panel bg blur strength (might cause slight artifacts) */
+	--ThemePanelBlur: 0px;
+	/* bg blur strength for tooltips, context panels etc */
+	--ThemeModalPanelBlur: 8px;
 	/* panel */
-	--ThemePanelBGColor: #00000088;
+	--ThemePanelBGColor: #00001199;
 	/* panel hovered */
 	--ThemePanelBGColorHovered: hsla(0, 0%, 5%, .533);
 	/* background color for tooltips, context panels etc */
 	--ThemePanelContextBGColor: #00000088;
 	/* background color for media picker, notification inbox, search filters, pins etc */
-	--ThemePanelModalBGColor: var(--ThemeFlatPrimary);
-	/* panel border thickness */
-	--ThemePanelBorderThickness: 3px;
+	--ThemePanelModalBGColor: #000011cc;
+	
+    /* BORDERS */
+    /* panel border thickness */
+	--ThemePanelBorderThickness: 2px;
 	/* panel border rounding */
 	--ThemePanelBorderRounding: 0px;
 	/* panel border color (not hovered) */
 	--ThemePanelBorderColor: #1f283d;
 	/* panel border color (hovered) */
 	--ThemePanelBorderColorHovered: var(--brand-primary);
-	
-	/* you can ignore these */
-	--ThemePanelBorder: var(--ThemePanelBorderThickness) solid var(--ThemePanelBorderColor);
-	--ThemePanelBorderHovered: var(--ThemePanelBorderThickness) solid var(--ThemePanelBorderColorHovered);
 	
 	/* ----------------------------------------------------------------------- */
 	/* rounding
@@ -156,51 +161,6 @@ body {
 	--media-border-radius: calc(4px * var(--ThemeRoundingMultiplier));
 	--message-reply-spine-radius: calc(6px * var(--ThemeRoundingMultiplier));
 	--spoiler-border-radius: calc(6px * var(--ThemeRoundingMultiplier));
-	
-	/* ----------------------------------------------------------------------- */
-	/* background presets (credits to ThaSilentArtist)
-	/* ----------------------------------------------------------------------- */
-	--bg-1: url("https://fluxerusercontent.com/attachments/1474610319297830991/1493962211325685781/bg-1.png");
-	--bg-2: url("https://fluxerusercontent.com/attachments/1474610319297830991/1493962211334074390/bg-2.png");
-	--bg-3: url("https://fluxerusercontent.com/attachments/1474610319297830991/1493962211338268695/bg-3.gif");
-}
-
-/* light-theme specific tweaks */
-.theme-light {
-	
-	/* ----------------------------------------------------------------------- */
-	/* Colors & default theme overrides
-	/* ----------------------------------------------------------------------- */
-	
-	--brand-primary: rgb(77, 176, 246);
-	--brand-secondary: rgb(63, 112, 165);
-	
-	--ThemeMessageBubbleColor: rgba(255, 255, 255, .06);
-	--ThemeFlatPrimary: #c8c8d1;
-	--ThemeFlatLighter: #cccfd6;
-	--ThemeFlatDarker: #c4c4cb;
-
-    --text-chat: #222;
-    --text-chat-muted: #444;
-	
-	/* ----------------------------------------------------------------------- */
-	/* Panels
-	/* ----------------------------------------------------------------------- */
-	
-	/* panel */
-	--ThemePanelBGColor: hsla(0, 0%, 100%, .500);
-	/* panel hovered */
-	--ThemePanelBGColorHovered: hsla(0, 0%, 100%, .6);
-	
-	/* background color for tooltips, context panels etc */
-	--ThemePanelContextBGColor: #fff8;
-	/* background color for media picker, notification inbox, search filters, pins etc */
-	--ThemePanelModalBGColor: var(--ThemeFlatPrimary);
-	
-	/* panel border color (not hovered) */
-	--ThemePanelBorderColor: #6b758e;
-	/* panel border color (hovered) */
-	--ThemePanelBorderColorHovered: var(--brand-primary);
 }
 
 /* ################################################################################################# */
@@ -216,7 +176,8 @@ html {
 }
 
 /* prevent background turning black in mobile view */
-body {
+body,
+html:not(.auth-page) [class*="App.module__appContainer_"] {
 	background: transparent!important;
 }
 
@@ -248,31 +209,37 @@ body::after {
 	z-index: var(--z-index-contextmenu);
 }
 
+[data-flx="app.native-titlebar.titlebar"] /* window titlebar */ {
+    background: var(--ThemePanelBGColor);
+    backdrop-filter: blur(var(--ThemePanelBlur));
+  
+}
 
 /* remove backgrounds. this is safer than overwriting the color variables directly */
-html:not(.auth-page) [class*="App.module__appContainer_"],
-[class*="App.module__appContainer_"],
 [class*="GuildsLayout.module__guildsLayoutContainer_"],
-[class*="GuildsLayout.module__guildListScrollContainer_"],
+[class*="GuildsLayout.module__guildListScrollContainer_"], /* community bar */
 [class*="GuildsLayout.module__contentContainer_"],
-[class*="UserArea.module__userAreaInnerWrapper_"],
+[class*="UserArea.module__userAreaInnerWrapper_"], /* self area */
 [class*="OutlineFrame.module__frame_"],
 [class*="GuildsLayout.module__contentInner_"],
 [class*="GuildLayout.module__guildLayoutContainer_"],
 [class*="ChannelListContent.module__channelListScroller_"],
 [class*="GuildLayout.module__guildMainContent_"],
-[class*="ChannelLayout.module__channelLayoutContainer_"],
-[class*="ChannelIndexPage.module__channelGrid_"],
-[class*="ChannelHeader.module__headerContainer_"],
+[data-flx="channel.channel-header.header-wrapper"], /* channel content */
+[class*="ChannelLayout.module__channelLayoutContainer_"], /* channel content */
+[class*="ChannelIndexPage.module__channelGrid_"], /* channel content */
+[data-flx="app.native-drag-region.native-drag-region-inner.native-drag-region"],
 [data-flx="channel.channel-chat-layout.container"],
 [data-flx="channel.lexical-channel-textarea-content.textarea-outer"],
 [class*="GuildHeader.module__headerContainer_"],
-
+[data-flx="forum.forum-channel-view.view"], /* forum page */
+[data-flx="threads.thread-side-panel.panel"],
+[class^="ThreadComposerArea.module__notice_"], /* thread archived notice */
 [class*="DMFriendsView.module__container_"],
 [class*="UserProfileModal.module__modalContainer_"],
+[data-flx="discovery.discovery.discovery-navbar.navbar"], /* discovery page header bar */
 [class*="Divider.module__text_"],
 [class*="Divider.module__dateWithUnreadText_"],
-[class*="SplashScreen.module__splashOverlay_"],
 [class*="MobileTextareaLayout.module__mobilePlusButton_"],
 [class*="MobileTextareaLayout.module__mobileInputContainer_"],
 [class*="MobileTextareaLayout.module__mobileVoiceButton_"],
@@ -280,9 +247,12 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 [class*="NotificationsPage.module__container_"],
 [class*="SelectBottomSheet.module__trigger_"],
 [class*="NotificationsPage.module__bookmarkButton_"],
+[class^="UnreadChannelsContent.module__headerIconButton_"], /* inbox buttns */
+[class^="InboxMessageHeader.module__headerIconButton_"],
 [class*="MemberListContainer.module__memberListScroller_"],
 [class*="ChannelSearchResults.module__container_"],
 [class*="GuildNavbarSkeleton.module__skeletonHeader_"],
+[data-flx="channel.textarea.composer-action-stack"],
 /* dm list & chat */
 [data-flx="channel.direct-message.dm-layout.content-inner--2"],
 [data-flx="channel.direct-message.dm-list.dm-list-header.show.button"],
@@ -292,6 +262,19 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 [data-flx="channel.direct-message.dm-list.dm-list-container"],
 [data-flx="channel.direct-message.dm-layout.dm-layout-container"],
 [data-flx="channel.direct-message.dm-layout.dm-list-column--2"],
+/* emoji/media/gif picker */
+[data-flx="expressions.expression-picker-popout.content"],
+[class^="EmojiPicker.module__emojiPickerListWrapper_"],
+[class^="EmojiPicker.module__categoryList_"],
+[class^="EmojiPicker.module__inspector_"],
+[data-flx="channel.pickers.memes.memes-picker-view.scroller"],
+[class^="GifPicker.module__gifMediaContainer"],
+[class^="GifPicker.module__gridItem_"],
+[class^="GifPicker.module__gifPickerContainer_"],
+[class^="GifPicker.module__gifPickerMain_"],
+[data-flx="channel.pickers.gif.gif-picker-view.virtual-list"],
+[data-flx="app.settings-modal-layout.settings-modal-desktop-content-component.desktop-content"], /* settings menu */
+[data-flx="app.native-drag-region.native-drag-region-inner.native-drag-region"], /* settings menu */
 /* vc */
 [data-flx="voice.compact-voice-call-view.compact-voice-call-view-inner.section.voice-root-pointer-activity"],
 [data-flx="channel.channel-view.channel-compact-call-surface.compact-call-wrapper"],
@@ -302,9 +285,8 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 [data-flx="voice.compact-voice-call-view.compact-voice-call-placeholder-view.audio-avatar-layout"],
 [data-flx="voice.compact-voice-call-view.compact-voice-call-placeholder-view.container"],
 [data-flx="channel.channel-view.dm-channel-view.compact-call-wrapper"]
-
 {
-	background: transparent;
+	background: transparent!important;
 }
 
 /* ---------------------------------------------------------------- */
@@ -318,38 +300,24 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 /* server channel list skeleton */
 [class*="GuildNavbarSkeleton.module__skeletonContainer_"],
 /* dm list container */
-[data-flx="channel.direct-message.dm-layout.dm-list-column--2"]
+[data-flx="channel.direct-message.dm-list.dm-list-container"]
 {
 	width: -webkit-fill-available;
 	height: 100%;
-    /*height: calc(100% - var(--layout-user-area-reserved-height) - var(--layout-mobile-bottom-nav-reserved-height) - var(--ThemePanelMargin) - var(--ThemePanelBorderThickness) * 2);*/
-  height: calc(100% - var(--footer-box-height) - var(--ThemePanelMargin) - var(--ThemePanelBorderThickness) * 2);
+    /*height: calc(100% - var(--layout-user-area-reserved-height) - var(--layout-mobile-bottom-nav-reserved-height) - var(--ThemePanelMargin) - var(--ThemePanelBorderThickness) * 2);
+    height: calc(100% - var(--footer-box-height) - var(--ThemePanelMargin) - var(--ThemePanelBorderThickness) * 2);*/
+    height: calc(100% - var(--ThemePanelMargin) - var(--layout-user-area-overlay-height));
 }
+
+[data-flx="channel.direct-message.dm-list.bottom-spacer"] {
+	height: var(--spacing-2);
+}
+
 /* self status */
 [data-flx="app.guilds-layout.user-area-wrapper"]
 {
 	width: calc(var(--layout-guild-list-width) + var(--layout-sidebar-width) + var(--ThemePanelMargin));
     padding: 0px;
-}
-
-/* channel header to message list */
-[class*="ChannelIndexPage.module__channelGrid_"]
-{
-	display: flex;
-	flex-direction: column;
-}
-/* typing users list 
-[class*="ChannelChatLayout.module__typingArea_"]
-{
-	height: fit-content;
-	transition-property: height;
-	transition-duration: 0.3s;
-} */
-
-/* self profile popout */
-[class*="UserAreaPopout.module__container_"]
-{
-	width: inherit;
 }
 
 
@@ -373,25 +341,32 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 /* nagbar to channel header */
 [class*="OutlineFrame.module__frame_"][class*="OutlineFrame.module__frameShowTop_"],
 [class*="GuildLayout.module__guildLayoutContainerWithNagbar_"],
-/* channel header to message list */
-[class*="ChannelIndexPage.module__channelGrid_"],
+/* channel header to forum tab */
+[data-flx="forum.forum-channel-view.view"],
+[data-flx="threads.thread-split-view.split"],
+/* chat to chat text input */
+[data-flx="channel.channel-chat-layout.container"],
 /* server area container */
 [class*="GuildLayout.module__guildLayoutContent_"],
 /* friendslist to active panel */
 [data-flx="channel.direct-message.dm-friends-view.container"],
 /* friendslist header & friendslist */
-[class*="DMFriendsView.module__mainColumn_"],
-/* mobile notifications page header to notifs */
-[class*="NotificationsPage.module__container_"] 
+[class*="DMFriendsView.module__mainColumn_"]
 {
 	gap: var(--ThemePanelMargin);
 }
 
-/*  messages to text input */
-[data-flx="channel.channel-chat-layout.container"] {
-	gap: calc(var(--ThemePanelMargin) + 1px);
+[data-flx="channel.channel-view.channel-view-scaffold.content-grid"],
+[data-flx="channel.mature-content-channel-gate.container"] {
+	margin-top: var(--ThemePanelMargin);
+	height: calc(100% - var(--ThemePanelMargin));
 }
 
+
+/* thread header */
+[data-flx="threads.thread-side-panel.panel-header.header"] {
+    margin-bottom: var(--ThemePanelMargin);
+}
 
 /* these require a margin because using gap leaves a gap even when those panels are hidden. */
 /*  message list to member list */
@@ -407,21 +382,15 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 [class*="GuildsLayout.module__guildListScrollContainer_"] {
 	padding-top: var(--spacing-2);
 }
+[data-flx="app.guilds-layout.guild-list.guild-list-content"] {
+  padding-bottom: calc(var(--layout-user-area-overlay-height,var(--layout-user-area-reserved-height,0px)) + var(--spacing-2));
+  padding-bottom: var(--spacing-2)!important;
+}
 
 
-/* ordered list fix */
-[class*="Markup.module__markup_"] ol {
-	-webkit-margin-start: calc(1.4em + var(--totalCharacters, 1) * 0.6em);
-	margin-inline-start: calc(1.4em + var(--totalCharacters, 1) * 0.6em);
-}
-/* unordered list fix */
-[class*="Markup.module__markup_"] ul {
-	-webkit-margin-start: calc(0.8em + var(--totalCharacters, 1) * 0.6em);
-	margin-inline-start: calc(0.8em + var(--totalCharacters, 1) * 0.6em);
-}
 
 /* ---------------------------------------------------------------- */
-/* panel borders
+/* panels
 /* ---------------------------------------------------------------- */
 
 /* remove default panel dividers */
@@ -438,9 +407,6 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 	border: none!important;
 }
 
-
-/* loading splashscreen */
-[class*='SplashScreen.module__splashContent_'],
 /* server sidebar */
 [data-flx="app.guilds-layout.guild-list.guild-list-scroller-wrapper"],
 /* dm list */
@@ -450,17 +416,25 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 /* self status */
 [data-flx="app.guilds-layout.user-area-wrapper"],
 /* channel header */
-[class*="ChannelHeader.module__headerWrapper_"],
+[data-flx="channel.channel-header.header-wrapper"],
+/* thread header */
+[data-flx="threads.thread-side-panel.panel-header.header"],
 /* channel member list */
 [class*="MemberListContainer.module__memberListContainer_"],
 /* channel message container */
 [class*="ChannelChatLayout.module__messagesArea_"],
+/* nsfw warning */
+[data-flx="channel.mature-content-channel-gate.container"],
 /* chat input area */
 [data-flx="channel.channel-chat-layout.textarea-area"],
+/* forum tab */
+[data-flx="forum.forum-channel-view.scroller"],
 /* friendslist */
 [class*='DMFriendsView.module__content_'],
 /* friendslist active now panel */
 [class*="ActiveNowSidebar.module__sidebar_"],
+/* favorites welcome screen */
+[data-flx="expressions.favorites-welcome-section.welcome-section"],
 /* search results */
 [class*="ChannelIndexPage.module__searchPanel_"],
 /* settings panel */
@@ -471,32 +445,21 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 [class*="ChannelIndexPage.module__emptyStateContent_"],
 /* VC DMs panel */
 [class*="DMChannelView.module__callBanner_"],
-/* VC DMs panel active */
 [data-flx="channel.channel-view.channel-compact-call-surface.compact-call-wrapper"],
 /* server member page */
 [class*="GuildMembersPage.module__pageContainer_"],
-/* mobile bottom nav
-[class*="MobileBottomNav.module__container_"], */
-/* mobile notifications page header */
-[class*="NotificationsPage.module__header_"],
-/* mobile notifications page content */
-[class*="NotificationsPage.module__content_"],
-/* mobile own profile page */
-[class*="YouPage.module__container_"],
 /* server discovery explore page */
 [class*="DiscoveryPage.module__container_"],
-/* auth page */
-[class*="AuthLayout.module__card_"],
 /* server unavailable */
 [class*="GuildLayout.module__guildUnavailableContainer_"],
 /* server unavailable channels skeleton */
 [class*="GuildNavbarSkeleton.module__skeletonContainer_"]
 {
-	border: var(--ThemePanelBorder)!important;
+	border: var(--ThemePanelBorderThickness) solid var(--ThemePanelBorderColor)!important;
 	border-radius: var(--ThemePanelBorderRounding)!important;
 	backdrop-filter: blur(var(--ThemePanelBlur)) !important;
 	-webkit-backdrop-filter: blur(var(--ThemePanelBlur)) !important;
-	background: var(--ThemePanelBGColor);
+	background: var(--ThemePanelBGColor)!important;
 	transition: var(--transition-slow);
     transition-property: background, border-color, border-radius;
 }
@@ -513,11 +476,15 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 /* self status */
 [data-flx="app.guilds-layout.user-area-wrapper"]:hover,
 /* channel header */
-[class*="ChannelHeader.module__headerWrapper_"]:hover,
+[data-flx="channel.channel-header.header-wrapper"]:hover,
+/* thread header */
+[data-flx="threads.thread-side-panel.panel-header.header"]:hover,
 /* channel member list */
 [class*="MemberListContainer.module__memberListContainer_"]:hover,
 /* channel message container */
 [class*="ChannelChatLayout.module__messagesArea_"]:hover,
+/* nsfw warning */
+[data-flx="channel.mature-content-channel-gate.container"]:hover,
 /* chat input area */
 [data-flx="channel.channel-chat-layout.textarea-area"]:hover,
 /* friendslist */
@@ -534,7 +501,6 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 [class*="ChannelIndexPage.module__emptyStateContent_"]:hover,
 /* VC DMs panel */
 [class*="DMChannelView.module__callBanner_"]:hover,
-/* VC DMs panel active */
 [data-flx="channel.channel-view.channel-compact-call-surface.compact-call-wrapper"]:hover,
 /* server member page */
 [class*="GuildMembersPage.module__pageContainer_"]:hover,
@@ -556,29 +522,107 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 [class*="GuildNavbarSkeleton.module__skeletonContainer_"]:hover
 {
 	background: var(--ThemePanelBGColorHovered);
-	border: var(--ThemePanelBorderHovered)!important;
+	border: var(--ThemePanelBorderThickness) solid var(--ThemePanelBorderColorHovered)!important;
 	transition: var(--transition-fast);
     transition-property: background, border-color, border-radius;
+}
+
+
+/* ---------------------------------------------------------------- */
+/* context/modal panels
+/* ---------------------------------------------------------------- */
+
+/* .modal-backdrop,
+[data-flx="messaging.media-modal.modal-backdrop.close"] {
+	backdrop-filter: blur(var(--ThemeModalPanelBlur));
+} */
+
+[class*="Modal.module__root_"] {
+	background: var(--ThemeFlatPrimary)!important;
+}
+
+[data-flx="messaging.inbox-popout.container"], /* notifications */
+[data-flx="channel.channel-pins-popout.container"], /* channel pins */
+[data-flx="expressions.expression-picker-popout.container"], /* emoji/media/gif picker */
+[data-flx="threads.thread-browser.container"], /* threads */
+[data-flx="channel.message-search-bar.message-search-bar.popout-container"], /* chat search filters */
+[data-flx="ui.action-menu.context-menu.popup"], /* right click context menu */
+[data-flx="ui.action-menu.context-menu.sub-menu.popup"]
+{
+    background: var(--ThemePanelModalBGColor)!important;
+    backdrop-filter: blur(var(--ThemeModalPanelBlur));
+    overflow: hidden;
+}
+
+/* emoji tooltip */
+[class*="EmojiTooltipContent.module__container_"],
+/* tooltip panels */
+[class*="Tooltip.module__tooltip_"] {
+	backdrop-filter: blur(var(--ThemeModalPanelBlur));
+	background: var(--ThemePanelModalBGColor);
+}
+
+/* emoji autocomplete */
+[class*="Autocomplete.module__container_"] {
+	border-left: unset!important;
+	border-right: unset!important;
+	border-bottom: unset!important;
+	border-radius: calc(var(--ThemePanelBorderRounding) - var(--ThemePanelBorderThickness))!important;
+	top: calc(0px - var(--ThemePanelMargin) - var(--ThemePanelBorderThickness)*2)!important;
+	
+	backdrop-filter: blur(var(--ThemeModalPanelBlur));
+	background: var(--ThemePanelContextBGColor);
+}
+
+
+/* right click context menu */
+[class*='module__contextMenu_'],
+/* vc stats info panel */
+[class*='VoiceStatsOverlay.module__overlay_'], 
+/* media buttons */
+[class*='module__mediaHoverAction_'] > button {
+	backdrop-filter: blur(var(--ThemeModalPanelBlur));
+	background-color: var(--ThemePanelContextBGColor);
+}
+
+/* message hover reaction suggestions. blur effect doesnt seem to work correctly. */
+[class*='MessageActionBar.module__actionBar_'] {
+	background-color: var(--ThemePanelContextBGColor);
+}
+
+
+/* inbox */
+[data-flx="messaging.inbox-message-header.header"] {
+	padding: var(--inbox-header-padding-y);
+}
+[data-flx="channel.reply-preview.replied-icon-container"] {
+	display: none;
+}
+
+/* forward modal */
+[data-flx="messaging.forward-modal.modal-root"],
+[data-flx="channel.channel-topic-modal.modal-root"] {
+	backdrop-filter: unset!important;
+	background-color: var(--ThemeFlatPrimary)!important;
+}
+/* forward modal */
+[data-flx="messaging.forward-modal.modal-header"],
+[data-flx="messaging.forward-modal.modal-footer"],
+/* channel description header */
+[data-flx="channel.channel-topic-modal.modal-header"] {
+	background: transparent!important;
 }
 
 /* ---------------------------------------------------------------- */
 /* settings menu
 /* ---------------------------------------------------------------- */
 
-/* settings menu backdrop */
-[class*="Modal.module__modalBackdrop_"] {
-	backdrop-filter: blur(var(--ThemePanelBlur));
-	opacity: 1!important;
-	background: var(--ThemeDarkenMedium);
-}
-
 [data-flx="app.settings-modal-layout.settings-modal-desktop-sidebar.desktop-sidebar-inner"] {
   background: var(--background-primary);
 }
 
 /* settings menu panel */
-[class*="Modal.module__root_"] {
-	background-color: var(--ThemeDarkenMedium);
+[data-flx="user.user-settings-modal.modal-root"] {
 	background-color: var(--ThemeFlatPrimary)!important;
 }
 
@@ -622,10 +666,9 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 	filter: brightness(1.2);
 }
 
-/*  dm list width fix */
-[class*="DMList.module__dmListContainer_"]{
-	width: inherit;
-}
+
+
+
 
 /* ---------------------------------------------------------------- */
 /* markup 
@@ -672,71 +715,6 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 	background: linear-gradient(90deg, color-mix(in srgb, var(--alert-warning-color) 40%, transparent),  transparent )!important;
 }
 
-
-/* ---------------------------------------------------------------- */
-/* modals
-/* ---------------------------------------------------------------- */
-
-/* NOTE: backdrop filter doesnt work on these panels. might reconsider re-adding backdropfilter to their parent Popout.module__popout_ */
-/* media picker*/
-[class*='ExpressionPickerPopout.module__container_'], 
-/* channel pins*/
-[class*='ChannelPinsPopout.module__container_'], 
-/* right click side subpanel | its inconsistent whether or not backdrop-filter works on these */
-[class*='ContextMenu.module__submenuPopover_'], 
-/* searchbar filter list */
-[class*="MessageSearchBar.module__popoutContainer_"],
-/* settings profile profile type dropdown */
-.css-206gj2-menu,
-/* notifications inbox */
-[class*='InboxPopout.module__container_'],
-/* profile card */
-[class*='ProfileCardLayout.module__profileCard_'],
-/* server options context panel */
-[class*='GuildHeaderPopout.module__container_'] {
-	
-	background-color: var(--ThemePanelModalBGColor);
-}
-
-/* ---------------------------------------------------------------- */
-/* context panels
-/* ---------------------------------------------------------------- */
-
-/* emoji tooltip */
-[class*="EmojiTooltipContent.module__container_"],
-/* tooltip panels */
-[class*="Tooltip.module__tooltip_"] {
-	backdrop-filter: blur(var(--ThemePanelBlurSmall));
-	background: var(--ThemePanelContextBGColor);
-}
-
-/* emoji autocomplete */
-[class*="Autocomplete.module__container_"] {
-	border-left: unset!important;
-	border-right: unset!important;
-	border-bottom: unset!important;
-	border-radius: calc(var(--ThemePanelBorderRounding) - var(--ThemePanelBorderThickness))!important;
-	top: calc(0px - var(--ThemePanelMargin) - var(--ThemePanelBorderThickness)*2)!important;
-	
-	backdrop-filter: blur(var(--ThemePanelBlurSmall));
-	background: var(--ThemePanelContextBGColor);
-}
-
-
-/* right click context menu */
-[class*='module__contextMenu_'],
-/* vc stats info panel */
-[class*='VoiceStatsOverlay.module__overlay_'], 
-/* media buttons */
-[class*='module__mediaHoverAction_'] > button {
-	backdrop-filter: blur(var(--ThemePanelBlurSmall));
-	background-color: var(--ThemePanelContextBGColor);
-}
-
-/* message hover reaction suggestions. blur effect doesnt seem to work correctly. */
-[class*='MessageActionBar.module__actionBar_'] {
-	background-color: var(--ThemePanelContextBGColor);
-}
 
 /* ---------------------------------------------------------------- */
 /* user profile poputs
@@ -851,7 +829,8 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 }
 
 /* custom profile status inner */
-[class*="CustomStatusDisplay"] > [class*="CustomStatusDisplay.module__content_"],
+[data-flx="app.floating.user-area-popout.custom-status-placeholder.open-custom-status.button"],
+[data-flx="app.custom-status-display.custom-status-display.content"],
 [class*="UserProfilePopout"] > [class*="CustomStatusDisplay.module__content_"],
 [class*="UserProfileModal"] > [class*="CustomStatusDisplay.module__content_"],
 [class*="ProfilePreview"] > [class*="CustomStatusDisplay.module__content_"] {
@@ -940,15 +919,19 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 }
 
 
+
 /* ---------------------------------------------------------------- */
 /* vc 
 /* ---------------------------------------------------------------- */
 
-[data-flx="voice.voice-control-bar.voice-control-bar-inner.container"] {
-  --vc-danger-solid: var(--status-danger); /* #ff3b30 */
-  --vc-danger: var(--status-danger); /* #ff453a */
-  --vc-danger-solid-hover: var(--status-danger); /* #ff453a */
+
+
+[data-flx="voice.voice-call-corner-controls.channel-header-icon.pop-out"],
+[data-flx="voice.voice-call-corner-controls.channel-header-icon.toggle-fullscreen"],
+[data-flx="voice.compact-voice-call-view.compact-call-height-toggle-button.height-toggle-pill"] {
+	background-color: var(--ThemeDarkenMedium)!important;
 }
+
 
 /* dm vc chat area */
 [class*="ChannelIndexPage.module__voiceActiveHeaderWrapper_"], 
@@ -958,33 +941,22 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 	background: transparent!important;
 }
 
-/* dm vc channel header gradient */
-[class*="ChannelHeader.module__headerContainerCallActive_"]::before {
-	display: none;
-}
-
-[class*="ChannelIndexPage.module__voiceActiveHeaderWrapper_"] {
-	display: grid;
-	gap: 10px;
-}
-
 /* vc header gradient */
 [class*='VoiceCallView.module__voiceHeader_']::before {
 	border-radius: var(--ThemePanelBorderRounding) var(--ThemePanelBorderRounding) 0 0;
 }
-/* vc buttons gradient */
-[class*='VoiceCallView\.module__controlBarContainer_']::before {
-	display: none;
+[data-flx="ui.avatars.avatar-stack.container"] {
+	gap: calc(var(--avatar-outline) * 3);
 }
 
 /* ---------------------------------------------------------------- */
 /* chat input area
 /* ---------------------------------------------------------------- */
 
-/* user typing status user container thingy */
+/* user typing status user container thingy*/
 [data-flx="channel.lexical-channel-textarea-content.flx-channel-textarea-status-rail"] {
 	height: calc(3.5rem + var(--ThemePanelMargin))!important;
-}
+} 
 
 /* overwrite the spacing change while replying to someone 
 [class*='ChannelChatLayout.module__typingAreaWithTopBar_'] [class*='ChannelChatLayout.module__typingContent_'] {
@@ -992,7 +964,6 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 }*/
 
 /* user typing bottom gradient */
-
 [data-flx="channel.messages.bottom-fade"] {
 	background: transparent!important;
     display: none!important;
@@ -1001,8 +972,8 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 /* user typing status user pills */
 [data-flx="channel.lexical-channel-textarea-content.flx-channel-textarea-typing-slot"],
 [data-flx='channel.lexical-channel-textarea-content.flx-channel-textarea-slowmode-slot'] {
-	backdrop-filter: blur(var(--ThemePanelBlurSmall));
-	-webkit-backdrop-filter: blur(var(--ThemePanelBlurSmall))!important;
+	backdrop-filter: blur(var(--ThemeModalPanelBlur));
+	-webkit-backdrop-filter: blur(var(--ThemeModalPanelBlur))!important;
 	background-color: var(--ThemePanelBGColor);
 	border: var(--ThemePanelBorder);
     border-radius: var(--radius-lg)!important;
@@ -1034,6 +1005,17 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
   margin-bottom: unset;
 }
 
+/* announcement channel thing */
+[data-flx="channel.barriers.barrier-components.barrier-base.div"] {
+  background: transparent;
+  border-width: 0px!important;
+}
+[data-flx="channel.barriers.barrier-components.barrier-base.div"] {
+  margin: unset!important;
+  padding: none;
+  border-width: 0px!important;
+}
+
 /* ---------------------------------------------------------------- */
 /* misc panels
 /* ---------------------------------------------------------------- */
@@ -1052,15 +1034,24 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 
 
 /* generic button secondary */
-[class*="Button.module__secondary_"] {
+[class*="Button.module__secondary_"],
+[class^="DirectMessageList.module__clickableItemIcon_"] {
 	background: var(--ThemeDarkenLight)!important;
 }
-[class*="Button.module__secondary_"]:hover {
+[class*="Button.module__secondary_"]:hover,
+[class^="DirectMessageList.module__clickableItemIcon_"]:hover {
 	background: var(--ThemeBrightenLight)!important;
 }
 
+/* server title in channel list */
+[data-flx="app.guild-header.header-glass"] {
+	background-color: transparent;
+}
+
+
+
 /* user mentioned */
-[class*="Message\.module__messageMentioned_"]
+[class*="Message.module__messageMentioned_"]
 {
 	background: linear-gradient(
 		90deg, 
@@ -1073,17 +1064,13 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 [class*="EmbedCard.module__wrapper_"],
 [class*="Embed.module__embedFull_"],
 [class*="AttachmentFile.module__attachmentContainer_"],
-[class*="InlineAudioPlayer.module__container_"] {
-	background: var(--ThemeDarkenLight);
-}
-
+[class*="InlineAudioPlayer.module__container_"],
 /* attachment uploads */
-[class*="ChannelAttachmentArea.module__upload_"] {
-	background: var(--ThemeDarkenLight);
-}
-
+[class*="ChannelAttachmentArea.module__upload_"],
 /* video controls */
-[class*="VideoPlayer.module__controlsRow_"] {
+[class*="VideoPlayer.module__controlsRow_"],
+[data-flx="forum.forum-post-composer.composer"]
+{
 	background: var(--ThemeDarkenLight);
 }
 
@@ -1117,34 +1104,46 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 
 
 /* emoji reactions */
-[class*='MessageReactions.module__reactionButton_'] {
+[class*='MessageReactions.module__reactionButton_'],
+/* forum post tags */
+[class^="Forum.module__tag_"]
+{
 	background: var(--ThemeDarkenLight);
 	border: 1px solid var(--background-modifier-accent);
 }
 
+
+/* channel start icons */
+[data-flx="channel.channel-welcome-section.pointer-events-none"],
+[data-flx="threads.thread-welcome-section.icon"],
+/* inbox sidebar*/
+[data-flx="messaging.inbox-popout.sidebar"],
+[data-flx="messaging.inbox.other-accounts.section"],
+[data-flx="messaging.inbox-message-header.header"],
+[data-flx="ui.segmented-tabs.segmented-tabs.tab-list"],
+[data-flx="ui.segmented-tabs.segmented-tabs.tab-background"],
+/* chat search filters */
+[data-flx="channel.message-search-bar.filter-option.search-filter"]{
+    background-color: var(--ThemeBrightenLight);
+}
+
+
+
+
 /* profile role badge */
-[class*='RoleManagement.module__roleBadge_'] {
-	background: var(--ThemeDarkenLight);
-}
-
-
-/* discovery explore page top banner */
-[class*="DiscoveryPage.module__hero_"]
-{
-	border-radius: calc(var(--ThemePanelBorderRounding) - var(--spacing-5) / 2);
-	margin: var(--spacing-5);
-	margin-bottom: unset;
-}
-
-
-/* discovery explore page search bar */
-[class*="DiscoveryPage.module__searchInput_"]
-{
-	background-color: var(--ThemeDarkenMedium);
-}
+[class*='RoleManagement.module__roleBadge_'],
+/* discovery page cards */
+[data-flx="discovery.discovery.discovery-guild-card.card.context-menu"],
+/* forum post cards */
+[data-flx="forum.forum-post-card.card.open"],
+[data-flx="forum.forum-post-card.card-media"],
 /* search/input bars */
-[class*="Input.module__input_"] {
-	background-color: var(--ThemeDarkenLight);
+[class*="Input.module__input_"],
+/* hopefully search bars and nothing else */
+[class^="FormSurface.module__surface_"][data-protonpass-ignore="true"],
+[data-flx="forum.forum-toolbar.entry-card"]
+{
+	background-color: var(--ThemeDarkenLight)!important;
 }
 
 /* search results container inner */
@@ -1195,80 +1194,16 @@ html:not(.auth-page) [class*="App.module__appContainer_"],
 }
 
 
-/* make theme input field resizable */ 
-textarea.FormSurface\.module__surface___XzQ4ZT.Input\.module__input___ZGQ3MT.Scroller\.module__scroller___ZTgyZD {
-	resize: vertical !important;
-	max-height: 900px !important;
+[data-flx="forum.forum-post-card.card.open"],
+[data-flx="forum.forum-post-card.card.open"]:hover {
+    transition: var(--transition-fast)!important;
+    transition-property: background-color;
 }
 
-
-/* ---------------------------------------------------------------- */
-/* splashscreen
-/* ---------------------------------------------------------------- */
-[class*='SplashScreen.module__splashContent_'] {
-	padding: 10px;
-	background: var(--ThemePanelBGColor);
-	aspect-ratio: 1 / 1;
-	justify-content: center;
+/* forum post active */ 
+[data-flx="forum.forum-post-card.card.open"][aria-current="true"] {
+    background: var(--ThemeBrightenLight);
 }
-
-@media (min-width: 1024px) {
-	[class*='SplashScreen.module__splashContent_'] {
-		width: 30rem;
-		height: 30rem;
-	}
-}
-@media (min-width: 768px) {
-	[class*='SplashScreen.module__splashContent_'] {
-		width: 30rem;
-		height: 30rem;
-	}
-}
-
-/* logo pulse effect */
-[class*='SplashScreen.module__iconPulse_'] {
-	border-radius: clamp(0%, calc(50% * var(--ThemeRoundingMultiplier)), 50%);
-}
-/* logo shape */
-[class*='SplashScreen.module__iconWrapper_'] > svg > rect {
-	rx: calc(256 * var(--ThemeRoundingMultiplier))!important;
-}
-
-
-
-[class*='SplashScreen.module__connectionStatus_'] {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-/* credits :3 
-[class*='ChannelHeader.module__headerWrapper_']::after,
-[class*='SplashScreen.module__connectionStatus_']::after 
-[class*='SplashScreen.module__splashContent_']::after,*/
-[class*='SplashScreen.module__connectionStatus_']::after {
-	
-	/* 
-	border: var(--ThemePanelBorder)!important;
-	border-radius: var(--ThemePanelBorderRounding)!important;
-	transition: var(--transition-slow);
-	position: absolute;
-	bottom: calc(-30px - var(--ThemePanelMargin));
-	background: var(--ThemePanelBGColor);
-	*/
-	content: "System-Glass Theme by Deer ♡";
-	
-	height: 30px;
-	width: fit-content;
-	padding: 0.3rem 0.5rem;
-	margin-top: 5px;
-	line-height: 18px;
-	
-	color: var(--brand-primary);
-	font-weight: bold;
-	z-index: 100;
-}
-
 
 /* ---------------------------------------------------------------- */
 /* fluxer ui fixes | things that should be fixed on fluxer's end
@@ -1303,9 +1238,20 @@ textarea.FormSurface\.module__surface___XzQ4ZT.Input\.module__input___ZGQ3MT.Scr
 
 @container body style(--ThemePanelLabels: on) {
 	
-	/* prevent clipping off panel labels */
-	
-	[class*="GuildNavbar.module__guildNavbarContainer_"],
+	/* prevent clipping labels */
+	[data-flx="app.guilds-layout.content-container"],
+	[data-flx="app.guilds-layout.main-content"],
+	[data-flx="app.guild-layout.guild-layout-container--7"],
+	[data-flx="app.guild-layout.guild-layout-content--6"],
+	/* member list */
+	[data-flx="channel.channel-view.channel-view-scaffold.content-grid"] [data-flx="app.outline-frame.bounds"],
+	[data-flx="app.guilds-layout.content-container"] [data-flx="app.outline-frame.bounds"],
+	[data-flx="app.guilds-layout.content-container"] [data-flx="app.outline-frame.content-wrapper"],
+	[data-flx="app.guilds-layout.content-container"] [data-flx="app.outline-frame.clip"],
+
+	[data-flx="app.guilds-layout.user-area-wrapper"], /* user self area */
+    [data-flx="app.guilds-layout.guild-list.guild-list-scroller-wrapper"], /* server list */
+	[class*="GuildNavbar.module__guildNavbarContainer_"], /* channel list */
 	[class*="ChannelChatLayout.module__messagesArea_"],
 	[data-flx="channel.channel-chat-layout.container"],
     [data-flx="channel.direct-message.dm-list.dm-list-container"],
@@ -1342,7 +1288,7 @@ textarea.FormSurface\.module__surface___XzQ4ZT.Input\.module__input___ZGQ3MT.Scr
 	/* channel member list */
 	[class*="MemberListContainer.module__memberListContainer_"],
 	/* channel message container */
-	[class*="ChannelChatLayout.module__messagesArea_"],
+	[data-flx="channel.channel-view.channel-view-scaffold.chat-area-slot"],
 	/* chat input area */
 	[data-flx="channel.channel-chat-layout.textarea-area"],
 	/* friendslist */
@@ -1463,11 +1409,11 @@ textarea.FormSurface\.module__surface___XzQ4ZT.Input\.module__input___ZGQ3MT.Scr
 	[class*="GuildLayout.module__guildUnavailableContainer_"]::after {
 		content: "server";
 	}
-	/* cant get this one to work without clipping.
-	[class*="ChannelChatLayout.module__messagesArea_"]::after {
+	/* chat message area */
+	[data-flx="channel.channel-view.channel-view-scaffold.chat-area-slot"]::after {
 		content: "chat";
 	}
-	*/
+	
 }
 
 /* ---------------------------------------------------------------- */
@@ -1490,7 +1436,8 @@ textarea.FormSurface\.module__surface___XzQ4ZT.Input\.module__input___ZGQ3MT.Scr
 	}
 
     /* profile mask */
-    [data-flx="ui.base-avatar.image-frame"] {
+    [data-flx="ui.base-avatar.image-frame"],
+	[data-flx="ui.base-avatar.hover-overlay"] {
       mask: unset;
     }
 }
@@ -1509,7 +1456,7 @@ textarea.FormSurface\.module__surface___XzQ4ZT.Input\.module__input___ZGQ3MT.Scr
 
 @container body style(--OutlineOnlineStatus: on) {
 	/* hide original status indicator */
-	[data-flx="ui.base-avatar.status-container"] {
+	[data-flx="ui.base-avatar.status-container"]:not(:has([data-flx="ui.base-avatar.custom-status-badge"])) {
 		display: none!important;
 	}
   
@@ -1553,6 +1500,99 @@ textarea.FormSurface\.module__surface___XzQ4ZT.Input\.module__input___ZGQ3MT.Scr
 }
 
 
+/* ---------------------------------------------------------------- */
+/* Customization: Visiblity Stuff */
+/* ---------------------------------------------------------------- */
+
+@property --ShowFluxerWordmark {
+	syntax: 'off | on';
+	inherits: false;
+	initial-value: on;
+}
+
+@container body style(--ShowFluxerWordmark: off) {
+	[data-flx="app.native-titlebar.wordmark"] {
+		display: none;
+	}
+}
+
+
+
+@property --CompactDmList {
+	syntax: 'off | on';
+	inherits: false;
+	initial-value: on;
+}
+
+@container body style(--CompactDmList: on) {
+
+	/* dm user list entry */
+	[data-flx="channel.direct-message.dm-list-item.dm-item-selected.navigate-to"] {
+		height: 2.3rem;
+	}
+	/* separators */
+	[data-flx="channel.direct-message.dm-list.div--2"] {
+		height: var(--spacing-1)!important;
+	}
+	[data-flx="channel.direct-message.dm-list.dm-section-separator"] {
+		--spacing-2: var(--spacing-1);
+	}
+
+
+	[data-flx="channel.direct-message.dm-list.clickable-item.clickable-item.button"]:nth-child(2),
+	[data-flx="channel.direct-message.dm-list.clickable-item.clickable-item.button"]:nth-child(3),
+	[data-flx="channel.direct-message.dm-list.clickable-item.clickable-item.button"]:nth-child(4) {
+		padding-inline: 0.25rem;
+	}
+
+	/* dm list friends button */
+	[data-flx="channel.direct-message.dm-list.clickable-item.clickable-item.button"]:nth-child(2) {
+		anchor-name: --dmlist-friends;
+	}
+	/* dm list personal notes button */
+	[data-flx="channel.direct-message.dm-list.clickable-item.clickable-item.button"]:nth-child(3) {
+		anchor-name: --dmlist-notes;
+		position-anchor: --dmlist-friends;
+		position-area: right span-all;
+		position-visibility: always;
+		position: absolute;
+	}
+	/* dm list plutonium button */
+	[data-flx="channel.direct-message.dm-list.clickable-item.clickable-item.button"]:nth-child(4) {
+		anchor-name: --dmlist-plutonium;
+		position-anchor: --dmlist-notes;
+		position-area: right span-all;
+		position-visibility: always;
+		position: absolute;
+	}
+
+	[data-flx="channel.direct-message.dm-list.dm-list-header.show.button"] {
+		position-anchor: --dmlist-plutonium;
+		position-area: right span-all;
+		position-visibility: always;
+		position: absolute;
+		background-color: var(--ThemeDarkenLight);
+
+		height: fit-content;
+		min-height: unset;
+		border: none;
+		padding: unset;
+		z-index: 1;
+	}
+	[data-flx="channel.direct-message.dm-list.dm-list-header-shortcut"] {
+		display: none;
+	}
+
+	[data-flx="channel.direct-message.dm-list.clickable-item.clickable-item.button"] {
+		width: fit-content;
+	}
+
+	[data-flx^="channel.direct-message.dm-list.clickable-item-text"] {
+		display: none;
+	}
+}
+
+
 
 
 
@@ -1582,37 +1622,6 @@ textarea.FormSurface\.module__surface___XzQ4ZT.Input\.module__input___ZGQ3MT.Scr
 		display: none;
 	}
 }
-/* ---------------------------------------------------------------- */
-/* Customization: Message Bubbles */
-/* ---------------------------------------------------------------- */
-
-@property --MessageBubbles {
-	syntax: 'off | on';
-	inherits: false;
-	initial-value: on;
-}
-
-@container body style(--MessageBubbles: on) {
-	
-	/*
-	[aria-label="Message group"] {
-		background: var(--ThemeMessageBubbleColor);
-		border-radius: calc(var(--ThemePanelBorderRounding) - var(--chat-horizontal-padding)/2);
-		border-radius: calc(var(--ThemePanelBorderRounding) * var(--ThemeRoundingMultiplier));
-		padding-left: 0.3rem;
-	} */
-	
-	[class*="messageContent"] {
-		/* display: block !important;   restore proper layout */
-		width: fit-content;          /* shrink to content */
-		margin-top: 4px;
-		padding: 0.3rem 0.4rem;
-		background: var(--ThemeMessageBubbleColor)!important;
-		border-radius: var(--ThemePanelBorderRounding) !important;
-	}
-}
-
-
 
 /* ---------------------------------------------------------------- */
 /* Customization: Animations */
@@ -1627,7 +1636,7 @@ textarea.FormSurface\.module__surface___XzQ4ZT.Input\.module__input___ZGQ3MT.Scr
 @container body style(--ExtraAnimations: on) {
 	
 	/* channel select flash */
-	[class*="ChannelItemSurface\.module__channelItemSurfaceSelected_"] {
+	[class*="ChannelItemSurface.module__channelItemSurfaceSelected_"] {
 		background-color: var(--background-modifier-selected);
 		animation-name: ChannelSelectAnim;
 		animation-duration: 1s;
@@ -1706,7 +1715,6 @@ textarea.FormSurface\.module__surface___XzQ4ZT.Input\.module__input___ZGQ3MT.Scr
 	
 	/* doesnt have any effect placed here. need to find a workaround. */
 	:root {
-		
 		--layout-sidebar-width: calc(16.875rem + var(--layout-guild-list-width))!important; /* make sidebar wider to compensate for extra space */
 	}
 	
@@ -1938,7 +1946,6 @@ textarea.FormSurface\.module__surface___XzQ4ZT.Input\.module__input___ZGQ3MT.Scr
 	src: url(https://fonts.gstatic.com/s/dmmono/v16/aFTT7PB1QTsUX8KYth-o9Yedb435.woff2) format('woff2');
 	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-
 
 /* latin-ext */
 @font-face {
