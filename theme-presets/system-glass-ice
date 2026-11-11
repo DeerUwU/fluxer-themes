@@ -1,0 +1,153 @@
+/**
+ * @name System Glass Ice
+ * @description based on system24 by refact0r, using background art by ThaSilentArtist
+ * @author deer#1234
+ * @version 3.2.0
+ * @tags canary, frosted glass, modern, customizable
+ */
+@import url('https://raw.githubusercontent.com/DeerUwU/fluxer-themes/refs/heads/canary/base-system-glass.css');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+
+body {
+	container-name: body;
+	
+	/* ----------------------------------------------------------------------- */
+	/* TOGGLES
+	/* ----------------------------------------------------------------------- */
+	
+	/* decide if you want square or rounded avatars. | Options: off, on */
+	--SquareAvatars: on;
+	/* set the user online status appearance. outlines look better with square avatars | Options: off, on */
+	--OutlineOnlineStatus: on;
+	/* decide if you want panel labels. looks better without a background image | Options: off, on */
+	--ThemePanelLabels: off;
+	/* overwrites fluxer's panel rounding in most places | Options: off, on
+	/* see also: --ThemeRoundingMultiplier */
+	--UseDefaultRounding: off; 
+	/* decide if you want to disable some additional animations added by the theme | Options: off, on */
+	--ExtraAnimations: on;
+	/* Controls the server list position. Options: off | on */
+	--Horizontal-Serverlist: off;
+	/* Controls the server list alignment. center only works with the horizontal serverlist. 
+    Options: left | center | right */
+	--Serverlist-Alignment: left;
+	/* hide the word mark in the titlebar. Options: off | on */
+	--ShowFluxerWordmark: on;
+	/* Experimental. Options: off | on */
+	--CompactDmList: off;
+}
+
+:root {
+	
+    /* ----------------------------------------------------------------------- */
+	/* Fonts & Text
+	/* ----------------------------------------------------------------------- */
+	
+    /* change to '' for fluxer's default font */
+	--font-sans: 'DM Sans', sans-serif;
+	/* change to '' for fluxer's default font */
+	--font-mono: 'DM Mono';
+	/* 300 is light, 400 is normal. DOES NOT AFFECT BOLD TEXT */
+	font-weight: 300;
+	/* decreases letter spacing for better readability. recommended on monospace fonts.*/
+	letter-spacing: 0.0ch;
+  
+	/* ----------------------------------------------------------------------- */
+	/* Colors & default theme overrides
+	/* ----------------------------------------------------------------------- */
+	
+	--brand-primary: rgb(96, 174, 229);
+	--brand-secondary: rgb(78, 121, 167);
+	
+	--ThemeMessageBubbleColor: rgba(255, 255, 255, .06);
+	--ThemeFlatPrimary: #16161c;
+	--ThemeFlatLighter: #2e3138;
+	--ThemeFlatDarker: #1e1e24;
+
+	--ThemeDarkenLight: rgba(0, 0, 0, .267);
+	--ThemeDarkenMedium: rgba(0, 0, 0, .533);
+	--ThemeBrightenLight: rgba(255, 255, 255, .06);
+	--ThemeBrightenMedium: rgba(255, 255, 255, .15);
+	
+	/* color overrides */
+	--background-primary: var(--ThemeFlatDarker);
+	--background-secondary: var(--ThemeFlatPrimary);
+	--background-secondary-alt: var(--ThemeFlatLighter); /* mainly used in for mobile view*/
+	--background-tertiary: var(--ThemeFlatLighter); /* mainly used in for mobile view*/
+	--background-textarea: var(--ThemeDarkenLight); /* used in search bars */
+	--status-danger: #f24562; /* notification badges, unread divider line etc */
+	--message-mention-bg: color-mix(in srgb, var(--message-mention-color) 30%, transparent)!important;
+	
+	--text-chat: #EBEDF0; /*default #EBEDF0 */
+	--text-chat-muted: #C0C5CF; /*default #C0C5CF */
+    --bg-code: var(--ThemeBrightenLight);
+    --bg-code-block: var(--ThemeBrightenLight);
+	--keybind-hint-background: var(--ThemeBrightenLight);
+
+	--voice-header-gradient: transparent!important;
+	--voice-footer-gradient: transparent!important;
+	
+	/* ----------------------------------------------------------------------- */
+	/* BACKGROUND
+	/* ----------------------------------------------------------------------- */
+	
+	/* Background Image | fluxer currently only allows using images hosted on their own servers. */
+	--ThemeBackgroundImage: url("https://raw.githubusercontent.com/DeerUwU/fluxer-themes/refs/heads/main/assets/bg-1.png");
+	/* fallback color behind the background image. can be used to give your bg image a tint */
+	--ThemeBackgroundColor: #222;
+	/* Image position | center, left, right, bottom, top */
+	--ThemeBackgroundPosition: top;
+	/* To cover the entire app, set to "cover". You can also set it to "100% 100%" but the image will be stretched. Set to "contain" to see the entire image */
+	--ThemeBackgroundSize: cover;
+	/* if you want the image to repeat */
+	--ThemeBackgroundRepeat: no-repeat;
+	/* Set to 0 to remove blur. alternatively you can use --ThemePanelBlur to add blur */
+	--ThemeBackgroundBlur: 10px;
+	/* 0 is fully transparent, 1 is fully visible */
+	--ThemeBackgroundOpacity: 1;
+	
+	/* ----------------------------------------------------------------------- */
+	/* screen overlay effect */
+	/* ----------------------------------------------------------------------- */
+	
+	--ThemeOverlayOpacity: 0.12;
+	--ThemeScreenOverlay: url('https://raw.githubusercontent.com/DeerUwU/fluxer-themes/refs/heads/main/assets/Noise_Texture.png');
+
+	/* ----------------------------------------------------------------------- */
+	/* PANELS
+	/* ----------------------------------------------------------------------- */
+	
+	/* gap between panels */
+	--ThemePanelMargin: 8px;
+	/* panel bg blur strength (might cause slight artifacts) */
+	--ThemePanelBlur: 0px;
+	/* bg blur strength for tooltips, context panels etc */
+	--ThemeModalPanelBlur: 8px;
+	/* panel */
+	--ThemePanelBGColor: #00001199;
+	/* panel hovered */
+	--ThemePanelBGColorHovered: hsla(0, 0%, 5%, .533);
+	/* background color for tooltips, context panels etc */
+	--ThemePanelContextBGColor: #00000088;
+	/* background color for media picker, notification inbox, search filters, pins etc */
+	--ThemePanelModalBGColor: #000011cc;
+	
+    /* BORDERS */
+    /* panel border thickness */
+	--ThemePanelBorderThickness: 2px;
+	/* panel border rounding */
+	--ThemePanelBorderRounding: 0px;
+	/* panel border color (not hovered) */
+	--ThemePanelBorderColor: #1f283d;
+	/* panel border color (hovered) */
+	--ThemePanelBorderColorHovered: var(--brand-primary);
+	
+	/* ----------------------------------------------------------------------- */
+	/* rounding
+	/* ----------------------------------------------------------------------- */
+
+	/* change this value to control the ui's overall rounding strength 
+	* 1 is the default, 0 removes most rounding. */
+	--ThemeRoundingMultiplier: 0;
+}

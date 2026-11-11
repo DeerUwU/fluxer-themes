@@ -2,10 +2,10 @@
  * @name System Glass - Crystal
  * @description based on system24 by refact0r, using background art by ThaSilentArtist
  * @author deer#1234
- * @version 3.1.1
+ * @version 3.2.0
  * @tags canary, frosted glass, modern, customizable
  */
-
+@import url('https://raw.githubusercontent.com/DeerUwU/fluxer-themes/refs/heads/canary/base-system-glass.css');
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
 
@@ -88,7 +88,7 @@ body {
     /* ----------------------------------------------------------------------- */
     
     /* Background Image | fluxer currently only allows using images hosted on their own servers. */
-    --ThemeBackgroundImage: url("https://fluxerusercontent.com/attachments/1474610319297830991/1493962211338268695/bg-3.gif");
+    --ThemeBackgroundImage: url("https://raw.githubusercontent.com/DeerUwU/fluxer-themes/refs/heads/main/assets/bg-3.gif");
     /* fallback color behind the background image. can be used to give your bg image a tint */
     --ThemeBackgroundColor: #222;
     /* Image position | center, left, right, bottom, top */
@@ -107,7 +107,7 @@ body {
     /* ----------------------------------------------------------------------- */
     
     --ThemeOverlayOpacity: 0.12;
-    --ThemeScreenOverlay: url('https://fluxerusercontent.com/attachments/1474610319297830991/1493962211233411092/Noise_Texture.png');
+    --ThemeScreenOverlay: url('https://raw.githubusercontent.com/DeerUwU/fluxer-themes/refs/heads/main/assets/Noise_Texture.png');
 
     /* ----------------------------------------------------------------------- */
     /* panels
