@@ -204,7 +204,7 @@ body::before {
 
 /* shade dark */
 [data-flx="app.native-titlebar.titlebar"], /* window titlebar */
-[data-flx="forum.forum-post-card.card.open"], /* forum post card*/
+[data-flx="forum.forum-post-card.card"], /* forum post card*/
 [data-flx="forum.forum-post-card.card-media"],
 [data-flx="channel.barriers.barrier-components.barrier-base.div"], /* announcement channel text bar */
 [data-flx="channel.channel-attachment-area.attachment-action-bar.action-bar"] /* attachment upload options */
@@ -221,6 +221,10 @@ body::before {
 [class^="FormSurface.module__surface_"][data-protonpass-ignore="true"], /* hopefully search bars and nothing else */
 [data-flx="app.settings-modal-layout.settings-modal-desktop-sidebar.desktop-sidebar"], /* settings page sidebar */
 [data-flx="forum.forum-toolbar.entry-card"],
+[data-flx="forum.forum-post-card.card"]:hover,
+[data-flx="forum.forum-tag-pill.tag.click.button"],
+[data-flx="forum.forum-tag-pill.tag"],
+[data-flx="forum.forum-post-card.tag"],
 [data-flx="discovery.discovery.discovery-navbar.div"], /* discovery page navbar */
 [data-flx="discovery.discovery.discovery-guild-card.card.context-menu"], /* discovery page card */
 [data-flx="channel.lexical-channel-textarea-content.textarea-outer"]::after, /* chat input */
