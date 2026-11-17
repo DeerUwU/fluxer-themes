@@ -2,7 +2,7 @@
  * @name Transparent theme template
  * @description customizable template for transparent themes. can also just be a used as a theme on its own.
  * @author deer
- * @version 1.2.1
+ * @version 1.2.2
  * @tags canary, template, transparent
  */
 
@@ -197,6 +197,7 @@ body::before {
 }
 
 /* blur light */
+[data-flx="app.user-area.user-area-inner.section"], /* self user status */
 [data-flx="user.user-settings-modal.modal-root"] /* settings page */ {
     background: var(--theme-shade-light)!important;
     backdrop-filter: blur(var(--theme-blur-strength));
@@ -215,7 +216,6 @@ body::before {
 [class*="Button.module__secondary_"], /* secondary buttons */
 [class^="SegmentedTabs.module__tabList_"],
 [data-flx="ui.segmented-tabs.segmented-tabs.tab-background"],
-[data-flx="app.user-area.user-area-inner.section"], /* self user status */
 [data-flx="channel.message-search-bar.message-search-bar.input-container"], /* chat searchbar */
 [data-flx="channel.message-search-bar.filter-option.search-filter"], /* chat search filters */
 [class^="FormSurface.module__surface_"][data-protonpass-ignore="true"], /* hopefully search bars and nothing else */
@@ -228,6 +228,7 @@ body::before {
 [data-flx="discovery.discovery.discovery-navbar.div"], /* discovery page navbar */
 [data-flx="discovery.discovery.discovery-guild-card.card.context-menu"], /* discovery page card */
 [data-flx="channel.lexical-channel-textarea-content.textarea-outer"]::after, /* chat input */
+[data-flx="channel.textarea.composer-action-stack"],
 [data-flx="voice.media-player.media-vertical-volume-control.mute-button.mute-click"], /* vc button */
 [data-flx="voice.voice-call-corner-controls.channel-header-icon.pop-out"], /* vc button */
 [data-flx="voice.voice-call-corner-controls.channel-header-icon.toggle-fullscreen"], /* vc button */
